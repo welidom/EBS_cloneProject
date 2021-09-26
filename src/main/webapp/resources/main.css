@@ -1,0 +1,157 @@
+@charset "UTF-8";
+.header{
+background-color:white;
+font-size:20px;
+outline: 13px solid white;
+margin:13px 0;
+}
+a{
+text-decoration:none;
+}
+body{
+background-color:black;
+width: 100%;
+height: 100%;
+padding: 0;
+margin: 0;
+}
+.defaultButton{
+ 	color: black;
+  	padding: 7px 25px;
+  	text-decoration: none;
+  	display: inline-block;
+}
+a.gts{
+	color: white;
+	transition : background-color .5s, color .5s;
+	margin:80px 0;
+}
+a:hover.gts{
+	color: #2580EB;
+	background-color:white;
+	margin:100px 0;
+}
+.gts{
+	border: 2px solid #F2F2F2;
+	font-size:20px;
+	border-radius:50px;
+	color:#F2F2F2;
+	padding: 14px 25px;
+}
+.ebsNoticeBanner{
+	padding:70px 14%;
+	background-image:url("images/ebsNoticeBanner.jpg");
+	background-size: 100%;
+}
+a:hover.notice .moreNotice{
+	color:blue;
+}
+a:hover.notice .moreNoticed{
+	color:blue;
+}
+.moreNotice{
+	color:#525252;
+	font-size:15px;
+	float: left;
+}
+.moreNoticed{
+	font-size:10px;
+	color:#aba3ac; 
+	float:right;
+}
+a:hover.faq{
+	color:white;
+	background-color: #2580EB;
+}
+.faq:hover .faqc{
+	color:white;
+	background-color: #2580EB;
+}
+.faq .moreInfo{
+	color:white;
+	font-size: 15px;
+	padding: 14px 0;
+}
+.faq{
+	border : 1px solid #edf1f5;
+	display : inline-block;
+	font-size:15px;
+	width: 100%;
+	color:black;
+	border-radius: 15px;
+	margin-bottom: 15px;
+}
+.faqc{
+	display : inline-block;
+	color:#2580eb;
+	border-top-left-radius : 15px;
+	border-bottom-left-radius : 15px;
+	background-color: #f6f9fc;
+	padding: 14px 0;
+	width: 180px;
+	text-align:center;
+	font-weight: bold;
+}
+.faq .slice{
+	color:white;
+	margin-right: 10px;
+}
+.banner{
+	display: inline-block;
+	border: 1px solid #edf1f5;
+	background-color: rgb(247, 251, 252, 0.8);
+	font-size:25px;
+	font-weight: bold;
+	padding:30px;
+	box-shadow: 7px 10px 10px lightgray;
+	border-radius: 10px
+}
+.moreInfo{
+	color:#2580eb;
+	float: right;
+	font-size:15px;
+}
+.tob01:before{
+	content:url("images/teacher/teacher_obj01.png")
+}
+.tob02:before{
+	content:url("images/teacher/teacher_obj02.png")
+}
+.tob03:before{
+	content:url("images/teacher/teacher_obj03.png")
+}
+.tob04:before{
+	content:url("images/teacher/teacher_obj04.png")
+}
+.tob05:before{
+	content:url("images/teacher/teacher_obj05.png")
+}
+.sob01:before{
+	content:url("images/student/student_obj01.png")
+}
+.sob02:before{
+	content:url("images/student/student_obj02.png")
+}
+.sob03:before{
+	content:url("images/student/student_obj03.png")
+}
+.sob04:before{
+	content:url("images/student/student_obj04.png")
+}
+.lookMenual{
+	float: right;
+	font-size:21px;
+	font-weight: bold;
+	border : 1px hidden;
+	border-radius: 50px;
+	padding:20px;
+	color:white;
+}
+.menualObj{
+	text-align: center;
+	font-size: 22px;
+}
+div.footer a {
+	text-decoration: none;
+	color:gray;
+}
