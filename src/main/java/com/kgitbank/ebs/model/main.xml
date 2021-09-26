@@ -15,4 +15,7 @@
 <select id="getManual" resultType="ManualDTO" parameterType="int">
 	select * from manual where type = #{type}
 </select>
+<insert id="insertManual" parameterType="ManualDTO">
+	insert into manual values(manual_seq.nextval, #{category}, #{subject}, #{content}, sysdate, #{type})
+</insert>
 </mapper>

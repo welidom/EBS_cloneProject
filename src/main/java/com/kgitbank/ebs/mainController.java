@@ -2,13 +2,16 @@ package com.kgitbank.ebs;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale.Category;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.taglibs.standard.lang.jstl.AndOperator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kgitbank.ebs.model.FaqDTO;
 import com.kgitbank.ebs.model.ManualDTO;
@@ -50,12 +53,12 @@ public class mainController {
 				str+="...";
 				dto.setContent(str);
 			}else {dto.setContent(dto.getContent().replace("\r\n", "<br>"));}
-			List<FaqDTO> faqlist = mainMapper.faqSortByReadcount();
-			if(faqlist.size() > 8) {
-				faqlist = faqlist.subList(0, 8);
-			}
-			req.setAttribute("listFaq", faqlist);
 		}
+		List<FaqDTO> faqlist = mainMapper.faqSortByReadcount();
+		if(faqlist.size() > 8) {
+			faqlist = faqlist.subList(0, 8);
+		}
+		req.setAttribute("listFaq", faqlist);
 		req.setAttribute("footerContent", getFooter());
 		req.setAttribute("listNotice", list);
 		req.setAttribute("getNotice", dto);
@@ -68,8 +71,8 @@ public class mainController {
 	}
 	@RequestMapping(value="/manual.do", method = RequestMethod.GET)
 	public String manual(HttpServletRequest req) {
-		List<ManualDTO> videoManual = mainMapper.getManual(0);
-		List<ManualDTO> documentManual = mainMapper.getManual(1);
+		List<ManualDTO> videoManual = mainMapper.getManual(1);
+		List<ManualDTO> documentManual = mainMapper.getManual(0);
 		
 		req.setAttribute("videoManual", setDate(videoManual));
 		req.setAttribute("documentManual", setDate(documentManual));
@@ -84,9 +87,25 @@ public class mainController {
 		return list;
 	}
 	@RequestMapping(value="/insertManual.do", method=RequestMethod.GET)
-	public String manualForm(HttpServletRequest req) {
-		
+	public String insertManualForm(HttpServletRequest req) {
 		req.setAttribute("footerContent", getFooter());
 		return "manual/form";
+	}
+	@RequestMapping(value="/insertManual.do", method=RequestMethod.POST)
+	public ModelAndView insertManualPro(HttpServletRequest req, ManualDTO dto) {
+		int res = mainMapper.insertManual(dto);
+		String msg,url;
+		if(res > 0) {
+			msg="메뉴얼 등록 성공";
+			url = "manual.do";
+		}else {
+			msg="메뉴얼 등록 실페";
+			url = "insertManual.do";
+		}
+		req.setAttribute("footerContent", getFooter());
+		ModelAndView mav = new ModelAndView("message");
+		mav.addObject("msg", msg);
+		mav.addObject("url", url);
+		return mav;
 	}
 }

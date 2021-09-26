@@ -2,11 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 <div style="padding: 0 14%">
-<form action="">
+<form action="insertManual.do" name="insertManual" method="post" accept-charset="UTF-8">
 	<table>
 	<tr>
 		<th>메뉴얼명</th><td><input type="text" name="subject"></td>
-		
 	</tr>
 	<tr>
 		<th id="contentName">첨부파일</th><td id="content"><input name="content" type="file"></td>
@@ -28,8 +27,9 @@
 		<label for="동영상">동영상</label>
 		</td>
 	</tr>
-	<tr>
-		<td colspan="2"><input type="reset" value="다시작성"><input type="button" value="제출" onclick=""></td>
+	<tr align="right">
+		<td colspan="2"><input type="reset" value="다시작성" onclick="doc()">
+		<input type="button" value="추가" onclick="check()"></td>
 	</tr>
 	</table>
 </form>
@@ -46,6 +46,16 @@ function video() {
 	document.getElementById('content').innerHTML = '<input type="url" name="content">';
 }
 function check(){
-	
+	var form = document.insertManual;
+	if(form.subject.value==""){
+		alert("메뉴얼명을 입력하세요")
+		return form.subject.focus();
+	}else if(!form.content.value){
+		alert("첨부파일, 동영상URL을 추가해주세요")
+		return;
+	}else{
+		form.submit();
+	}
+		
 }
 </script>
