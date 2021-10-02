@@ -1,5 +1,7 @@
 package com.kgitbank.ebs;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -29,6 +31,8 @@ import com.kgitbank.ebs.service.mainMapper;
 public class mainController {
 	@Autowired
 	private mainMapper mainMapper;
+	
+	private static final String SAVE_PATH = "../../../webapp/resources/manualFiles";
 	
 	@RequestMapping(value="/main.do", method = RequestMethod.GET)
 	public String mainNotice(HttpServletRequest req) {
@@ -100,7 +104,31 @@ public class mainController {
 	}
 	
 	@RequestMapping(value="/insertManualPro.do", method = RequestMethod.POST)
-	public ModelAndView insertManualPro(HttpServletRequest req, ManualDTO dto){
+	public ModelAndView insertManualPro(HttpServletRequest req, @RequestParam(value="file", required = false) MultipartFile mf){
+		
+		String originalFileName = mf.getOriginalFilename();
+		long fileSize = mf.getSize();
+		String safeFile = SAVE_PATH + System.currentTimeMillis() + originalFileName;
+		
+		try {
+            mf.transferTo(new File(safeFile));
+
+           	} catch (IllegalStateException e) {
+                e.printStackTrace();
+           	} catch (IOException e) {
+        	   e.printStackTrace();
+           	}
+		
+		System.out.println(originalFileName);
+		ManualDTO dto = new ManualDTO();
+		dto.setCategory((String) req.getAttribute("category"));
+		dto.setSubject((String) req.getAttribute("subject"));
+		dto.setType(Integer.parseInt((String) req.getAttribute("type")));
+		if( originalFileName != null) {
+			dto.setContent(originalFileName);
+		}else {
+			dto.setContent((String) req.getAttribute("content"));
+		}
 		int res = mainMapper.insertManual(dto);
 		Object file = req.getAttribute("content");
 		System.out.println(file);
