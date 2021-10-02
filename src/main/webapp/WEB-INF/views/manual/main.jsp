@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
+<%@ include file="../include/header.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/manual.css" type="text/css">
 <div style="background-color: #2580EB; padding: 0 14%; color:white; display: inline-block; width: 72%">
 	<span style="float: left; padding-top: 30px">
@@ -19,15 +19,15 @@
 		<table style="border-top: 2px solid #2580EB; width: 100%" class="manual">
 		<tr style="background-color: ; border-top: 2px solid #2580EB;">
 			<th style="padding : 15px 0; width: 15%;">구분</th>
-			<th style="padding : 15px 0;">메뉴얼명</th>
-			<th style="padding : 15px 0; width: 15%;">재생</th>
-			<th style="padding : 15px 0; width: 15%;">등록일</th>
+			<th>메뉴얼명</th>
+			<th style="width: 15%;">재생</th>
+			<th style="width: 15%;">등록일</th>
 		</tr>
 		<c:forEach items="${videoManual}" var="dto">
 		<tr>
-			<td align="center">${dto.category}</td>
+			<td align="center" style="padding: 15px 0;">${dto.category}</td>
 			<td>${dto.subject}</td>
-			<td align="center">${dto.content}</td>
+			<td align="center"><a href="${dto.content}" style="font-size: 20px; color:black;"><i class="fas fa-play"></i></a></td>
 			<td align="center">${dto.reg_date}</td>
 		</tr>
 		</c:forEach>
@@ -38,15 +38,15 @@
 		<table style="border-top: 2px solid #2580EB; width: 100%" class="manual">
 		<tr style="background-color: ; border-top: 2px solid #2580EB;">
 			<th style="padding : 15px 0; width: 15%;">구분</th>
-			<th style="padding : 15px 0;">메뉴얼명</th>
-			<th style="padding : 15px 0; width: 15%;">재생</th>
-			<th style="padding : 15px 0; width: 15%;">등록일</th>
+			<th>메뉴얼명</th>
+			<th style="width: 15%;">첨부파일</th>
+			<th style="width: 15%;">등록일</th>
 		</tr>
 		<c:forEach items="${documentManual}" var="dto">
 		<tr>
-			<td align="center">${dto.category}</td>
+			<td align="center" style="padding: 15px 0;">${dto.category}</td>
 			<td>${dto.subject}</td>
-			<td align="center">${dto.content}</td>
+			<td align="center"><a download="${dto.content}"><i class="fas fa-file-download" style="font-size: 20px; color:black;"></i></a></td>
 			<td align="center">${dto.reg_date}</td>
 		</tr>
 		</c:forEach>
@@ -54,4 +54,5 @@
 	</div>
 </div>
 
-<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<%@ include file="../include/footer.jsp" %>

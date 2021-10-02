@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/views/include/header.jsp" %>
+<%@include file="../include/header.jsp" %>
+<%request.setCharacterEncoding("UTF-8"); %>
 <div style="padding: 0 14%">
-<form action="insertManual.do" name="insertManual" method="post" accept-charset="UTF-8">
+<form action="insertManualPro.do" name="insertManual" method="post" enctype="multipart/form-data">
 	<table>
 	<tr>
 		<th>메뉴얼명</th><td><input type="text" name="subject"></td>
@@ -23,7 +24,7 @@
 		<th>유형</th><td>
 		<input type="radio" name="type" id="문서" value="1" onclick="doc();" checked>
 		<label for="문서">문서</label>
-		<input type="radio" name="type" id="동영상" value="1" onclick="video();">
+		<input type="radio" name="type" id="동영상" value="0" onclick="video();">
 		<label for="동영상">동영상</label>
 		</td>
 	</tr>
@@ -34,7 +35,7 @@
 	</table>
 </form>
 </div>
-<%@include file="/WEB-INF/views/include/footer.jsp" %>
+<%@include file="../include/footer.jsp" %>
 
 <script>
 function doc() {

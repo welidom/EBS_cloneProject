@@ -1,16 +1,23 @@
 package com.kgitbank.ebs;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Locale.Category;
+import java.util.Map;
 
+import javax.servlet.Servlet;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.taglibs.standard.lang.jstl.AndOperator;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kgitbank.ebs.model.FaqDTO;
@@ -71,8 +78,8 @@ public class mainController {
 	}
 	@RequestMapping(value="/manual.do", method = RequestMethod.GET)
 	public String manual(HttpServletRequest req) {
-		List<ManualDTO> videoManual = mainMapper.getManual(1);
-		List<ManualDTO> documentManual = mainMapper.getManual(0);
+		List<ManualDTO> videoManual = mainMapper.getManual(0);
+		List<ManualDTO> documentManual = mainMapper.getManual(1);
 		
 		req.setAttribute("videoManual", setDate(videoManual));
 		req.setAttribute("documentManual", setDate(documentManual));
@@ -91,9 +98,12 @@ public class mainController {
 		req.setAttribute("footerContent", getFooter());
 		return "manual/form";
 	}
-	@RequestMapping(value="/insertManual.do", method=RequestMethod.POST)
-	public ModelAndView insertManualPro(HttpServletRequest req, ManualDTO dto) {
+	
+	@RequestMapping(value="/insertManualPro.do", method = RequestMethod.POST)
+	public ModelAndView insertManualPro(HttpServletRequest req, ManualDTO dto){
 		int res = mainMapper.insertManual(dto);
+		Object file = req.getAttribute("content");
+		System.out.println(file);
 		String msg,url;
 		if(res > 0) {
 			msg="메뉴얼 등록 성공";
