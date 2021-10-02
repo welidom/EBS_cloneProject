@@ -57,7 +57,7 @@
 		<br><br>
 		<c:forEach var="dto" items="${listFaq}">
 		<a class="faq" style="" href="">
-			<span class="faqc" style="">${dto.category}</span><span class="slice">|</span><span>${dto.subject}</span>
+			<span class="faqc" style="">${dto.category}</span><span class="slice">|</span><span>${dto.question}</span>
 			<span class="moreInfo">〉</span>
 		</a>
 		</c:forEach>

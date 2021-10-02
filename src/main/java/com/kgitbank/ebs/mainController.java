@@ -54,7 +54,7 @@ public class mainController {
 				dto.setContent(str);
 			}else {dto.setContent(dto.getContent().replace("\r\n", "<br>"));}
 		}
-		List<FaqDTO> faqlist = mainMapper.faqSortByReadcount();
+		List<FaqDTO> faqlist = mainMapper.faqList();
 		if(faqlist.size() > 8) {
 			faqlist = faqlist.subList(0, 8);
 		}

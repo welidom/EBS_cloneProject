@@ -3,19 +3,22 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kgitbank.ebs.model.notice">
+<!-- 공지 -->
 <select id="listNotice" resultType="NoticeDTO">
 	select * from noticeBoard order by num desc
 </select>
 <select id="getNotice" resultType="NoticeDTO" parameterType="int">
 	select * from noticeBoard where num = #{num}
 </select>
-<select id="faqSortByReadcount" resultType="FaqDTO">
-	select * from faqBoard order by readcount desc
-</select>
+<!-- 이용자메뉴얼 -->
 <select id="getManual" resultType="ManualDTO" parameterType="int">
 	select * from manual where type = #{type}
 </select>
 <insert id="insertManual" parameterType="ManualDTO">
 	insert into manual values(manual_seq.nextval, #{category}, #{subject}, #{content}, sysdate, #{type})
 </insert>
+<!-- FAQ -->
+<select id="faqList" resultType="FaqDTO">
+	select * from faqBoard order by readcount desc
+</select>
 </mapper>

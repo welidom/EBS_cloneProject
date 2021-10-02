@@ -25,8 +25,8 @@ public class mainMapper {
 		NoticeDTO dto = sqlSession.selectOne("getNotice", num);
 		return dto;
 	}
-	public List<FaqDTO> faqSortByReadcount(){
-		List<FaqDTO> list = sqlSession.selectList("faqSortByReadcount");
+	public List<FaqDTO> faqList(){
+		List<FaqDTO> list = sqlSession.selectList("faqList");
 		return list;
 	}
 	public List<ManualDTO> getManual(int type){
