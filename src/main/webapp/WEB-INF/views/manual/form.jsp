@@ -12,7 +12,7 @@
 	</span>
 </div>
 <div style="padding: 0 14%; display: flex; width: 36%; justify-content: space-between;">
-<form action="uploadTest" name="insertDocManual" method="post" enctype="multipart/form-data">
+<form action="uploadTest.do" name="insertDocManual" method="post" enctype="multipart/form-data">
 	<table style="padding: 10px 0;">
 	<caption style="font-weight: bold; font-size: 20px;">문서 메뉴얼 추가</caption>
 	<tr>
@@ -33,7 +33,7 @@
 	<tr>
 		<td align="right">
 			<input type="reset" value="다시작성">
-			<input type="button" value="추가" onclick="checkDoc()">
+			<input type="submit" value="추가">
 		</td>
 	</tr>
 	</table>
@@ -78,7 +78,7 @@ function checkDoc(){
 		return;
 	}else{
 		form.submit();
-	}	
+	}
 }
 function checkVideo(){
 	var form = document.insertVideoManual;

@@ -21,13 +21,12 @@ import com.kgitbank.ebs.model.ManualDTO;
 import com.kgitbank.ebs.model.NoticeDTO;
 import com.kgitbank.ebs.service.mainMapper;
 import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
 public class mainController {
 	@Autowired
 	private mainMapper mainMapper;
-	
-	private static final String SAVE_PATH = "/manualFiles/";
 	
 	@RequestMapping(value="/main.do", method = RequestMethod.GET)
 	public String mainNotice(HttpServletRequest req) {
@@ -99,41 +98,31 @@ public class mainController {
 	}
 	
 	@RequestMapping(value="/insertManualPro.do", method = RequestMethod.POST)
-	public ModelAndView insertManualPro(HttpServletRequest req, @RequestParam(value="file", required = false) MultipartFile mf){
-		
+	public ModelAndView insertManualPro(HttpServletRequest req){
 		ManualDTO dto = new ManualDTO();
-		dto.setCategory((String) req.getAttribute("category"));
-		dto.setSubject((String) req.getAttribute("subject"));
+		
 		dto.setType(1);
 		
-		if (mf != null) {
-			String originalFileName = mf.getOriginalFilename();
-			int fileSize = (int) mf.getSize();
-			String safeFile = SAVE_PATH + System.currentTimeMillis() + originalFileName;
-			
-			try {
-	            mf.transferTo(new File(safeFile));
-	
-			} catch (IllegalStateException e) {
-	                e.printStackTrace();
-			} catch (IOException e) {
-	        	   e.printStackTrace();
-	        }
-			try {
-				System.out.println(safeFile);
-				MultipartRequest multi = new MultipartRequest(req, safeFile, fileSize, "utf-8");				
-			} catch (IOException e) {
-				// e.printStackTrace();
-			}
-			
-			if( originalFileName != null) {
-				dto.setContent(originalFileName);
-				dto.setFile(safeFile);
-			}
-		}else {
-			dto.setContent((String) req.getAttribute("content"));
-			dto.setFile("X");
+		String savePath = "D:/manualFiles";
+		int sizeLimit = 10 * 1024 * 1024;
+		
+		MultipartRequest multi = null;
+		String originalFileName= null;
+		String fileDir = null;
+		try {
+			multi = new MultipartRequest(req, savePath, sizeLimit, "utf-8", new DefaultFileRenamePolicy());
+			dto.setCategory(multi.getParameter("category"));
+			dto.setSubject(multi.getParameter("subject"));
+			originalFileName = multi.getOriginalFileName("file");
+			fileDir = multi.getFilesystemName("file");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		if( originalFileName != null) {
+			dto.setContent(originalFileName);
+			dto.setFile(fileDir);
+		}
+		System.out.println(originalFileName);
 		int res = mainMapper.insertManual(dto);
 		String msg,url;
 		if(res > 0) {
@@ -166,6 +155,6 @@ public class mainController {
 		mav.addObject("msg", msg);
 		mav.addObject("url", url);
 		return mav;
-		}
+	}
 	
 }
