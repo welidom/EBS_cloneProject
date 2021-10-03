@@ -2,37 +2,32 @@ package com.kgitbank.ebs;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.NotDirectoryException;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kgitbank.ebs.model.FaqDTO;
 import com.kgitbank.ebs.model.ManualDTO;
 import com.kgitbank.ebs.model.NoticeDTO;
 import com.kgitbank.ebs.service.mainMapper;
+import com.oreilly.servlet.MultipartRequest;
 
 @Controller
 public class mainController {
 	@Autowired
 	private mainMapper mainMapper;
 	
-	private static final String SAVE_PATH = "../../../webapp/resources/manualFiles";
+	private static final String SAVE_PATH = "/manualFiles/";
 	
 	@RequestMapping(value="/main.do", method = RequestMethod.GET)
 	public String mainNotice(HttpServletRequest req) {
@@ -106,32 +101,40 @@ public class mainController {
 	@RequestMapping(value="/insertManualPro.do", method = RequestMethod.POST)
 	public ModelAndView insertManualPro(HttpServletRequest req, @RequestParam(value="file", required = false) MultipartFile mf){
 		
-		String originalFileName = mf.getOriginalFilename();
-		long fileSize = mf.getSize();
-		String safeFile = SAVE_PATH + System.currentTimeMillis() + originalFileName;
-		
-		try {
-            mf.transferTo(new File(safeFile));
-
-           	} catch (IllegalStateException e) {
-                e.printStackTrace();
-           	} catch (IOException e) {
-        	   e.printStackTrace();
-           	}
-		
-		System.out.println(originalFileName);
 		ManualDTO dto = new ManualDTO();
 		dto.setCategory((String) req.getAttribute("category"));
 		dto.setSubject((String) req.getAttribute("subject"));
-		dto.setType(Integer.parseInt((String) req.getAttribute("type")));
-		if( originalFileName != null) {
-			dto.setContent(originalFileName);
+		dto.setType(1);
+		
+		if (mf != null) {
+			String originalFileName = mf.getOriginalFilename();
+			int fileSize = (int) mf.getSize();
+			String safeFile = SAVE_PATH + System.currentTimeMillis() + originalFileName;
+			
+			try {
+	            mf.transferTo(new File(safeFile));
+	
+			} catch (IllegalStateException e) {
+	                e.printStackTrace();
+			} catch (IOException e) {
+	        	   e.printStackTrace();
+	        }
+			try {
+				System.out.println(safeFile);
+				MultipartRequest multi = new MultipartRequest(req, safeFile, fileSize, "utf-8");				
+			} catch (IOException e) {
+				// e.printStackTrace();
+			}
+			
+			if( originalFileName != null) {
+				dto.setContent(originalFileName);
+				dto.setFile(safeFile);
+			}
 		}else {
 			dto.setContent((String) req.getAttribute("content"));
+			dto.setFile("X");
 		}
 		int res = mainMapper.insertManual(dto);
-		Object file = req.getAttribute("content");
-		System.out.println(file);
 		String msg,url;
 		if(res > 0) {
 			msg="메뉴얼 등록 성공";
@@ -146,4 +149,23 @@ public class mainController {
 		mav.addObject("url", url);
 		return mav;
 	}
+	@RequestMapping(value="/insertManualPro.do", method = RequestMethod.GET)
+	public ModelAndView insertManualPro(HttpServletRequest req ,ManualDTO dto){
+		dto.setFile("");
+		int res = mainMapper.insertManual(dto);
+		String msg,url;
+		if(res > 0) {
+			msg="메뉴얼 등록 성공";
+			url = "manual.do";
+		}else {
+			msg="메뉴얼 등록 실페";
+			url = "insertManual.do";
+		}
+		req.setAttribute("footerContent", getFooter());
+		ModelAndView mav = new ModelAndView("message");
+		mav.addObject("msg", msg);
+		mav.addObject("url", url);
+		return mav;
+		}
+	
 }

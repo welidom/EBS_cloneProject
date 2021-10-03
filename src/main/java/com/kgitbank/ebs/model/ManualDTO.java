@@ -7,8 +7,15 @@ public class ManualDTO {
 	private String content;
 	private String reg_date;
 	private int type;
+	private String fileDir;
 	
 	
+	public String getFile() {
+		return fileDir;
+	}
+	public void setFile(String file) {
+		this.fileDir = file;
+	}
 	public int getNum() {
 		return num;
 	}

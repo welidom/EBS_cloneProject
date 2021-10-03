@@ -27,7 +27,7 @@
 		<tr>
 			<td align="center" style="padding: 15px 0;">${dto.category}</td>
 			<td>${dto.subject}</td>
-			<td align="center"><a href="${dto.content}" style="font-size: 20px; color:black;"><i class="fas fa-play"></i></a></td>
+			<td align="center"><a href="${dto.content}" target="_blank" style="font-size: 20px; color:black;"><i class="fas fa-play"></i></a></td>
 			<td align="center">${dto.reg_date}</td>
 		</tr>
 		</c:forEach>
