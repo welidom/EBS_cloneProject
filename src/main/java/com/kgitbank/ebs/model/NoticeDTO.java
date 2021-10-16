@@ -2,7 +2,7 @@ package com.kgitbank.ebs.model;
 
 public class NoticeDTO {
 	private int num;
-	private String writer;
+	private int mustRead;
 	private String subject;
 	private String content;
 	private String reg_date;
@@ -14,11 +14,11 @@ public class NoticeDTO {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public String getWriter() {
-		return writer;
+	public int getMustRead() {
+		return mustRead;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setMustRead(int mustRead) {
+		this.mustRead = mustRead;
 	}
 	public String getSubject() {
 		return subject;

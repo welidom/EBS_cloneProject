@@ -5,10 +5,10 @@
 <mapper namespace="com.kgitbank.ebs.model.notice">
 <!-- 공지 -->
 <select id="listNotice" resultType="NoticeDTO">
-	select * from noticeBoard order by num desc
+	select * from notice order by num desc
 </select>
 <select id="getNotice" resultType="NoticeDTO" parameterType="int">
-	select * from noticeBoard where num = #{num}
+	select * from notice where num = #{num}
 </select>
 <!-- 이용자메뉴얼 -->
 <select id="getManual" resultType="ManualDTO" parameterType="int">

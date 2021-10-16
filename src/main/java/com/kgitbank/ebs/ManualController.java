@@ -57,7 +57,7 @@ public class ManualController {
 		
 		dto.setType(1);
 		
-		String savePath = "D:/manualFiles";
+		String savePath = "D:/manualFiles/manualFiles";
 		
 		String originalFileName= null;
 		
