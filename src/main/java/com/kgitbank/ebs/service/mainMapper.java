@@ -33,9 +33,17 @@ public class mainMapper {
 		List<ManualDTO> list = sqlSession.selectList("getManual",type);
 		return list;
 	}
+	
 	public int insertManual(ManualDTO dto) {
 		int res = sqlSession.insert("insertManual", dto);
 		return res;
 	}
 	
+	public int deleteManual(List<Integer> nums) {
+		int res = 0;
+		for(int num: nums) {
+			res += sqlSession.delete("deleteManual", num);
+		}
+		return res;
+	}
 }
