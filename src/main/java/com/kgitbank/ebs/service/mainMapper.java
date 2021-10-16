@@ -39,4 +39,11 @@ public class mainMapper {
 		return res;
 	}
 	
+	public int deleteManual(List<Integer> nums) {
+		int res = 0;
+		for(int num: nums) {
+			res += sqlSession.delete("deleteManual", num);
+		}
+		return res;
+	}
 }

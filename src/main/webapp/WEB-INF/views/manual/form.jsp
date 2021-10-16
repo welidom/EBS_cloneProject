@@ -12,14 +12,14 @@
 	</span>
 </div>
 <div style="padding: 0 14%; display: flex; width: 36%; justify-content: space-between;">
-<form action="uploadTest.do" name="insertDocManual" method="post" enctype="multipart/form-data">
+<form action="insertManualPro.do" name="insertDocManual" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
 	<table style="padding: 10px 0;">
 	<caption style="font-weight: bold; font-size: 20px;">문서 메뉴얼 추가</caption>
 	<tr>
 		<th style="font-size:20px; padding: 10px 0;">메뉴얼명</th><td><input type="text" name="subject"></td>
 	</tr>
 	<tr>
-		<th id="contentName" style="font-size:20px; padding: 10px 0;">첨부파일</th><td id="content"><input name="file" type="file"></td>
+		<th id="contentName" style="font-size:20px; padding: 10px 0;">첨부파일</th><td id="content"><input id="file" name="file" type="file"></td>
 	</tr>
 	<tr>
 		<th style="font-size:20px; padding: 10px 0;">구분</th><td>
@@ -73,7 +73,7 @@ function checkDoc(){
 	if(form.subject.value==""){
 		alert("메뉴얼명을 입력하세요")
 		return form.subject.focus();
-	}else if(!form.content.value){
+	}else if(!document.getElementById("file").value){
 		alert("첨부파일을 추가해주세요")
 		return;
 	}else{
