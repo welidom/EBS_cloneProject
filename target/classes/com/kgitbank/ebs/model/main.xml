@@ -17,6 +17,9 @@
 <insert id="insertManual" parameterType="ManualDTO">
 	insert into manual values(manual_seq.nextval, #{category}, #{subject}, #{content}, sysdate, #{type})
 </insert>
+<delete id="deleteManual" parameterType="int">
+	delete from manual where num = #{num}
+</delete>
 <!-- FAQ -->
 <select id="faqList" resultType="FaqDTO">
 	select * from faqBoard order by readcount desc

@@ -1,0 +1,7 @@
+@charset "UTF-8";
+.manual th{
+	background-color: #efefef;
+}
+.manual tr{
+	border-bottom: 1px solid lightgray;
+}
