@@ -19,11 +19,11 @@
 				<td style="width: 50%; vertical-align: top; height:50%;">
 				<p class="banner" style= "width: 85%; height: 50%">
 					<span>공지사항</span>
-					<a class="moreInfo" href="https://www.ebsoc.co.kr/notice">더보기 〉</a>
+					<a class="moreInfo" href="notice.do">더보기 〉</a>
 					<br>
 					<c:forEach var="dto" items="${listNotice}">
 						<br><span style="font-size:15px; color:#525252; float: left;">ㆍ</span>
-						<a href="" class="notice">
+						<a href="noticeContent.do?num=${dto.num }&&no=${dto.mustRead}" class="notice">
 							<span class="moreNotice">${dto.subject}</span>
 							<span class="moreNoticed">${dto.reg_date}</span>
 						</a>
@@ -37,9 +37,9 @@
 			</tr>
 			<tr>
 				<td style="width: 50%; height:50%;">
-				<p class="banner" style="width: 85%; height: 50%; margin-bottom: 0%;  line-height: 80%">
+				<p class="banner" style="width: 85%; height: 100%; margin-bottom: 0%;  line-height: 80%">
 					<span>화상수업 업데이트</span>
-					<a class="moreInfo" href="">더보기 〉</a>
+					<a class="moreInfo" href="noticeContent.do?num=${getNotice.num }&&no=${getNotice.mustRead}">더보기 〉</a>
 					<span style="font-size:13px; color:#525252;">
 					<br>
 					<br>

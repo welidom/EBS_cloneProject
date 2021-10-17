@@ -62,7 +62,7 @@ public class ManualController {
 		String originalFileName= null;
 		
 		try {
-			saveFile(uploadFile, savePath);
+			Includes.saveFile(uploadFile, savePath);
 			originalFileName = new String(uploadFile.getOriginalFilename().getBytes("8859_1"), "utf-8");
 			
 			dto.setContent(originalFileName);
@@ -104,17 +104,6 @@ public class ManualController {
 		mav.addObject("msg", msg);
 		mav.addObject("url", url);
 		return mav;
-	}
-	public void saveFile(MultipartFile file, String dirPath) throws IOException {
-		Path dir = Paths.get(dirPath).toAbsolutePath().normalize();
-
-		Files.createDirectories(dir);
-	    
-		String fileName = new String(file.getOriginalFilename().getBytes("8859_1"), "utf-8");
-
-		Path targetPath = dir.resolve(fileName).normalize();
-
-		file.transferTo(targetPath);
 	}
 	@RequestMapping(value="/deleteManual.do", method=RequestMethod.GET)
 	public String deleteManualForm(HttpServletRequest req) {

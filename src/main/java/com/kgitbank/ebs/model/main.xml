@@ -2,14 +2,29 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kgitbank.ebs.model.notice">
+<mapper namespace="com.kgitbank.ebs.model">
+<!-- Test -->
+<select id="listTest" resultType="TestDTO">
+	select * from test
+</select>
+
 <!-- 공지 -->
 <select id="listNotice" resultType="NoticeDTO">
 	select * from notice order by num desc
 </select>
+<select id="listNoticeByMust" resultType="NoticeDTO">
+	select * from notice order by mustRead desc, num desc
+</select>
 <select id="getNotice" resultType="NoticeDTO" parameterType="int">
 	select * from notice where num = #{num}
 </select>
+<insert id="insertNotice" parameterMap="NoticeDTO">
+	insert into notice values(notice_seq.nextval, #{dto.mustRead}, #{dto.category}, #{dto.subject},  #{dto.content},  #{dto.attach}, sysdate, 0)
+</insert>
+<update id="addNoticeReadCount" parameterType="int">
+	update notice set readcount = readcount + 1 where num = #{num}
+</update>
+
 <!-- 이용자메뉴얼 -->
 <select id="getManual" resultType="ManualDTO" parameterType="int">
 	select * from manual where type = #{type}
@@ -20,6 +35,7 @@
 <delete id="deleteManual" parameterType="int">
 	delete from manual where num = #{num}
 </delete>
+
 <!-- FAQ -->
 <select id="faqList" resultType="FaqDTO">
 	select * from faqBoard order by readcount desc

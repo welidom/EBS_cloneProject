@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kgitbank.ebs.model.FaqDTO;
 import com.kgitbank.ebs.model.ManualDTO;
 import com.kgitbank.ebs.model.NoticeDTO;
+import com.kgitbank.ebs.model.TestDTO;
 
 @Service
 public class mainMapper {
@@ -17,13 +18,28 @@ public class mainMapper {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<NoticeDTO> listNotice() {
-		List<NoticeDTO> list = sqlSession.selectList("listNotice");
+	public List<NoticeDTO> listNotice(String mode) {
+		List<NoticeDTO> list = null;
+		if(mode == "main") {
+			list = sqlSession.selectList("listNoticeByMust");
+		} else {
+			list = sqlSession.selectList("com.kgitbank.ebs.model.listNotice");
+		}
 		return list;
 	}
-	public NoticeDTO getNotice(int num) {
+	public NoticeDTO getNotice(int num, String mode) {
+		if(mode == "read") {
+			addNoticeReadCount(num);
+		}
 		NoticeDTO dto = sqlSession.selectOne("getNotice", num);
 		return dto;
+	}
+	private void addNoticeReadCount(int num) {
+		sqlSession.update("addNoticeReadCount", num);
+	}
+	public int insertNotice(NoticeDTO dto) {
+		int res = sqlSession.insert("insertNotice", dto);
+		return res;
 	}
 	public List<FaqDTO> faqList(){
 		List<FaqDTO> list = sqlSession.selectList("faqList");
@@ -45,5 +61,9 @@ public class mainMapper {
 			res += sqlSession.delete("deleteManual", num);
 		}
 		return res;
+	}
+	public List<TestDTO> listTest() {
+		List<TestDTO> list = sqlSession.selectList("listTest");
+		return list;
 	}
 }
