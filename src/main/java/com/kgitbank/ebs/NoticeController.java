@@ -67,30 +67,37 @@ public class NoticeController {
 		return "notice/insertForm";
 	}
 	@RequestMapping(value="insertNotice.do", method=RequestMethod.POST)
-public ModelAndView upload(@RequestParam("file") MultipartFile uploadFile, MultipartHttpServletRequest req){
+public ModelAndView upload(MultipartHttpServletRequest req){
 		
 		NoticeDTO dto = new NoticeDTO();
 		
-		String savePath = "D:/manualFiles/noticeFiles";
+		MultipartFile uploadFile = req.getFile("file");
 		
-		String originalFileName= null;
+		String savePath = "D:/Files/noticeFiles";
 		
-		try {
-			Includes.saveFile(uploadFile, savePath);
-			originalFileName = new String(uploadFile.getOriginalFilename().getBytes("8859_1"), "utf-8");
+		String originalFileName= "";
 			
+		try {
+			if(!uploadFile.isEmpty()) {
+				Includes.saveFile(uploadFile, savePath);
+				originalFileName = new String(uploadFile.getOriginalFilename().getBytes("8859_1"), "utf-8");
+			}
 			dto.setAttach(originalFileName);
 			dto.setContent(new String(req.getParameter("content").getBytes("8859_1"), "utf-8"));
 			dto.setCategory(new String(req.getParameter("category").getBytes("8859_1"), "utf-8"));
-			dto.setSubject(new String(req.getParameter("subject").getBytes("8859_1"), "utf-8"));
-			
+			dto.setSubject(new String(req.getParameter("subject").getBytes("8859_1"), "utf-8"));				
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		String[] mr = req.getParameterValues("mustRead");
+		if(mr != null) {
+			dto.setMustRead(1);
+		}else {
+			dto.setMustRead(0);
+		}
 		
-		dto.setMustRead(Integer.parseInt(req.getParameter("mustRead")));
+		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 		
-		System.out.println(dto.getContent());
 		
 		int res = mainMapper.insertNotice(dto);
 		String msg,url;

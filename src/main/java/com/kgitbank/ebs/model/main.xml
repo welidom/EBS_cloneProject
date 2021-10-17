@@ -18,8 +18,8 @@
 <select id="getNotice" resultType="NoticeDTO" parameterType="int">
 	select * from notice where num = #{num}
 </select>
-<insert id="insertNotice" parameterMap="NoticeDTO">
-	insert into notice values(notice_seq.nextval, #{dto.mustRead}, #{dto.category}, #{dto.subject},  #{dto.content},  #{dto.attach}, sysdate, 0)
+<insert id="insertNotice" parameterType="NoticeDTO">
+	insert into notice values(notice_seq.nextval, #{mustRead}, #{category}, #{subject},  #{content},  #{attach}, sysdate, 0)
 </insert>
 <update id="addNoticeReadCount" parameterType="int">
 	update notice set readcount = readcount + 1 where num = #{num}

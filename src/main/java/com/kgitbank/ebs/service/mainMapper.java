@@ -41,6 +41,7 @@ public class mainMapper {
 		int res = sqlSession.insert("insertNotice", dto);
 		return res;
 	}
+	
 	public List<FaqDTO> faqList(){
 		List<FaqDTO> list = sqlSession.selectList("faqList");
 		return list;

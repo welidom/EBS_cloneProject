@@ -16,19 +16,19 @@
 	<table>
 	<tr>
 		<th>작성자:</th>
-		<td><input id="category" maxlength="6" placeholder="6글자 제한"></td>
-		<th>필독 </th><td><input type="checkbox" id="mustRead" value="1"></td>
+		<td><input id="category" name="category" maxlength="6" placeholder="6글자 제한"></td>
+		<th>필독 </th><td><input type="checkbox" id="mustRead" name="mustRead" value="1"></td>
 	</tr>
 	<tr>
-		<th>제목:</th><td colspan="3"><input id="subject" style="width: 100%"></td>
+		<th>제목:</th><td colspan="3"><input id="subject" name="subject" style="width: 100%"></td>
 	</tr>
 	<tr>
 		<th>내용:</th>
-		<td colspan="3"><textarea rows="20px" cols="100%"></textarea> </td>
+		<td colspan="3"><textarea id="content" name="content" rows="20px" cols="100%"></textarea> </td>
 	</tr>
 	<tr>
 		<th>첨부파일:</th>
-		<td><input type="file"></td>
+		<td><input type="file" id="file" name="file"></td>
 		<td colspan="2" align="right"><input type="reset"><input type="submit" value="추가"></td>
 	</tr>
 	</table>
