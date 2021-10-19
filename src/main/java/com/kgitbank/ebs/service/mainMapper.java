@@ -1,7 +1,8 @@
 package com.kgitbank.ebs.service;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.kgitbank.ebs.model.FaqDTO;
 import com.kgitbank.ebs.model.ManualDTO;
 import com.kgitbank.ebs.model.NoticeDTO;
-import com.kgitbank.ebs.model.TestDTO;
 
 @Service
 public class mainMapper {
@@ -20,11 +20,22 @@ public class mainMapper {
 
 	public List<NoticeDTO> listNotice(String mode) {
 		List<NoticeDTO> list = null;
-		if(mode == "main") {
-			list = sqlSession.selectList("listNoticeByMust");
-		} else {
-			list = sqlSession.selectList("com.kgitbank.ebs.model.listNotice");
+		if(mode == "must") {
+			list = sqlSession.selectList("listMustNotice");
+		}else if(mode=="notMust") {
+			list = sqlSession.selectList("listNotMustNotice");
 		}
+		else {
+			list = sqlSession.selectList("listNotice");
+		}
+		return list;
+	}
+	public List<NoticeDTO> searchNotice(String search, String mode){
+		HashMap<String, String> hm = new HashMap<String, String>();
+		hm.put("search", search);
+		hm.put("mode", mode);
+		
+		List<NoticeDTO> list = sqlSession.selectList("searchNotice", hm);
 		return list;
 	}
 	public NoticeDTO getNotice(int num, String mode) {
@@ -41,6 +52,15 @@ public class mainMapper {
 		int res = sqlSession.insert("insertNotice", dto);
 		return res;
 	}
+
+	public int deleteNotice(List<Integer> nums) {
+		int res = 0;
+		for(int num: nums) {
+			res += sqlSession.delete("deleteNotice", num);
+		}
+		return res;
+	}
+	
 	
 	public List<FaqDTO> faqList(){
 		List<FaqDTO> list = sqlSession.selectList("faqList");
@@ -62,9 +82,5 @@ public class mainMapper {
 			res += sqlSession.delete("deleteManual", num);
 		}
 		return res;
-	}
-	public List<TestDTO> listTest() {
-		List<TestDTO> list = sqlSession.selectList("listTest");
-		return list;
 	}
 }

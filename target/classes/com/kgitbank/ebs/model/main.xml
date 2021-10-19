@@ -3,17 +3,27 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kgitbank.ebs.model">
-<!-- Test -->
-<select id="listTest" resultType="TestDTO">
-	select * from test
-</select>
-
 <!-- 공지 -->
 <select id="listNotice" resultType="NoticeDTO">
 	select * from notice order by num desc
 </select>
-<select id="listNoticeByMust" resultType="NoticeDTO">
-	select * from notice order by mustRead desc, num desc
+<select id="listMustNotice" resultType="NoticeDTO">
+	select * from notice where mustRead = 1 order by  num desc
+</select>
+<select id="listNotMustNotice" resultType="NoticeDTO">
+	select * from notice where mustRead = 0 order by num desc
+</select>
+<select id="searchNotice" parameterType="hashMap" resultType="NoticeDTO">
+	select * from notice where 
+	<choose>
+		<when test="mode.equals('content')">
+			content
+		</when>
+		<when test="mode.equals('subject')">
+			subject 
+		</when>
+	</choose>
+	like '%'||#{search}||'%' and mustRead = 0 order by mustRead desc, num desc
 </select>
 <select id="getNotice" resultType="NoticeDTO" parameterType="int">
 	select * from notice where num = #{num}
@@ -24,6 +34,9 @@
 <update id="addNoticeReadCount" parameterType="int">
 	update notice set readcount = readcount + 1 where num = #{num}
 </update>
+<delete id="deleteNotice" parameterType="int">
+	delete from notice where num = #{num}
+</delete>
 
 <!-- 이용자메뉴얼 -->
 <select id="getManual" resultType="ManualDTO" parameterType="int">
@@ -38,6 +51,6 @@
 
 <!-- FAQ -->
 <select id="faqList" resultType="FaqDTO">
-	select * from faqBoard order by readcount desc
+	select * from faq order by readcount desc
 </select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.kgitbank.ebs;
 
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,17 +28,33 @@ public class NoticeController {
 	
 	@RequestMapping(value = "/notice.do", method=RequestMethod.GET)
 	public String noticeMain(HttpServletRequest req) {
-		List<NoticeDTO> notice = mainMapper.listNotice("main");
+		List<NoticeDTO> mustList = mainMapper.listNotice("must");
+		List<NoticeDTO> notMustList = mainMapper.listNotice("notMust");
 		
-		int count = 0;
-		for(NoticeDTO dto: notice) {
-			if(dto.getMustRead() == 0) {
-				count ++;
-			}
+		
+		req.setAttribute("mustList", setDate(mustList));
+		req.setAttribute("notMustList", setDate(notMustList));
+		req.setAttribute("footerContent", Includes.getFooter());
+		
+		return "notice/main";
+	}
+	@RequestMapping(value = "/notice.do", method=RequestMethod.POST)
+	public String searchNotice(HttpServletRequest req) {
+		String search = "";
+		try {
+			search = new String (req.getParameter("search").getBytes("8859_1"), "utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
 		}
 		
-		req.setAttribute("notice", setDate(notice));
-		req.setAttribute("count", count);
+		
+		String mode = req.getParameter("searchFor");
+		
+		List<NoticeDTO> mustList = mainMapper.listNotice("must");
+		List<NoticeDTO> notMustList = mainMapper.searchNotice(search, mode);
+		
+		req.setAttribute("mustList", setDate(mustList));
+		req.setAttribute("notMustList", setDate(notMustList));
 		req.setAttribute("footerContent", Includes.getFooter());
 		
 		return "notice/main";
@@ -61,13 +79,13 @@ public class NoticeController {
 		return "notice/content";
 	}
 	@RequestMapping(value = "/insertNotice.do", method= RequestMethod.GET)
-	public String insertNoticeForm(HttpServletRequest req) {
+	public String insertForm(HttpServletRequest req) {
 
 		req.setAttribute("footerContent", Includes.getFooter());
 		return "notice/insertForm";
 	}
 	@RequestMapping(value="insertNotice.do", method=RequestMethod.POST)
-public ModelAndView upload(MultipartHttpServletRequest req){
+	public ModelAndView upload(MultipartHttpServletRequest req){
 		
 		NoticeDTO dto = new NoticeDTO();
 		
@@ -102,13 +120,52 @@ public ModelAndView upload(MultipartHttpServletRequest req){
 		int res = mainMapper.insertNotice(dto);
 		String msg,url;
 		if(res > 0) {
-			msg="°øÁö µî·Ï ¼º°ø";
+			msg="ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
 			url = "notice.do";
 		}else {
-			msg="°øÁö µî·Ï ½ÇÆä";
+			msg="ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
 			url = "main.do";
 		}
 		req.setAttribute("footerContent", Includes.getFooter());
+		ModelAndView mav = new ModelAndView("message");
+		mav.addObject("msg", msg);
+		mav.addObject("url", url);
+		return mav;
+	}
+	@RequestMapping(value = "/deleteNotice.do", method = RequestMethod.GET)
+	public String deleteForm(HttpServletRequest req) {
+		List<NoticeDTO> mustList = mainMapper.listNotice("must");
+		List<NoticeDTO> notMustList = mainMapper.listNotice("notMust");
+		
+		
+		req.setAttribute("mustList", setDate(mustList));
+		req.setAttribute("notMustList", setDate(notMustList));
+		req.setAttribute("footerContent", Includes.getFooter());
+		
+		return "notice/deleteForm";
+	}
+	@RequestMapping(value = "/deleteNotice.do", method = RequestMethod.POST)
+	public ModelAndView deletePro(HttpServletRequest req) {
+		int res = -1;
+		String msg,url;
+		if(req.getParameterValues("nums") != null) {
+			List<Integer> nums = new ArrayList<Integer>();
+			for(String i: req.getParameterValues("nums")) {
+				nums.add(Integer.parseInt(i));
+			}
+			res = mainMapper.deleteNotice(nums);
+		}
+		if(res > 0) {
+			msg="ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
+			url="notice.do";
+		} else if(res < 0) {
+			msg = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½";
+			url="deleteNotice.do";
+		}
+		else {
+			msg="ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
+			url="main.do";
+		}
 		ModelAndView mav = new ModelAndView("message");
 		mav.addObject("msg", msg);
 		mav.addObject("url", url);

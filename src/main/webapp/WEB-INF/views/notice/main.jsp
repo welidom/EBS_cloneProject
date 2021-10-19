@@ -17,19 +17,19 @@
 	<div>
 		<div style="font-weight: bold;display: flex; justify-content:space-between;">
 			<div>
-				총<span style="color:#2580EB;">${fn:length(notice) }</span>개
+				총<span style="color:#2580EB;">${fn:length(notMustList) + fn:length(mustList) }</span>개
 				<a href="insertNotice.do" class="btn_noticePlus"></a>
 				<a href="deleteNotice.do" class="btn_noticeSub"></a>
 			</div>
 			<form action="notice.do" method="post">
 			<div style="float: right; display: block;">
-				<select id="searchFor" class="select search">
+				<select id="searchFor" name="searchFor" class="select search">
 					<option value="subject">제목</option>
 					<option value="content">내용</option>
 				</select>
-				<input placeholder="검색어를 입력하세요." onfocus="this.value=''" class="searchBar search">
+				<input id="search" name="search" placeholder="검색어를 입력하세요." onfocus="this.value=''" class="searchBar search">
 				<input type="submit" value="검색 " class="search btn_submitKey">
-				<input type="reset" value="검색 초기화" class="search btn_resetKey">
+				<input type="button" onclick="location.href='notice.do'" value="검색 초기화" class="search btn_resetKey">
 			</div>
 			</form>
 		</div>
@@ -42,22 +42,27 @@
 			<th style="width: 10%;">등록일</th>
 			<th style="width: 10%;">조회수</th>
 		</tr>
-		<c:set var="re" value="${count }"/>
-		<c:forEach items="${notice}" var="dto">
+		<c:forEach items="${mustList}" var="dto">
 		<tr align="center">
 		<c:set var="color" value="black"/>
+			<td style="color:#2580EB;"><i class="fas fa-volume-up"></i> 필독</td>
+			<td style="padding: 15px 0;color:#2580EB;">${dto.category}</td>
+			<td align="left" ><a style="color:#2580EB;" href="noticeContent.do?num=${dto.num }&&no=${dto.mustRead}">${dto.subject}</a></td>
 			<c:choose>
-				<c:when test="${dto.mustRead eq 1}">
-						<td style="color:#2580EB;"><i class="fas fa-volume-up"></i> 필독</td>
-						<c:set var="color" value="#2580EB"/>
-				</c:when>
-				<c:otherwise>
-					<td>${re }</td>
-					<c:set var="re" value="${re - 1}"/>
-				</c:otherwise>
+				<c:when test="${dto.attach ne null}"><td align="center"><a href="/filepath/noticeFiles/${dto.attach}" style="font-size: 20px; color:black;" download><i class="fas fa-paperclip"></i></a></td></c:when>
+				<c:otherwise><td></td></c:otherwise>
 			</c:choose>
-			<td style="padding: 15px 0;color:${color};">${dto.category}</td>
-			<td align="left" ><a style="color:${color};" href="noticeContent.do?num=${dto.num }&&no=${dto.mustRead}">${dto.subject}</a></td>
+			<td align="center">${dto.reg_date}</td>
+			<td align="center">${dto.readcount}</td>
+		</tr>
+		</c:forEach>
+		<c:set var="re" value="${fn:length(notMustList) }"/>
+		<c:forEach items="${notMustList}" var="dto">
+		<tr align="center">
+			<td>${re }</td>
+			<c:set var="re" value="${re - 1}"/>
+			<td style="padding: 15px 0;color:black;">${dto.category}</td>
+			<td align="left" ><a style="color:black;" href="noticeContent.do?num=${dto.num }&&no=${dto.mustRead}">${dto.subject}</a></td>
 			<c:choose>
 				<c:when test="${dto.attach ne null}"><td align="center"><a href="/filepath/noticeFiles/${dto.attach}" style="font-size: 20px; color:black;" download><i class="fas fa-paperclip"></i></a></td></c:when>
 				<c:otherwise><td></td></c:otherwise>

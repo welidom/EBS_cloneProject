@@ -72,7 +72,7 @@
 	content: "+";
 }
 a:hover.btn_noticePlus:after{
-	content: "메뉴얼 추가";
+	content: "공지사항 추가";
 }
 .btn_noticeSub{
 	color: black;
@@ -86,7 +86,7 @@ a:hover.btn_noticePlus:after{
 	content: "-";
 }
 a:hover.btn_noticeSub:after{
-	content: "메뉴얼  삭제";
+	content: "공지사항  삭제";
 }
 .notice th{
 	background-color: #efefef;
