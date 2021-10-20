@@ -37,7 +37,9 @@
 <delete id="deleteNotice" parameterType="int">
 	delete from notice where num = #{num}
 </delete>
-
+<update id="updateNotice" parameterType="NoticeDTO">
+	update notice set category
+</update>
 <!-- 이용자메뉴얼 -->
 <select id="getManual" resultType="ManualDTO" parameterType="int">
 	select * from manual where type = #{type}

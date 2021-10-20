@@ -60,6 +60,15 @@
     font-weight: bold;
     border-radius: 5px;
 }
+.btn_update{
+	border: 1px solid #2580eb;
+	background-color: #2580eb;
+    font-size: 15px;
+    color: white;
+    padding: 7px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+}
 .btn_noticePlus{
 	color: white;
     border: 1px hidden #2580EB;

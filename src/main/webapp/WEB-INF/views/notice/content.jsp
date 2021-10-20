@@ -14,7 +14,7 @@
 </div>
 <div style=" padding: 40px 14%; margin-bottom: 90px">
 	<div style="font-weight: bold;padding: 20px 0; border-top :2px solid #2580EB; width: 100%;background-color: #efefef; display:inline-block ;border-bottom: 1px solid lightgray;">
-		<c:if test="${no eq 1}">
+		<c:if test="${dto.mustRead eq 1}">
 			<span style="margin-left: 20px;color:#2580EB;"><i class="fas fa-volume-up"></i> 필독</span>
 		</c:if>
 		<span style="margin-left: 20px;">${dto.subject }</span>
@@ -30,7 +30,10 @@
 			<a href="/filePath/noticeFiles/${dto.attach}" style="font-size: 10px; #2580EB;" download><i class="fas fa-paperclip"></i>${dto.attach }</a>
 		</c:if>
 	</div>
-	<a style="margin: 50px 0; float: right;" href="notice.do" class="btn_list">목록</a>
+	<div style="margin: 50px 0; float: right;">
+		<a href="updateNotice.do?num=${dto.num }" class="btn_update">수정</a>
+		<a href="notice.do" class="btn_list">목록</a>
+	</div>
 </div>
 <%@ include file="../include/footer.jsp" %>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>

@@ -60,6 +60,11 @@ public class mainMapper {
 		}
 		return res;
 	}
+	public int updateNotice(NoticeDTO dto) {
+		int res = sqlSession.update("updateNotice", dto);
+		return res;
+	}
+	
 	
 	
 	public List<FaqDTO> faqList(){

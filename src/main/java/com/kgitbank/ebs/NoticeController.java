@@ -67,7 +67,7 @@ public class NoticeController {
 		return list;
 	}
 	@RequestMapping(value="/noticeContent.do", method = RequestMethod.GET)
-	public String showContent(HttpServletRequest req, @Param("num") int num, @Param("no") int no) {
+	public String showContent(HttpServletRequest req, @Param("num") int num) {
 		NoticeDTO dto = mainMapper.getNotice(num, "read");
 		
 		dto.setReg_date(dto.getReg_date().substring(0, 10));
@@ -75,7 +75,6 @@ public class NoticeController {
 		
 		req.setAttribute("footerContent", Includes.getFooter());
 		req.setAttribute("dto", dto);
-		req.setAttribute("no", no);
 		return "notice/content";
 	}
 	@RequestMapping(value = "/insertNotice.do", method= RequestMethod.GET)
@@ -85,7 +84,7 @@ public class NoticeController {
 		return "notice/insertForm";
 	}
 	@RequestMapping(value="insertNotice.do", method=RequestMethod.POST)
-	public ModelAndView upload(MultipartHttpServletRequest req){
+	public ModelAndView uploadPro(MultipartHttpServletRequest req){
 		
 		NoticeDTO dto = new NoticeDTO();
 		
@@ -166,6 +165,66 @@ public class NoticeController {
 			msg="�޴��� ���� ����";
 			url="main.do";
 		}
+		ModelAndView mav = new ModelAndView("message");
+		mav.addObject("msg", msg);
+		mav.addObject("url", url);
+		return mav;
+	}
+	@RequestMapping(value="/updateNotice.do", method = RequestMethod.GET)
+	public String updateForm(HttpServletRequest req, @Param("num") int num) {
+		NoticeDTO dto = mainMapper.getNotice(num, "read");
+		
+		dto.setReg_date(dto.getReg_date().substring(0, 10));
+		dto.setReg_date(dto.getReg_date().replaceAll("-", "."));
+		
+		dto.setContent(dto.getContent().replaceAll("<br>", ""));
+		
+		req.setAttribute("footerContent", Includes.getFooter());
+		req.setAttribute("dto", dto);
+		return "notice/updateForm";
+	}
+	@RequestMapping(value="insertNotice.do", method=RequestMethod.POST)
+	public ModelAndView updatePro(MultipartHttpServletRequest req){
+		
+		NoticeDTO dto = new NoticeDTO();
+		
+		MultipartFile uploadFile = req.getFile("file");
+		
+		String savePath = "D:/Files/noticeFiles";
+		
+		String originalFileName= "";
+			
+		try {
+			if(!uploadFile.isEmpty()) {
+				Includes.saveFile(uploadFile, savePath);
+				originalFileName = new String(uploadFile.getOriginalFilename().getBytes("8859_1"), "utf-8");
+			}
+			dto.setAttach(originalFileName);
+			dto.setContent(new String(req.getParameter("content").getBytes("8859_1"), "utf-8"));
+			dto.setCategory(new String(req.getParameter("category").getBytes("8859_1"), "utf-8"));
+			dto.setSubject(new String(req.getParameter("subject").getBytes("8859_1"), "utf-8"));				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String[] mr = req.getParameterValues("mustRead");
+		if(mr != null) {
+			dto.setMustRead(1);
+		}else {
+			dto.setMustRead(0);
+		}
+		
+		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+		
+		int res = mainMapper.updateNotice(dto);
+		String msg,url;
+		if(res > 0) {
+			msg="공지사항 수정 성공";
+			url = "notice.do";
+		}else {
+			msg="공지사항 수정 실페";
+			url = "main.do";
+		}
+		req.setAttribute("footerContent", Includes.getFooter());
 		ModelAndView mav = new ModelAndView("message");
 		mav.addObject("msg", msg);
 		mav.addObject("url", url);
