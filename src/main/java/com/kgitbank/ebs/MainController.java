@@ -21,7 +21,7 @@ public class MainController {
 	
 	@RequestMapping(value="/main.do", method = RequestMethod.GET)
 	public String mainNotice(HttpServletRequest req) {
-		List<NoticeDTO> list = mainMapper.listNotice();
+		List<NoticeDTO> list = mainMapper.listNotice("mainPage");
 		if(list.size() > 4) {
 			list = list.subList(0, 4);
 		}
@@ -37,7 +37,7 @@ public class MainController {
 				list.get(i).setSubject(str+"...");
 			}
 		}
-		NoticeDTO dto = mainMapper.getNotice(1);
+		NoticeDTO dto = mainMapper.getNotice(1, "ex");
 		if(dto != null) {
 			String[] arr = dto.getContent().split("\n");	
 			if(arr.length > 7) {

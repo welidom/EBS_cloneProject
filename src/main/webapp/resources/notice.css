@@ -1,0 +1,105 @@
+@charset "UTF-8";
+.select{
+    background-image: url(//static.ebsoc.co.kr/oc_main/img/m_arr_select.7c849da.png);
+    background-size: 43px;
+    background-repeat: no-repeat;
+    background-position: right;
+    width: 120px;
+	border-color: #ccc;
+    border-radius: 5px;
+	padding: 0 30px 0 10px;
+    color: #666;
+    appearance: none;
+}
+.search{
+    margin-right: 12px;
+    display: inline-block;
+    font-size: 14px;
+    height: 35px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+.searchBar{
+    width: calc(100% - 354px);
+    overflow: hidden;
+    padding: 0 10px;
+    line-height: 34px;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+}
+
+.btn_submitKey{
+    border-color: #2580eb;
+    background-color: #2580eb;
+    color:#fff;
+    text-align: center;
+    border-radius: 3px;
+    border: 1px solid;
+    font-size: 15px;
+    position: relative;
+    min-width: 75px;
+}
+.btn_resetKey{
+	border-color: #5b677a;
+    background-color: #5b677a;
+    color:#fff;
+    text-align: center;
+    border-radius: 3px;
+    border: 1px solid;
+    font-size: 15px;
+    position: relative;
+    min-width: 75px;
+}
+.btn_list{
+	border: 1px solid #2580eb;
+    font-size: 15px;
+    color: #2580eb;
+    padding: 7px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.btn_update{
+	border: 1px solid #2580eb;
+	background-color: #2580eb;
+    font-size: 15px;
+    color: white;
+    padding: 7px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.btn_noticePlus{
+	color: white;
+    border: 1px hidden #2580EB;
+    background-color: #2580EB;
+    border-radius: 10px;
+    text-align: center;
+    padding: 0px 5px;
+}
+.btn_noticePlus:after{
+	content: "+";
+}
+a:hover.btn_noticePlus:after{
+	content: "공지사항 추가";
+}
+.btn_noticeSub{
+	color: black;
+    border: 1px hidden lightgray;
+    background-color: lightgray;
+    border-radius: 10px;
+    text-align: center;
+    padding: 0px 7px;
+}
+.btn_noticeSub:after{
+	content: "-";
+}
+a:hover.btn_noticeSub:after{
+	content: "공지사항  삭제";
+}
+.notice th{
+	background-color: #efefef;
+}
+.notice tr{
+	border-bottom: 1px solid lightgray;
+}

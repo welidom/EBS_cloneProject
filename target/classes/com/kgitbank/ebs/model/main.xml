@@ -2,14 +2,45 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kgitbank.ebs.model.notice">
+<mapper namespace="com.kgitbank.ebs.model">
 <!-- 공지 -->
 <select id="listNotice" resultType="NoticeDTO">
-	select * from noticeBoard order by num desc
+	select * from notice order by num desc
+</select>
+<select id="listMustNotice" resultType="NoticeDTO">
+	select * from notice where mustRead = 1 order by  num desc
+</select>
+<select id="listNotMustNotice" resultType="NoticeDTO">
+	select * from notice where mustRead = 0 order by num desc
+</select>
+<select id="searchNotice" parameterType="hashMap" resultType="NoticeDTO">
+	select * from notice where 
+	<choose>
+		<when test="mode.equals('content')">
+			content
+		</when>
+		<when test="mode.equals('subject')">
+			subject 
+		</when>
+	</choose>
+	like '%'||#{search}||'%' and mustRead = 0 order by mustRead desc, num desc
 </select>
 <select id="getNotice" resultType="NoticeDTO" parameterType="int">
-	select * from noticeBoard where num = #{num}
+	select * from notice where num = #{num}
 </select>
+<insert id="insertNotice" parameterType="NoticeDTO">
+	insert into notice values(notice_seq.nextval, #{mustRead}, #{category}, #{subject},  #{content},  #{attach}, sysdate, 0)
+</insert>
+<update id="addNoticeReadCount" parameterType="int">
+	update notice set readcount = readcount + 1 where num = #{num}
+</update>
+<delete id="deleteNotice" parameterType="int">
+	delete from notice where num = #{num}
+</delete>
+<update id="updateNotice" parameterType="NoticeDTO">
+	update notice set category = #{category}, subject = #{subject}, content=#{content}, attach = #{attach}, mustRead=#{mustRead} where num = #{num}
+</update>
+
 <!-- 이용자메뉴얼 -->
 <select id="getManual" resultType="ManualDTO" parameterType="int">
 	select * from manual where type = #{type}
@@ -20,8 +51,9 @@
 <delete id="deleteManual" parameterType="int">
 	delete from manual where num = #{num}
 </delete>
+
 <!-- FAQ -->
 <select id="faqList" resultType="FaqDTO">
-	select * from faqBoard order by readcount desc
+	select * from faq order by readcount desc
 </select>
 </mapper>

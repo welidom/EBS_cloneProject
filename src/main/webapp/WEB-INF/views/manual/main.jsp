@@ -51,7 +51,7 @@
 		<tr>
 			<td align="center" style="padding: 15px 0;">${dto.category}</td>
 			<td>${dto.subject}</td>
-			<td align="center"><a href="/filepath/${dto.content}" download><i class="fas fa-file-download" style="font-size: 20px; color:black;"></i></a></td>
+			<td align="center"><a href="/filepath/manualFiles/${dto.content}" download><i class="fas fa-file-download" style="font-size: 20px; color:black;"></i></a></td>
 			<td align="center">${dto.reg_date}</td>
 		</tr>
 		</c:forEach>
