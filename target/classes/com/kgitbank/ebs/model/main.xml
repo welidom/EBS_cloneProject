@@ -38,8 +38,9 @@
 	delete from notice where num = #{num}
 </delete>
 <update id="updateNotice" parameterType="NoticeDTO">
-	update notice set category
+	update notice set category = #{category}, subject = #{subject}, content=#{content}, attach = #{attach}, mustRead=#{mustRead} where num = #{num}
 </update>
+
 <!-- 이용자메뉴얼 -->
 <select id="getManual" resultType="ManualDTO" parameterType="int">
 	select * from manual where type = #{type}

@@ -13,6 +13,7 @@
 </div>
 <div style="padding: 50px 14%;">
 	<form action="updateNotice.do" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+	<input type="hidden" name="num" id="num" value="${dto.num }"/>
 	<table>
 	<tr>
 		<th>작성자:</th>
@@ -36,27 +37,11 @@
 		<td colspan="3"><textarea id="content" name="content" rows="20px" cols="100%">${dto.content}</textarea> </td>
 	</tr>
 	<tr>
-		<td colspan="4">
-			첨부파일 재설정하기 <input type="checkbox" id="setFile" onclick="fileState()">
-		</td>
-	</tr>
-	<tr>
 		<th>첨부파일:</th>
-		<td id="attachFile">파일 수정 안함</td>
+		<td><input type="file" id="file" name="file"></td>
 		<td colspan="2" align="right"><input type="button" onclick="location.href='updateNotice.do?num=${dto.num}'" value="초기화"><input type="submit" value="수정"></td>
 	</tr>
 	</table>
 	</form>
 </div>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
-function fileState(){
-	var setFile = document.getElementById('setFile');
-	if($(setFile).prop('checked')){
-		document.getElementById('attachFile').innerHTML = '<td id="attachFile"><input type="file" id="file" name="file"></td>'
-	}else{
-		document.getElementById('attachFile').innerHTML = '<td id="attachFile">파일 수정 안함</td>'
-	}
-}
-</script>
 <%@ include file="../include/footer.jsp" %>

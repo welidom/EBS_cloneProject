@@ -183,10 +183,12 @@ public class NoticeController {
 		req.setAttribute("dto", dto);
 		return "notice/updateForm";
 	}
-	@RequestMapping(value="insertNotice.do", method=RequestMethod.POST)
-	public ModelAndView updatePro(MultipartHttpServletRequest req){
+	@RequestMapping(value="updateNotice.do", method=RequestMethod.POST)
+	public ModelAndView updatePro(MultipartHttpServletRequest req, @Param("num") int num){
 		
 		NoticeDTO dto = new NoticeDTO();
+		
+		dto.setNum(num);
 		
 		MultipartFile uploadFile = req.getFile("file");
 		
