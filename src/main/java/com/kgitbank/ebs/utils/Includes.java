@@ -1,4 +1,4 @@
-package com.kgitbank.ebs;
+package com.kgitbank.ebs.utils;
 
 import java.io.IOException;
 import java.nio.file.Files;

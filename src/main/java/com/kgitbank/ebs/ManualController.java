@@ -19,18 +19,19 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kgitbank.ebs.model.ManualDTO;
-import com.kgitbank.ebs.service.mainMapper;
+import com.kgitbank.ebs.service.manualMapper;
+import com.kgitbank.ebs.utils.Includes;
 
 @Controller
 public class ManualController {
 	
 	@Inject
-	private mainMapper mainMapper;
+	private manualMapper manualmapper;
 
 	@RequestMapping(value="/manual.do", method = RequestMethod.GET)
 	public String manual(HttpServletRequest req) {
-		List<ManualDTO> videoManual = mainMapper.getManual(0);
-		List<ManualDTO> documentManual = mainMapper.getManual(1);
+		List<ManualDTO> videoManual = manualmapper.getManual(0);
+		List<ManualDTO> documentManual = manualmapper.getManual(1);
 		
 		req.setAttribute("videoManual", setDate(videoManual));
 		req.setAttribute("documentManual", setDate(documentManual));
@@ -74,7 +75,7 @@ public class ManualController {
 			e.printStackTrace();
 		}
 		
-		int res = mainMapper.insertManual(dto);
+		int res = manualmapper.insertManual(dto);
 		String msg,url;
 		if(res > 0) {
 			msg="�޴��� ��� ����";
@@ -91,7 +92,7 @@ public class ManualController {
 	}
 	@RequestMapping(value="/insertManualPro.do", method = RequestMethod.GET)
 	public ModelAndView insertManualPro(HttpServletRequest req ,ManualDTO dto){
-		int res = mainMapper.insertManual(dto);
+		int res = manualmapper.insertManual(dto);
 		String msg,url;
 		if(res > 0) {
 			msg="�޴��� ��� ����";
@@ -108,8 +109,8 @@ public class ManualController {
 	}
 	@RequestMapping(value="/deleteManual.do", method=RequestMethod.GET)
 	public String deleteManualForm(HttpServletRequest req) {
-		List<ManualDTO> videoManual = mainMapper.getManual(0);
-		List<ManualDTO> documentManual = mainMapper.getManual(1);
+		List<ManualDTO> videoManual = manualmapper.getManual(0);
+		List<ManualDTO> documentManual = manualmapper.getManual(1);
 		
 		req.setAttribute("videoManual", setDate(videoManual));
 		req.setAttribute("documentManual", setDate(documentManual));
@@ -125,7 +126,7 @@ public class ManualController {
 			for(String i: req.getParameterValues("nums")) {
 				nums.add(Integer.parseInt(i));
 			}
-			res = mainMapper.deleteManual(nums);
+			res = manualmapper.deleteManual(nums);
 		}
 		if(res > 0) {
 			msg="�޴��� ���� ����";

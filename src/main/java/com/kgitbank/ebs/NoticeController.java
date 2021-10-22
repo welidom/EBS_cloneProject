@@ -16,19 +16,20 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kgitbank.ebs.model.NoticeDTO;
-import com.kgitbank.ebs.service.mainMapper;
+import com.kgitbank.ebs.service.noticeMapper;
+import com.kgitbank.ebs.utils.Includes;
 
 @Controller
 public class NoticeController {
 
 	@Inject
-	private mainMapper mainMapper;
+	private noticeMapper noticemapper;
 	
 	
 	@RequestMapping(value = "/notice.do", method=RequestMethod.GET)
 	public String noticeMain(HttpServletRequest req) {
-		List<NoticeDTO> mustList = mainMapper.listNotice("must");
-		List<NoticeDTO> notMustList = mainMapper.listNotice("notMust");
+		List<NoticeDTO> mustList = noticemapper.listNotice("must");
+		List<NoticeDTO> notMustList = noticemapper.listNotice("notMust");
 		
 		
 		req.setAttribute("mustList", setDate(mustList));
@@ -49,8 +50,8 @@ public class NoticeController {
 		
 		String mode = req.getParameter("searchFor");
 		
-		List<NoticeDTO> mustList = mainMapper.listNotice("must");
-		List<NoticeDTO> notMustList = mainMapper.searchNotice(search, mode);
+		List<NoticeDTO> mustList = noticemapper.listNotice("must");
+		List<NoticeDTO> notMustList = noticemapper.searchNotice(search, mode);
 		
 		req.setAttribute("mustList", setDate(mustList));
 		req.setAttribute("notMustList", setDate(notMustList));
@@ -67,7 +68,7 @@ public class NoticeController {
 	}
 	@RequestMapping(value="/noticeContent.do", method = RequestMethod.GET)
 	public String showContent(HttpServletRequest req, @Param("num") int num) {
-		NoticeDTO dto = mainMapper.getNotice(num, "read");
+		NoticeDTO dto = noticemapper.getNotice(num, "read");
 		
 		dto.setReg_date(dto.getReg_date().substring(0, 10));
 		dto.setReg_date(dto.getReg_date().replaceAll("-", "."));
@@ -115,7 +116,7 @@ public class NoticeController {
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 		
 		
-		int res = mainMapper.insertNotice(dto);
+		int res = noticemapper.insertNotice(dto);
 		String msg,url;
 		if(res > 0) {
 			msg="���� ��� ����";
@@ -132,8 +133,8 @@ public class NoticeController {
 	}
 	@RequestMapping(value = "/deleteNotice.do", method = RequestMethod.GET)
 	public String deleteForm(HttpServletRequest req) {
-		List<NoticeDTO> mustList = mainMapper.listNotice("must");
-		List<NoticeDTO> notMustList = mainMapper.listNotice("notMust");
+		List<NoticeDTO> mustList = noticemapper.listNotice("must");
+		List<NoticeDTO> notMustList = noticemapper.listNotice("notMust");
 		
 		
 		req.setAttribute("mustList", setDate(mustList));
@@ -151,7 +152,7 @@ public class NoticeController {
 			for(String i: req.getParameterValues("nums")) {
 				nums.add(Integer.parseInt(i));
 			}
-			res = mainMapper.deleteNotice(nums);
+			res = noticemapper.deleteNotice(nums);
 		}
 		if(res > 0) {
 			msg="�޴��� ���� ����";
@@ -171,7 +172,7 @@ public class NoticeController {
 	}
 	@RequestMapping(value="/updateNotice.do", method = RequestMethod.GET)
 	public String updateForm(HttpServletRequest req, @Param("num") int num) {
-		NoticeDTO dto = mainMapper.getNotice(num, "read");
+		NoticeDTO dto = noticemapper.getNotice(num, "read");
 		
 		dto.setReg_date(dto.getReg_date().substring(0, 10));
 		dto.setReg_date(dto.getReg_date().replaceAll("-", "."));
@@ -216,7 +217,7 @@ public class NoticeController {
 		
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 		
-		int res = mainMapper.updateNotice(dto);
+		int res = noticemapper.updateNotice(dto);
 		String msg,url;
 		if(res > 0) {
 			msg="공지사항 수정 성공";

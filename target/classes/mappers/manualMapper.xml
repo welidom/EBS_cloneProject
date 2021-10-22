@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kgitbank.ebs.mapper.manualMapper">
+
+<select id="getManual" resultType="ManualDTO" parameterType="int">
+	select * from manual where type = #{type}
+</select>
+
+<insert id="insertManual" parameterType="ManualDTO">
+	insert into manual values(manual_seq.nextval, #{category}, #{subject}, #{content}, sysdate, #{type})
+</insert>
+
+<delete id="deleteManual" parameterType="int">
+	delete from manual where num = #{num}
+</delete>
+
+
+</mapper>

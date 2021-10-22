@@ -12,16 +12,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kgitbank.ebs.model.FaqDTO;
 import com.kgitbank.ebs.model.NoticeDTO;
-import com.kgitbank.ebs.service.mainMapper;
+import com.kgitbank.ebs.service.faqMapper;
+import com.kgitbank.ebs.service.noticeMapper;
+import com.kgitbank.ebs.utils.Includes;
 
 @Controller
 public class MainController {
 	@Inject
-	private mainMapper mainMapper;
+	private faqMapper faqmapper;
 	
+	@Inject
+	private noticeMapper noticemapper;
+
 	@RequestMapping(value="/main.do", method = RequestMethod.GET)
 	public String mainNotice(HttpServletRequest req) {
-		List<NoticeDTO> list = mainMapper.listNotice("mainPage");
+		List<NoticeDTO> list = noticemapper.listNotice("mainPage");
 		if(list.size() > 4) {
 			list = list.subList(0, 4);
 		}
@@ -37,7 +42,7 @@ public class MainController {
 				list.get(i).setSubject(str+"...");
 			}
 		}
-		NoticeDTO dto = mainMapper.getNotice(1, "ex");
+		NoticeDTO dto = noticemapper.getNotice(1, "ex");
 		if(dto != null) {
 			String[] arr = dto.getContent().split("\n");	
 			if(arr.length > 7) {
@@ -50,7 +55,7 @@ public class MainController {
 				dto.setContent(str);
 			}else {dto.setContent(dto.getContent().replace("\r\n", "<br>"));}
 		}
-		List<FaqDTO> faqlist = mainMapper.faqList();
+		List<FaqDTO> faqlist = faqmapper.faqList();
 		if(faqlist.size() > 8) {
 			faqlist = faqlist.subList(0, 8);
 		}
