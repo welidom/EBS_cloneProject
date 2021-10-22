@@ -17,8 +17,20 @@
 			<td><a href="manual.do" class="defaultButton">이용자메뉴얼</a></td>
 			<td><a href="notice.do" class="defaultButton">공지사항</a></td>
 			<td><a href="" class="defaultButton">FAQ</a></td>
-			<td><a href="" class="defaultButton" style="border-radius:100px; background-color:#2E5DEB; color:white; padding: 7px 25px;">로그인</a></td>
-			<td><a href="" class="defaultButton" style="border-radius:100px; background-color:lightgray; color:black; padding: 7px 25px;">회원가입</a></td>
+			<c:choose>
+				<c:when test="${UserId eq '0'}">
+					<td><a href="" class="defaultButton" style="border-radius:100px; background-color:#2580EB; color:white; padding: 7px 25px;">로그인</a></td>
+					<td><a href="" class="defaultButton" style="border-radius:100px; background-color:lightgray; color:black; padding: 7px 25px;">회원가입</a></td>
+				</c:when>
+				<c:otherwise>
+					<td>
+						<form action="main.do" method="post" id="login">
+							<input type="hidden" value="0" name="login">
+							<a href="#" onclick="javascript:document.getElementById('login').submit();" class="defaultButton" style="border-radius:100px; background-color:#2580EB; color:white; padding: 7px 25px;">로그아웃</a>
+						</form>
+					</td>
+				</c:otherwise>
+			</c:choose>
 		</tr>
 		</table>
 	</div>

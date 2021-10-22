@@ -14,7 +14,7 @@ public class manualMapper {
 	
 	@Inject SqlSession sqlSession;
 	
-	private static String namespace = "com.kgitbank.ebs.mapper.manualNotice";
+	private static String namespace = "com.kgitbank.ebs.mapper.manualMapper";
 	
 	public List<ManualDTO> getManual(int type){
 		List<ManualDTO> list = sqlSession.selectList(namespace+".getManual",type);

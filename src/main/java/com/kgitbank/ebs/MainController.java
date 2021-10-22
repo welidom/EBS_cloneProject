@@ -5,10 +5,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kgitbank.ebs.model.FaqDTO;
 import com.kgitbank.ebs.model.NoticeDTO;
@@ -20,12 +20,15 @@ import com.kgitbank.ebs.utils.Includes;
 public class MainController {
 	@Inject
 	private faqMapper faqmapper;
-	
 	@Inject
 	private noticeMapper noticemapper;
 
-	@RequestMapping(value="/main.do", method = RequestMethod.GET)
+	@RequestMapping(value="/main.do")
 	public String mainNotice(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		
+		session.setAttribute("UserId", req.getParameter("login"));
+		
 		List<NoticeDTO> list = noticemapper.listNotice("mainPage");
 		if(list.size() > 4) {
 			list = list.subList(0, 4);
