@@ -3,8 +3,9 @@ package com.kgitbank.ebs.service;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kgitbank.ebs.model.FaqDTO;
@@ -14,18 +15,20 @@ import com.kgitbank.ebs.model.NoticeDTO;
 @Service
 public class mainMapper {
 
-	@Autowired
+	@Inject
 	private SqlSession sqlSession;
+	
+	private static String namespace = "com.kgitbank.ebs.main";
 
 	public List<NoticeDTO> listNotice(String mode) {
 		List<NoticeDTO> list = null;
 		if(mode == "must") {
-			list = sqlSession.selectList("listMustNotice");
+			list = sqlSession.selectList(namespace+".listMustNotice");
 		}else if(mode=="notMust") {
-			list = sqlSession.selectList("listNotMustNotice");
+			list = sqlSession.selectList(namespace+".listNotMustNotice");
 		}
 		else {
-			list = sqlSession.selectList("listNotice");
+			list = sqlSession.selectList(namespace+".listNotice");
 		}
 		return list;
 	}
@@ -34,56 +37,56 @@ public class mainMapper {
 		hm.put("search", search);
 		hm.put("mode", mode);
 		
-		List<NoticeDTO> list = sqlSession.selectList("searchNotice", hm);
+		List<NoticeDTO> list = sqlSession.selectList(namespace+".searchNotice", hm);
 		return list;
 	}
 	public NoticeDTO getNotice(int num, String mode) {
 		if(mode == "read") {
 			addNoticeReadCount(num);
 		}
-		NoticeDTO dto = sqlSession.selectOne("getNotice", num);
+		NoticeDTO dto = sqlSession.selectOne(namespace+".getNotice", num);
 		return dto;
 	}
 	private void addNoticeReadCount(int num) {
-		sqlSession.update("addNoticeReadCount", num);
+		sqlSession.update(namespace+".addNoticeReadCount", num);
 	}
 	public int insertNotice(NoticeDTO dto) {
-		int res = sqlSession.insert("insertNotice", dto);
+		int res = sqlSession.insert(namespace+".insertNotice", dto);
 		return res;
 	}
 
 	public int deleteNotice(List<Integer> nums) {
 		int res = 0;
 		for(int num: nums) {
-			res += sqlSession.delete("deleteNotice", num);
+			res += sqlSession.delete(namespace+".deleteNotice", num);
 		}
 		return res;
 	}
 	public int updateNotice(NoticeDTO dto) {
-		int res = sqlSession.update("updateNotice", dto);
+		int res = sqlSession.update(namespace+".updateNotice", dto);
 		return res;
 	}
 	
 	
 	
 	public List<FaqDTO> faqList(){
-		List<FaqDTO> list = sqlSession.selectList("faqList");
+		List<FaqDTO> list = sqlSession.selectList(namespace+".faqList");
 		return list;
 	}
 	public List<ManualDTO> getManual(int type){
-		List<ManualDTO> list = sqlSession.selectList("getManual",type);
+		List<ManualDTO> list = sqlSession.selectList(namespace+".getManual",type);
 		return list;
 	}
 	
 	public int insertManual(ManualDTO dto) {
-		int res = sqlSession.insert("insertManual", dto);
+		int res = sqlSession.insert(namespace+".insertManual", dto);
 		return res;
 	}
 	
 	public int deleteManual(List<Integer> nums) {
 		int res = 0;
 		for(int num: nums) {
-			res += sqlSession.delete("deleteManual", num);
+			res += sqlSession.delete(namespace+".deleteManual", num);
 		}
 		return res;
 	}

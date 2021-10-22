@@ -4,27 +4,26 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kgitbank.ebs.model.ManualDTO;
 import com.kgitbank.ebs.model.NoticeDTO;
 import com.kgitbank.ebs.service.mainMapper;
 
 @Controller
 public class NoticeController {
 
-	@Autowired
+	@Inject
 	private mainMapper mainMapper;
+	
 	
 	@RequestMapping(value = "/notice.do", method=RequestMethod.GET)
 	public String noticeMain(HttpServletRequest req) {

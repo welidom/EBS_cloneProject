@@ -6,9 +6,9 @@ import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +23,8 @@ import com.kgitbank.ebs.service.mainMapper;
 
 @Controller
 public class ManualController {
-	@Autowired
+	
+	@Inject
 	private mainMapper mainMapper;
 
 	@RequestMapping(value="/manual.do", method = RequestMethod.GET)
@@ -76,10 +77,10 @@ public class ManualController {
 		int res = mainMapper.insertManual(dto);
 		String msg,url;
 		if(res > 0) {
-			msg="¸Þ´º¾ó µî·Ï ¼º°ø";
+			msg="ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
 			url = "manual.do";
 		}else {
-			msg="¸Þ´º¾ó µî·Ï ½ÇÆä";
+			msg="ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
 			url = "insertManual.do";
 		}
 		req.setAttribute("footerContent", Includes.getFooter());
@@ -93,10 +94,10 @@ public class ManualController {
 		int res = mainMapper.insertManual(dto);
 		String msg,url;
 		if(res > 0) {
-			msg="¸Þ´º¾ó µî·Ï ¼º°ø";
+			msg="ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
 			url = "manual.do";
 		}else {
-			msg="¸Þ´º¾ó µî·Ï ½ÇÆä";
+			msg="ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
 			url = "insertManual.do";
 		}
 		req.setAttribute("footerContent", Includes.getFooter());
@@ -127,14 +128,14 @@ public class ManualController {
 			res = mainMapper.deleteManual(nums);
 		}
 		if(res > 0) {
-			msg="¸Þ´º¾ó »èÁ¦ ¼º°ø";
+			msg="ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
 			url="manual.do";
 		} else if(res < 0) {
-			msg = "»èÁ¦ÇÒ ¸Þ´º¾óÀ» ¼±ÅÃÇØÁÖ¼¼¿ä";
+			msg = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½";
 			url="deleteManual.do";
 		}
 		else {
-			msg="¸Þ´º¾ó »èÁ¦ ½ÇÆä";
+			msg="ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
 			url="main.do";
 		}
 		ModelAndView mav = new ModelAndView("message");
