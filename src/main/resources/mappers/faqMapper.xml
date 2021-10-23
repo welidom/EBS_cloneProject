@@ -7,7 +7,8 @@
 	select * from faq order by readcount desc
 </select>
 
-<select id="faqReadTitle" resultType="FaqDTO" parameterType="String">
-	select * from faq order by readcount desc where category = #{keyword}
-</select>
+<update id="faqReadcount" parameterType="int">
+	update faq set readcount = readcount + 1 where num = #{num}
+</update>
+
 </mapper>
