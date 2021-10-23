@@ -23,7 +23,7 @@
    <ul class="tab">
    <c:forEach items="${listCategory}" var="listCategory" >
    		<li id="act_bt"><input type="hidden" name="ajacno" class="ajacno" value="${listCategory.cno}">
-   		<span class="act_B"  style="cursor:pointer;">${listCategory.name}</span>
+   		<span class="act_B"  style="cursor:pointer;">${listCategory.category}</span>
    		</li>
    </c:forEach>
    </ul>

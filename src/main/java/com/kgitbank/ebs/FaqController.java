@@ -1,8 +1,6 @@
 package com.kgitbank.ebs;
 
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -11,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kgitbank.ebs.model.CategoryDTO;
 import com.kgitbank.ebs.model.FaqDTO;
 import com.kgitbank.ebs.service.faqMapper;
 
