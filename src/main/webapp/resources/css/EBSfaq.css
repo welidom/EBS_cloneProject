@@ -178,7 +178,7 @@ height : 40px;
 line-height: 40px;
 }
 div.showanswer::before{
-content : url("/resources/img/answer.png");
+content : url("../images/faq/answer.png");
 }
 .v_btn{
 float:right;

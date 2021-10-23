@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kgitbank.ebs.service.faqMapper;
@@ -33,7 +34,7 @@ public class FaqController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/faqReadcount.do")
-	public void readcounts(@Param(value="bno") int num) throws Exception{
+	public void readcounts(@RequestParam(value="bno") int num) throws Exception{
 		faqmapper.faqreadcount(num);
 	}
 	

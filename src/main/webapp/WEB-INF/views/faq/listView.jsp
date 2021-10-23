@@ -21,7 +21,7 @@
    <ul class="tab">
    <c:set var="act" value="0"/>
    <c:forEach items="${listCategory}" var="category" >
-   		<li id="act_bt">
+   		<li id="act_bt"><input type="hidden" name="ajacno" class="ajacno" value="${act + 1000}">
    		<span class="act_B"  style="cursor:pointer;">${category}</span>
    		</li>
    		<c:set var="act" value="${act+1 }" />
@@ -37,13 +37,13 @@
             <ul class="myfaq">
             <li class="question" id="qu_bno"><c:out value="${re}"/>
             <c:set var="re" value="${re - 1}" />
-           </li>
+          	</li>
             <li class="question" id="qu_name">
             <c:if test="${UserId eq 3}">
             <div class="update_btn" style="cursor:pointer;" value="${dto.num}">(수정/ </div>
             <div class="delete_btn" style="cursor:pointer;" value="${dto.num}">삭제)</div>
             </c:if>
-          
+          	
             <c:out value="${dto.category}"/></li>
             <li class="hidden_btn" id="qu_qu" style="cursor:pointer;"><c:out value="${dto.question}"/>
             <input type="hidden" name="hiddenbno" id="hiddenbno" value="${dto.num}">
@@ -60,8 +60,6 @@
 	<div id="download">
 	<a href="faqDownload.do" class="key_color"><img src="${pageContext.request.contextPath }/resources/images/faq/downloadImage.png" class="downima"><b>온라인클래스 자주묻는질문(FAQ) 다운로드</b></a>
 	</div>
-
-	
 	     	<div class="loadMore">더보기 <b class=keyboard_down>∨</b></div>
       </c:if>
 </div>
