@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/header.jsp" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/manual.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/manual.css" type="text/css">
 <div style="background-color: #2580EB; padding: 0 14%; color:white; display: inline-block; width: 72%">
 	<span style="float: left; padding-top: 30px">
 	HOME 〉 이용자메뉴얼<br>

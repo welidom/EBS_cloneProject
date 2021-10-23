@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>EBS 온라인클론스</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main.css" type="text/css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" type="text/css">
 </head>
 <body style="background-color: white;">
 	<div class="header">

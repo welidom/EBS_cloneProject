@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+.keyva{
+	width : 200px;
+	height : 80px;
+	background-color: #f6f6f6;;
+	text-align: center;
+	
+}
+.qu_title{
+	float:left;
+	font-size: 20px;
+	padding-bottom: 2px;
+	margin-bottom: 10px;
+	border-top: none;
+}
+
+td{
+	border : 1px solid #ccc;
+}
+
+.newContainer{
+	margin-left: 20%;
+	margin-right: 20%;
+	text-align: center;
+}
+.write_btn{
+	width:100px;
+	color:white;
+	background-color: #2478FF;
+	height:40px;
+	line-height: 40px;
+	margin: 0px auto;
+}
+.cancel_btn{
+	width:200px;
+	margin: 0px auto;
+}
+.btns{
+	width :300px;
+	text-align: center;
+	margin :0px auto;
+	
+}

@@ -1,58 +1,41 @@
 package com.kgitbank.ebs.model;
 
 public class FaqDTO {
-	private String category; //카테고리
-	private int cno; //카테고리 고유번호
-	private String question;//질문
-	private String answer;//답변
-	private int bno;//고유번호
-	private int rNum;//표시번호
-	private int readcount;//조회수
-	
+	private int num;
+	private String category;
+	private String subject;
+	private String content;
+	private int number;
+
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getCategory() {
 		return category;
 	}
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public int getCno() {
-		return cno;
+	public String getSubject() {
+		return subject;
 	}
-	public void setCno(int cno) {
-		this.cno = cno;
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
-	public String getQuestion() {
-		return question;
+	public String getContent() {
+		return content;
 	}
-	public void setQuestion(String question) {
-		this.question = question;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public String getAnswer() {
-		return answer;
+	public int getNumber() {
+		return number;
 	}
-	public void setAnswer(String answer) {
-		this.answer = answer;
+	public void setNumber(int number) {
+		this.number = number;
 	}
-	public int getBno() {
-		return bno;
-	}
-	public void setBno(int bno) {
-		this.bno = bno;
-	}
-	public int getrNum() {
-		return rNum;
-	}
-	public void setrNum(int rNum) {
-		this.rNum = rNum;
-	}
-	public int getReadcount() {
-		return readcount;
-	}
-	public void setReadcount(int readcount) {
-		this.readcount = readcount;
-	}
-	
-	
-	
 	
 }

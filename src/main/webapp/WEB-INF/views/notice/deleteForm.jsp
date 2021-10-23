@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri= "http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../include/header.jsp" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/notice.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/notice.css" type="text/css">
 <div style="background-color: #2580EB; padding: 0 14%; color:white; display: inline-block; width: 72%">
 	<span style="float: left; padding-top: 30px">
 	HOME 〉 공지사항 〉 삭제<br>

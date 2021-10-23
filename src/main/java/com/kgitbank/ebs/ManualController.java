@@ -47,7 +47,7 @@ public class ManualController {
 	@RequestMapping(value="/insertManual.do", method=RequestMethod.GET)
 	public String insertManualForm(HttpServletRequest req) {
 		req.setAttribute("footerContent", Includes.getFooter());
-		return "manual/form";
+		return "manual/insertForm";
 	}
 	
 	@PostMapping(value="/insertManualPro.do")
@@ -76,10 +76,10 @@ public class ManualController {
 		int res = manualmapper.insertManual(dto);
 		String msg,url;
 		if(res > 0) {
-			msg="�޴��� ��� ����";
+			msg="占쌨댐옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙";
 			url = "manual.do";
 		}else {
-			msg="�޴��� ��� ����";
+			msg="占쌨댐옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙";
 			url = "insertManual.do";
 		}
 		req.setAttribute("footerContent", Includes.getFooter());
@@ -93,10 +93,10 @@ public class ManualController {
 		int res = manualmapper.insertManual(dto);
 		String msg,url;
 		if(res > 0) {
-			msg="�޴��� ��� ����";
+			msg="占쌨댐옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙";
 			url = "manual.do";
 		}else {
-			msg="�޴��� ��� ����";
+			msg="占쌨댐옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙";
 			url = "insertManual.do";
 		}
 		req.setAttribute("footerContent", Includes.getFooter());
@@ -127,14 +127,14 @@ public class ManualController {
 			res = manualmapper.deleteManual(nums);
 		}
 		if(res > 0) {
-			msg="�޴��� ���� ����";
+			msg="占쌨댐옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙";
 			url="manual.do";
 		} else if(res < 0) {
-			msg = "������ �޴����� �������ּ���";
+			msg = "占쏙옙占쏙옙占쏙옙 占쌨댐옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쌍쇽옙占쏙옙";
 			url="deleteManual.do";
 		}
 		else {
-			msg="�޴��� ���� ����";
+			msg="占쌨댐옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙";
 			url="main.do";
 		}
 		ModelAndView mav = new ModelAndView("message");
