@@ -15,14 +15,24 @@
 	</div>
 </div>
 <div class="container">
+<form name="addForm">
+</form>
+<form name="form">
 	<div class="search">
 		<input type="text" name="searchContent" id="searchContent" class="cancelenter" placeholder="검색어를 입력하세요."><button type="button" class="search_btn"style="cursor:pointer;">검색</button>
 	</div>
    <ul class="tab">
    <c:set var="act" value="0"/>
    <c:forEach items="${listCategory}" var="category" >
-   		<li id="act_bt"><input type="hidden" name="ajacno" class="ajacno" value="${act + 1000}">
-   		<span class="act_B"  style="cursor:pointer;">${category}</span>
+   		<li id="act_bt">
+   		<c:choose>
+   			<c:when test="${cno eq act}">
+   				<a href="faqList.do?cno=${act}" class="actC active" style="cursor:pointer; color:black;width: 120px;">${category}</a>
+   			</c:when>
+   			<c:otherwise>
+   				<a href="faqList.do?cno=${act}" class="actC" style="cursor:pointer;">${category}</a>
+   			</c:otherwise>
+   		</c:choose>
    		</li>
    		<c:set var="act" value="${act+1 }" />
    </c:forEach>
@@ -44,7 +54,8 @@
             <div class="delete_btn" style="cursor:pointer;" value="${dto.num}">삭제)</div>
             </c:if>
           	
-            <c:out value="${dto.category}"/></li>
+            <c:out value="${listCategory[dto.category]}"/></li>
+            
             <li class="hidden_btn" id="qu_qu" style="cursor:pointer;"><c:out value="${dto.question}"/>
             <input type="hidden" name="hiddenbno" id="hiddenbno" value="${dto.num}">
            	<input type="hidden" name="hiddenreadcount" id="hiddenreadcount" value="${dto.readcount}">
@@ -55,13 +66,14 @@
             </div>
             </li>
             </ul>
-         </c:forEach>
+		</c:forEach>
       
 	<div id="download">
 	<a href="faqDownload.do" class="key_color"><img src="${pageContext.request.contextPath }/resources/images/faq/downloadImage.png" class="downima"><b>온라인클래스 자주묻는질문(FAQ) 다운로드</b></a>
 	</div>
 	     	<div class="loadMore">더보기 <b class=keyboard_down>∨</b></div>
       </c:if>
+</form>
 </div>
 </div>
 <%@include file="../include/footer.jsp" %>

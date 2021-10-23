@@ -2,7 +2,7 @@ package com.kgitbank.ebs.model;
 
 public class FaqDTO {
 	private int num;
-	private String category;
+	private int category;
 	private String question;
 	private String answer;
 	private int readcount;
@@ -12,10 +12,10 @@ public class FaqDTO {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public String getCategory() {
+	public int getCategory() {
 		return category;
 	}
-	public void setCategory(String category) {
+	public void setCategory(int category) {
 		this.category = category;
 	}
 	public String getQuestion() {

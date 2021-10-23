@@ -67,6 +67,7 @@ public class MainController {
 		req.setAttribute("listNotice", list);
 		req.setAttribute("getNotice", dto);
 		req.setAttribute("getServiceNotice", service);
+		req.setAttribute("faqCategoryList", Includes.getFaqCategory());
 		return "main";
 		
 	}

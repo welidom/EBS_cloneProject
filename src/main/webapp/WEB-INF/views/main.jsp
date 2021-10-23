@@ -55,10 +55,10 @@
 	<div style="background-color: white; padding:70px 14%;">
 		<b style="font-size:40px;">자주 묻는 질문</b>
 		<br>
-		<a class="moreInfo" href="">더보기 〉</a>
+		<a class="moreInfo" href="faqList.do?cno=0">더보기 〉</a>
 		<br><br>
 		<c:forEach var="dto" items="${listFaq}">
-		<a class="faq" style="" href="">
+		<a class="faq" href="faqList.do?cno=${faqCategoryList[dto.category] }">
 			<span class="faqc" style="">${dto.category}</span><span class="slice">|</span><span>${dto.question}</span>
 			<span class="moreInfo">〉</span>
 		</a>

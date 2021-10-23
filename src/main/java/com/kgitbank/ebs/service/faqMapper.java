@@ -26,4 +26,14 @@ public class faqMapper {
 	public void faqreadcount(int num) {
 		sqlSession.update("faqReadcount", num);
 	}
+
+	public List<FaqDTO> faqList(int cno) {
+		List<FaqDTO> list = sqlSession.selectList(namespace+".cnoFaqList", cno);
+		return list;
+	}
+
+	public List<FaqDTO> faqReadcountList() {
+		List<FaqDTO> list = sqlSession.selectList(namespace+".readcountFaqList");
+		return list;
+	}
 }

@@ -6,7 +6,12 @@
 <select id="faqList" resultType="FaqDTO">
 	select * from faq order by readcount desc
 </select>
-
+<select id="cnoFaqList" resultType="FaqDTO" parameterType="int">
+	select * from faq where category = #{cno} order by readcount desc
+</select>
+<select id="readcountFaqList" resultType="FaqDTO">
+	select * from faq where readcount > 10 order by readcount desc
+</select>
 <update id="faqReadcount" parameterType="int">
 	update faq set readcount = readcount + 1 where num = #{num}
 </update>

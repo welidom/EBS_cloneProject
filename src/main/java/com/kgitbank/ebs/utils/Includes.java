@@ -23,4 +23,8 @@ public class Includes {
 
 		file.transferTo(targetPath);
 	}
+	public static String[] getFaqCategory() {
+		String[] category = {"자주 찾는 질문 ", "회원","클래스 이용", "학습", "클래스 개설/관리", "학습 관리", "화상 수업", "강좌 관리", "기타"};
+		return category;
+	}
 }
