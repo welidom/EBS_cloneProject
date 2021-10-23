@@ -1,18 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
 <%@include file="../include/header.jsp" %>
 <link rel="stylesheet" href="<c:url value='/resources/css/EBSfaq.css'/>">
 <div class="aja">
 <div class="whereami">
-	<div class="content">
-		<ul class = "hometext">
-			<li class="homestitle">HOME</li>
-			<li class="homes">FAQ</li>
-		</ul>
-		<h3 class="page_tit">FAQ</h3>
-		<p class="page_txt">온라인 클래스 이용시 자주 묻는 질문과 답변을 안내합니다.</p>
+	<div style="padding: 30px 14%;">
+		<div style="color: white; margin-bottom: 20px;">Home 〉 FAQ</div>
+		<div>
+		<div style="font-weight: bold; font-size: 25px; color: white;">FAQ</div>
+		<div style="color:white;">온라인 클래스 이용시 자주 묻는 질문과 답변을 안내합니다.</div>
+		</div>
 	</div>
 </div>
 <div class="container">
@@ -23,14 +21,12 @@
 		<input type="text" name="searchContent" id="searchContent" class="cancelenter" placeholder="검색어를 입력하세요."><button type="button" class="search_btn"style="cursor:pointer;">검색</button>
 	</div>
    <ul class="tab">
-   <c:forEach items="${dto}" var="listCategory" >
+   <c:forEach items="${listCategory}" var="listCategory" >
    		<li id="act_bt"><input type="hidden" name="ajacno" class="ajacno" value="${listCategory.cno}">
-   		<span class="act_B"  style="cursor:pointer;">${listCategory.category}</span>
+   		<span class="act_B"  style="cursor:pointer;">${listCategory.name}</span>
    		</li>
    </c:forEach>
    </ul>
-
-
 		<c:if test="${list ne null}">
 		<c:if test="${UserId eq 3}">
        		<div class="writeQu" style="cursor:pointer;">항목 추가</div>

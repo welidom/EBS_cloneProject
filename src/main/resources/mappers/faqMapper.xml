@@ -6,4 +6,7 @@
 <select id="faqList" resultType="FaqDTO">
 	select * from faq order by readcount desc
 </select>
+<select id="faqListByCategory" resultType="FaqDTO" parameterType="String">
+	select * from faq order by readcount desc where category = #{keyword}
+</select>
 </mapper>

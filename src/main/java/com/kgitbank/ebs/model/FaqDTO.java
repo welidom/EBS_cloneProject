@@ -1,17 +1,26 @@
 package com.kgitbank.ebs.model;
 
 public class FaqDTO {
-	private int num;
 	private String category;
-	private String subject;
-	private String content;
-	private int number;
-
-	public int getNum() {
-		return num;
+	private int cno;
+	private String question;
+	private String answer;
+	private int bno;
+	private int rNum;
+	private int readcount;
+	
+	public int getreadcount() {
+		return readcount;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setreadcount(int readcount) {
+		this.readcount = readcount;
+	}
+
+	public int getrNum() {
+		return rNum;
+	}
+	public void setrNum(int rNum) {
+		this.rNum = rNum;
 	}
 	public String getCategory() {
 		return category;
@@ -19,23 +28,30 @@ public class FaqDTO {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public String getSubject() {
-		return subject;
+
+	public int getCno() {
+		return cno;
 	}
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setCno(int cno) {
+		this.cno = cno;
 	}
-	public String getContent() {
-		return content;
+	public String getQuestion() {
+		return question;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setQuestion(String question) {
+		this.question = question;
 	}
-	public int getNumber() {
-		return number;
+	public String getAnswer() {
+		return answer;
 	}
-	public void setNumber(int number) {
-		this.number = number;
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
 	}
 	
 }

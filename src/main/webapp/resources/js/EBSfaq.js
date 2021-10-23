@@ -7,10 +7,11 @@
 	var readcountbno = $(this).find("input[name='hiddenbno']").val();
 			if($(this).find(".up_btn").css("display") == "none"){
 				$.ajax({
-					url:"/board/readcount",
+					url:"faqReadcount.do",
 					type:"GET",
 					data: {"cno":readcountcno, "bno":readcountbno},
 					success:function(data){
+						
 					}
 				})
 				$(this).find(".up_btn").show();
@@ -47,7 +48,7 @@
 			var cate = $("input[name='catecno']");
 			var catecno = $("input[name='catecno']").val();
        	$(".search_btn").on("click", function(){
-			formObj.attr("action", "/board/list");
+			formObj.attr("action", "faqList.do");
 			inputObj.attr("name", "keyword");
 			hid.attr("name", "cno");
 			hid.attr("value", hidcno);
@@ -58,7 +59,7 @@
 		$(".delete_btn").on("click", function(){
 			var hidn = $("input[name='hiddenbno']");
 			var hidbno=$(this).attr("value");
-			formObj.attr("action", "/board/delete");
+			formObj.attr("action", "faqDelete.do");
 			formObj.attr("method", "post");
 			var hid = $("input[name='hiddencno']");
 			var hidcno = $("input[name='hiddencno']").val();
@@ -79,7 +80,7 @@
 			hid.attr("value",hidcno);
 			hidn.attr("name","bno");
 			hidn.attr("value",hidbno)
-			formObj.attr("action", "/board/update");
+			formObj.attr("action", "faqUpdate.do");
 			formObj.attr("method", "post");
 			formObj.submit();
 		})
@@ -91,7 +92,7 @@ $(".cancelenter").keydown(function() {
 });
 		$(".writeQu").on("click",function(){
 			var formAdd = $("form[name='addForm']");
-			formAdd.attr("action" ,"/board/newqu");
+			formAdd.attr("action" ,"faqNewqu.do");
 			formAdd.attr("method", "get");
 			formAdd.submit();
 		})
@@ -100,7 +101,7 @@ $(".cancelenter").keydown(function() {
 		var cateCno = $("input[name='catecno']");
 		var cateCnoV = $(this).find(".catecno").attr("value");
 		var formca = $("form[name='cate']");
-		formca.attr("action", "/board/list");
+		formca.attr("action", "faqList.do");
 		formca.attr("method", "get");
 		cateCno.attr("name", "cno");
 		cateCno.attr("value", cateCnoV);
@@ -110,7 +111,7 @@ $(".cancelenter").keydown(function() {
 	
 $(".act_B").on("click", function(){
       var ajcno = $(this).siblings(".ajacno").val();
-        $(".aja").load("/board/list?cno="+ajcno)
+        $(".aja").load("faqList.do?cno="+ajcno)
 		$(this).parent().addClass("active");
 		$(this).parent().siblings().removeClass("active");
    })

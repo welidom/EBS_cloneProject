@@ -72,12 +72,6 @@ padding-left: 25%;
 .whereami{
 	background: #2580eb;
 	width: 100%;
-	height: 150px;
-}
-.content{
- margin-left: 15%;
- margin-right: 15%;
- padding: 40px;
 }
 .hometext{
 list-style: none;
@@ -96,16 +90,6 @@ color: white;
 list-style: none;
 float: left;
 color: white;
-}
-.page_tit{
-color:white;
-width:100%;
-float: left;
-}
-.page_txt{
-margin-left: 6px;
-color: white;
-margin-left: 0px;
 }
 .totalcounts{
 height: 30px;

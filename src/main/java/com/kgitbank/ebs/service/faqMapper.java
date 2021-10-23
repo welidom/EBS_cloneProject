@@ -21,4 +21,23 @@ public class faqMapper {
 		List<FaqDTO> list = sqlSession.selectList(namespace+".faqList");
 		return list;
 	}
+	public List<FaqDTO> faqList(String keyword){
+		List<FaqDTO> list = sqlSession.selectList(namespace+".faqListByCategory", keyword);
+		return list;
+	}
+	public Object FaqlistCategory() {
+		return null;
+	}
+	public Object FaqreadTitle(int cno, String keyword) {
+		return null;
+	}
+	public Object FaqtotalBnoCount(int cno, String keyword) {
+		return null;
+	}
+	public Object Faqfavorite() {
+		return null;
+	}
+	public Object FaqFavoriteTotalBnoCount(int cno, String keyword) {
+		return null;
+	}
 }
