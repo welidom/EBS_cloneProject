@@ -35,7 +35,7 @@ public class faqMapper {
 		return list;
 	}
 	public List<FaqDTO> FaqreadTitle(int cno, String keyword) {
-		return sqlSession.selectList(namespace+".faqReadTitle");
+		return sqlSession.selectList(namespace+".faqReadTitle", keyword);
 	}
 	public Object FaqtotalBnoCount(int cno, String keyword) {
 		return null;
