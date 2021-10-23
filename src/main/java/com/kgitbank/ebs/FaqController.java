@@ -39,7 +39,7 @@ public class FaqController {
 	}
 	@RequestMapping(value = "/faqList.do", method = RequestMethod.POST)
 	public String search(HttpServletRequest req){
-		String keyword = (String) req.getAttribute("searchContent");
+		String keyword = (String) req.getAttribute("keyword");
 		int cno = Integer.parseInt((String) req.getAttribute("cno"));
 		if(cno == 0) {
 			List<FaqDTO> list = faqmapper.faqReadcountList(keyword);
