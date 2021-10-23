@@ -30,16 +30,18 @@
 					</c:forEach>
 				</p>
 				</td>
-				<td rowspan="2" align="right"><p class="banner" style=" height:100%;"><span style="float: left;">서비스 업데이트</span>
-					<a class="moreInfo" href="">더보기 〉</a><br><br>
-				<img style="width: 100%;" src="${pageContext.request.contextPath}/resources/images/ebs.jpeg" alt="advice">
+				<td rowspan="2" align="left"><p class="banner" style=" height:100%;"><span style="float: left;">서비스 업데이트</span>
+					<a class="moreInfo" href="noticeContent.do?num=${getServiceNotice.num }">더보기 〉</a><br><br>
+					<span style="font-weight: normal; font-size: 16px; float:left;">
+					${getServiceNotice.content}
+					</span>
 				</p></td>
 			</tr>
 			<tr>
 				<td style="width: 50%; height:50%;">
 				<p class="banner" style="width: 85%; height: 100%; margin-bottom: 0%;  line-height: 80%">
 					<span>화상수업 업데이트</span>
-					<a class="moreInfo" href="noticeContent.do?num=${getNotice.num }&&no=${getNotice.mustRead}">더보기 〉</a>
+					<a class="moreInfo" href="noticeContent.do?num=${getNotice.num }">더보기 〉</a>
 					<span style="font-size:13px; color:#525252;">
 					<br>
 					<br>

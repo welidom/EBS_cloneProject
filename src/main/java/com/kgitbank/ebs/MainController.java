@@ -27,7 +27,16 @@ public class MainController {
 	public String mainNotice(HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		
-		session.setAttribute("UserId", req.getParameter("login"));
+		String user = req.getParameter("login");
+		if (user != null) {
+			if(user.equals("0")) {
+				session.setAttribute("UserId", null);
+			}else {
+				session.setAttribute("UserId", req.getParameter("login"));
+			}
+		}else {
+			session.setAttribute("UserId", null);
+		}
 		
 		List<NoticeDTO> list = noticemapper.listNotice("mainPage");
 		if(list.size() > 4) {
@@ -46,18 +55,9 @@ public class MainController {
 			}
 		}
 		NoticeDTO dto = noticemapper.getNotice(1, "ex");
-		if(dto != null) {
-			String[] arr = dto.getContent().split("\n");	
-			if(arr.length > 7) {
-				String str = "";
-				for(String c: Arrays.copyOfRange(arr, 0, 7)) {
-					str += c;
-					str += "<br>";
-				}
-				str+="...";
-				dto.setContent(str);
-			}else {dto.setContent(dto.getContent().replace("\r\n", "<br>"));}
-		}
+		dto.setContent(cut(dto.getContent(), 7));
+		NoticeDTO service = noticemapper.getNotice(2, "ex");
+		service.setContent(cut(service.getContent(), 20));
 		List<FaqDTO> faqlist = faqmapper.faqList();
 		if(faqlist.size() > 8) {
 			faqlist = faqlist.subList(0, 8);
@@ -66,10 +66,24 @@ public class MainController {
 		req.setAttribute("footerContent", Includes.getFooter());
 		req.setAttribute("listNotice", list);
 		req.setAttribute("getNotice", dto);
+		req.setAttribute("getServiceNotice", service);
 		return "main";
 		
 	}
-	
+	public String cut(String content, int len) {
+		String[] arr = content.split("<br>");
+		if(arr.length > len) {
+			String str = "";
+			for(String c: Arrays.copyOfRange(arr, 0, len)) {
+				str += c;
+				str += "<br>";
+			}
+			str+="...";
+			return str;
+		}else {
+			return content;
+		}
+	}
 	
 	
 }
