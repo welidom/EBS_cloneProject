@@ -38,14 +38,11 @@ public class FaqController {
 		return "faq/listView";
 	}
 	@RequestMapping(value = "/faqList.do", method = RequestMethod.POST)
-	public String search(HttpServletRequest req){
-		String keyword = (String) req.getAttribute("keyword");
-		int cno = Integer.parseInt((String) req.getAttribute("cno"));
+	public String search(HttpServletRequest req, @Param("keyword") String keyword, @Param("cno") int cno){
 		if(cno == 0) {
-			List<FaqDTO> list = faqmapper.faqReadcountList(keyword);
-			req.setAttribute("list", list);
+			req.setAttribute("list", faqmapper.faqReadcountList(keyword));
 		}else {
-			req.setAttribute("list", faqmapper.faqList(cno));
+			req.setAttribute("list", faqmapper.faqList(cno, keyword));
 		}
 		req.setAttribute("listCategory", Includes.getFaqCategory());
 		req.setAttribute("footerContent", Includes.getFooter());
