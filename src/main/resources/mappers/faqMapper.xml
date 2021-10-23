@@ -15,5 +15,7 @@
 <update id="faqReadcount" parameterType="int">
 	update faq set readcount = readcount + 1 where num = #{num}
 </update>
-
+<select id="faqSearch" resultType="FaqDTO" parameterType="String">
+	select * from faq where question like '%'||#{keyword}||'%' or answer like '%'||#{keyword}||'%' order by readcount desc
+</select>
 </mapper>

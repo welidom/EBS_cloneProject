@@ -30,7 +30,7 @@
 					</c:forEach>
 				</p>
 				</td>
-				<td rowspan="2" align="left"><p class="banner" style=" height:100%;"><span style="float: left;">서비스 업데이트</span>
+				<td rowspan="2" align="left"><p class="banner" style=" height:100%;display: inline-block;"><span style="float: left;">서비스 업데이트</span>
 					<a class="moreInfo" href="noticeContent.do?num=${getServiceNotice.num }">더보기 〉</a><br><br>
 					<span style="font-weight: normal; font-size: 16px; float:left;">
 					${getServiceNotice.content}

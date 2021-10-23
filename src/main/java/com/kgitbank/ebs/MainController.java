@@ -28,6 +28,7 @@ public class MainController {
 		HttpSession session = req.getSession();
 		
 		String user = req.getParameter("login");
+		
 		if (user != null) {
 			if(user.equals("0")) {
 				session.setAttribute("UserId", null);

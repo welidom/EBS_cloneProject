@@ -11,8 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SchoolController {
 	
-	@RequestMapping(value = "/schoolMain.do")
-	public ModelAndView main(HttpServletRequest req, HttpSession session) {
+	@RequestMapping(value = "/mainSchool.do")
+	public ModelAndView main(HttpServletRequest req) {
+		
+		HttpSession session = req.getSession();
 		
 		String url="schoolMainPage.do";
 		String UserId = (String) session.getAttribute("UserId");
@@ -29,7 +31,7 @@ public class SchoolController {
 		return mav;
 	}
 	@RequestMapping(value = "/schoolMainPage.do")
-	public String studentMain(HttpServletRequest req, HttpSession session) {
+	public String pageMain(HttpServletRequest req) {
 		
 		
 		return "school/main";

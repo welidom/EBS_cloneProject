@@ -36,4 +36,9 @@ public class faqMapper {
 		List<FaqDTO> list = sqlSession.selectList(namespace+".readcountFaqList");
 		return list;
 	}
+
+	public List<FaqDTO> faqReadcountList(String keyword) {
+		List<FaqDTO> list = sqlSession.selectList(namespace+".faqSearch", keyword);
+		return list;
+	}
 }

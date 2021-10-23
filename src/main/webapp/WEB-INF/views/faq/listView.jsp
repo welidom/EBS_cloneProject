@@ -20,6 +20,7 @@
 <form name="form">
 	<div class="search">
 		<input type="text" name="searchContent" id="searchContent" class="cancelenter" placeholder="검색어를 입력하세요."><button type="button" class="search_btn"style="cursor:pointer;">검색</button>
+		<input type="hidden" name="hidcno" id="hidcno" value="${cno}">
 	</div>
    <ul class="tab">
    <c:set var="act" value="0"/>

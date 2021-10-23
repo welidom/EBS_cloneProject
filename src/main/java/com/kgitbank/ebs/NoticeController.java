@@ -150,9 +150,13 @@ public class NoticeController {
 		if(req.getParameterValues("nums") != null) {
 			List<Integer> nums = new ArrayList<Integer>();
 			for(String i: req.getParameterValues("nums")) {
-				nums.add(Integer.parseInt(i));
+				if(!i.equals("1") && !i.equals("2")) {
+					nums.add(Integer.parseInt(i));
+				}
 			}
-			res = noticemapper.deleteNotice(nums);
+			if(!nums.isEmpty()) {
+				res = noticemapper.deleteNotice(nums);
+			}
 		}
 		if(res > 0) {
 			msg="�޴��� ���� ����";
