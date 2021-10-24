@@ -21,4 +21,13 @@
 <select id="cnoFaqSearch" parameterType="HashMap" resultType="FaqDTO">
 	select * from faq where category = #{cno} and (question like '%'||#{keyword}||'%' or answer like '%'||#{keyword}||'%' order by readcount) desc
 </select>
+<delete id="deleteFaq" parameterType="int">
+	delete from faq where num = #{num}
+</delete>
+<select id="getFaq" parameterType="int" resultType="FaqDTO">
+	select * from faq where num = #{num}
+</select>
+<update id="updateFaq" parameterType="FaqDTO">
+	update faq set category = #{category}, question = #{question}, answer = #{answer} where num = #{num}
+</update>
 </mapper>

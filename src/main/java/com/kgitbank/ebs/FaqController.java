@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.kgitbank.ebs.model.FaqDTO;
 import com.kgitbank.ebs.service.faqMapper;
 import com.kgitbank.ebs.utils.Includes;
@@ -49,10 +52,76 @@ public class FaqController {
 		req.setAttribute("cno", cno);
 		return "faq/listView";
 	}
+	@RequestMapping(value = "/faqDelete.do", method = RequestMethod.POST)
+	public ModelAndView delete(@Param("bno") int bno, @Param("cno") int cno) {
+		int res = faqmapper.deleteFaq(bno);
+		String msg,url;
+		if(res > 0) {
+			msg = "faq 삭제 성공";
+			url= "faqList.do?cno="+cno;
+		}else {
+			msg="faq 삭제 실페";
+			url = "main.do";
+		}
+		ModelAndView mav = new ModelAndView("message");
+		mav.addObject("msg", msg);
+		mav.addObject("url",url);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/faqUpdate.do", method = RequestMethod.POST)
+	public String updateForm(HttpServletRequest req ,@Param("bno") int bno, @Param("cno") int cno) {
+		
+		req.setAttribute("cno", cno);
+		req.setAttribute("update", faqmapper.getFaq(bno));
+		req.setAttribute("listCategory", Includes.getFaqCategory());
+		return "faq/updateView";
+	}
+	@RequestMapping(value="faqUpdateQu.do", method = RequestMethod.POST)
+	public ModelAndView updatePro(@Param("cno") int cno, FaqDTO dto) {
+		int res = faqmapper.updateFaq(dto);
+		System.out.println(dto.toString());
+		String msg, url;
+		if(res > 0) {
+			msg="faq 수정 성공";
+			url = "faqList.do?cno="+cno;
+		}else {
+			msg="faq 수정 실페";
+			url = "main.do";
+		}
+		ModelAndView mav = new ModelAndView("message");
+		mav.addObject("msg", msg);
+		mav.addObject("url", url);
+		return mav;
+	}
+	
+	
 	@ResponseBody
 	@RequestMapping(value = "/faqReadcount.do")
 	public void readcounts(@RequestParam(value="bno") int num) throws Exception{
 		faqmapper.faqreadcount(num);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/changeCategory.do")
+	public String categoryChanged(int cno) {
+		List<FaqDTO> faqDTOList = faqmapper.faqList(cno);
+		JsonObject jo = new JsonObject();
+		
+		JsonArray ja = new JsonArray();
+		for(FaqDTO dto: faqDTOList) {
+			JsonObject jObj = new JsonObject();
+			System.out.println(dto.getQuestion());
+			jObj.addProperty("num", dto.getNum());
+			jObj.addProperty("cno", dto.getCategory());
+			jObj.addProperty("question", dto.getQuestion());
+			jObj.addProperty("answer", dto.getAnswer());
+			jObj.addProperty("readcount", dto.getReadcount());
+			ja.add(jObj);
+		}
+		jo.add("FaqObj", ja);
+		
+		return jo.toString();
 	}
 	
 }

@@ -53,4 +53,19 @@ public class faqMapper {
 		List<FaqDTO> list = sqlSession.selectList(namespace+".cnoFaqSearch", map);
 		return list;
 	}
+
+	public int deleteFaq(int num) {
+		int res = sqlSession.delete(namespace+".deleteFaq", num);
+		return res;
+	}
+
+	public FaqDTO getFaq(int num) {
+		FaqDTO dto = sqlSession.selectOne(namespace+".getFaq", num);
+		return dto;
+	}
+
+	public int updateFaq(FaqDTO dto) {
+		int res = sqlSession.update(namespace+".updateFaq", dto);
+		return res;
+	}
 }

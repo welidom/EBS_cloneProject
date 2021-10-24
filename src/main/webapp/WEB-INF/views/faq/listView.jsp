@@ -28,10 +28,10 @@
    		<li id="act_bt">
    		<c:choose>
    			<c:when test="${cno eq act}">
-   				<a href="faqList.do?cno=${act}" class="actC active" style="cursor:pointer; color:black;width: 120px;">${category}</a>
+   				<a class="actC active" cno="${act }" style="cursor:pointer; color:black;width: 120px;">${category}</a>
    			</c:when>
    			<c:otherwise>
-   				<a href="faqList.do?cno=${act}" class="actC" style="cursor:pointer;">${category}</a>
+   				<a class="actC" cno="${act}" style="cursor:pointer;">${category}</a>
    			</c:otherwise>
    		</c:choose>
    		</li>

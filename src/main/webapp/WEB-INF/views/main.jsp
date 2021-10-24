@@ -58,8 +58,8 @@
 		<a class="moreInfo" href="faqList.do?cno=0">더보기 〉</a>
 		<br><br>
 		<c:forEach var="dto" items="${listFaq}">
-		<a class="faq" href="faqList.do?cno=${faqCategoryList[dto.category] }">
-			<span class="faqc" style="">${dto.category}</span><span class="slice">|</span><span>${dto.question}</span>
+		<a class="faq" href="faqList.do?cno=${dto.category}">
+			<span class="faqc" style="">${faqCategoryList[dto.category] }</span><span class="slice">|</span><span>${dto.question}</span>
 			<span class="moreInfo">〉</span>
 		</a>
 		</c:forEach>

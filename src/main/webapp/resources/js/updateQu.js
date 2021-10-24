@@ -8,17 +8,16 @@ $(document).ready(function(){
 		e.preventdefault();
 	} else{		
 	var formObj = $("form[name='writeform']");
-	var cnoObj = $("input[name='cno']");
-	cnoObj.attr("value", $("#category option:selected").attr('value2'));
-	formObj.attr("action", "faqUpdateQu");
+	formObj.attr("action", "faqUpdateQu.do");
 	formObj.attr("method", "post");
-	formObj.submit();	
+	formObj.attr("accept-charset", "UTF-8")
+	formObj.submit();
 	}
 	})
 	
 	
 	$(".cancel_btn").on("click", function(){
-		location.href= 'faqList.do?cno=1000';
+		location.href= 'faqList.do?cno='+ $("input[name='cno']");
 	})
 	
 	

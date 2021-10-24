@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kgitbank.ebs.model.FaqDTO;
 import com.kgitbank.ebs.model.NoticeDTO;
@@ -35,8 +36,6 @@ public class MainController {
 			}else {
 				session.setAttribute("UserId", req.getParameter("login"));
 			}
-		}else {
-			session.setAttribute("UserId", null);
 		}
 		
 		List<NoticeDTO> list = noticemapper.listNotice("mainPage");

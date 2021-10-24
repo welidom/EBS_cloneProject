@@ -2,6 +2,18 @@
       $(".answers").hide();
 	  $(".up_btn").hide();
 	
+	  $(".actC").on("click", function(){
+		  $.ajax({
+				url:"changeCategory.do",
+				type:"GET",
+				data: {"cno":$(this).attr("cno")},
+				success:function(data){
+					console.log(data);
+				}
+			})
+	  })
+	  
+	  
       $(".hidden_btn").on("click", function(){
 	var readcountcno = $("input[name='hiddencno']").val();
 	var readcountbno = $(this).find("input[name='hiddenbno']").val();
@@ -67,7 +79,6 @@
 			hid.attr("value",hidcno);
 			hidn.attr("name","bno");
 			hidn.attr("value",hidbno);
-			alert('삭제되었습니다.');
 			formObj.submit();
 		})
 		

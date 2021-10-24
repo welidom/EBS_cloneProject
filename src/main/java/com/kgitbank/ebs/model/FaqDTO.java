@@ -36,6 +36,11 @@ public class FaqDTO {
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
 	}
+	@Override
+	public String toString() {
+		return "FaqDTO [num=" + num + ", category=" + category + ", question=" + question + ", answer=" + answer
+				+ ", readcount=" + readcount + "]";
+	}
 	
 	
 }
