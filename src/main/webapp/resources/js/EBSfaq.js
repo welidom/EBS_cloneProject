@@ -1,22 +1,47 @@
    $(document).ready(function(){
       $(".answers").hide();
 	  $(".up_btn").hide();
-	
+	  
 	  $(".actC").on("click", function(){
 		  $.ajax({
 				url:"changeCategory.do",
 				type:"GET",
 				data: {"cno":$(this).attr("cno")},
 				success:function(data){
-					console.log(data);
+					var result = JSON.parse(data);
+					var cno = result['cno'];
+					var faqObj = result['FaqObj'];
+					var category = result['category'];
+					$(".totalcounts").html("총<b>"+faqObj.length+"</b>개");
+					
+					$(".actC").attr("class", "actC");
+					$(".actC[cno="+cno+"]").attr("class", "active actC");
+					
+					$(".myfaq").remove();
+					for(var i = 0; i < faqObj.length; i++){
+						var admin = "<c:if test='${UserId eq 3}'><div class='update_btn' style='cursor:pointer;' value='"+faqObj[i]['num']+"'>(수정/ </div><div class='delete_btn' style='cursor:pointer;' value='"+faqObj[i]['num']+"'>삭제)</div></c:if>";
+						var $obj = $("<ul class='myfaq'><li class='question' id='qu_bno'>" + (faqObj.length - i) +
+					          	"</li><li class='question' id='qu_name'>"+
+					          	admin+
+					          	category[faqObj[i]['cno']]['name']+
+					        	"</li><li class='hidden_btn' id='qu_qu' style='cursor:pointer;'>"+
+					        	faqObj[i]['question']+
+					        	"<input type='hidden' name='hiddenbno' id='hiddenbno' value="+faqObj[i]["num"]+"><input type='hidden' name='hiddenreadcount' id='hiddenreadcount' value='"+faqObj[i]['readcount']+"'><input type='hidden' name='hiddenanswer' id='hiddenanswer' value='" + faqObj[i]['answer'] +"'><div class='v_btn'>V</div><div class='up_btn'>Λ</div></li><li class='answers' class='an'><div class='showanswer'>"+
+					        	faqObj[i]['answer']+"</div></li></ul>")
+						$(".download").before($obj);
+						
+						$(".answers").hide();
+						$(".up_btn").hide();
+					}
+					
 				}
 			})
 	  })
 	  
 	  
-      $(".hidden_btn").on("click", function(){
-	var readcountcno = $("input[name='hiddencno']").val();
-	var readcountbno = $(this).find("input[name='hiddenbno']").val();
+    $(document).on("click","li[class='hidden_btn']", function(){
+    	var readcountcno = $("input[name='hiddencno']").val();
+    	var readcountbno = $(this).find("input[name='hiddenbno']").val();
 			if($(this).find(".up_btn").css("display") == "none"){
 				$.ajax({
 					url:"faqReadcount.do",
@@ -68,7 +93,7 @@
 			formObj.submit();
        	})
 
-		$(".delete_btn").on("click", function(){
+		$(document).on("click", "div[class='delete_btn']", function(){
 			var hidn = $("input[name='hiddenbno']");
 			var hidbno=$(this).attr("value");
 			formObj.attr("action", "faqDelete.do");
@@ -82,7 +107,7 @@
 			formObj.submit();
 		})
 		
-		$(".update_btn").on("click", function(){
+		$(document).on("click", "div[class='update_btn']", function(){
 			var hidn = $("input[name='hiddenbno']");
 			var hidbno=$(this).attr("value");
 			var hid = $("input[name='hiddencno']");
@@ -131,9 +156,6 @@ $(".act_B").on("click", function(){
 
 })
 
-	
 
 
 
-
-  

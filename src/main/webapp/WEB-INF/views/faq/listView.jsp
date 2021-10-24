@@ -28,7 +28,7 @@
    		<li id="act_bt">
    		<c:choose>
    			<c:when test="${cno eq act}">
-   				<a class="actC active" cno="${act }" style="cursor:pointer; color:black;width: 120px;">${category}</a>
+   				<a class="active actC" cno="${act }" style="cursor:pointer;">${category}</a>
    			</c:when>
    			<c:otherwise>
    				<a class="actC" cno="${act}" style="cursor:pointer;">${category}</a>
@@ -42,34 +42,9 @@
 		<c:if test="${UserId eq 3}">
        		<div class="writeQu" style="cursor:pointer;">항목 추가</div>
        	</c:if>
-       	<c:set var="re" value="${fn:length(list)}"/>
-        <div class="totalcounts">총<b><c:out value="${re }"/></b>개</div>
-       	<c:forEach items="${list}" var="dto">
-            <ul class="myfaq">
-            <li class="question" id="qu_bno"><c:out value="${re}"/>
-            <c:set var="re" value="${re - 1}" />
-          	</li>
-            <li class="question" id="qu_name">
-            <c:if test="${UserId eq 3}">
-            <div class="update_btn" style="cursor:pointer;" value="${dto.num}">(수정/ </div>
-            <div class="delete_btn" style="cursor:pointer;" value="${dto.num}">삭제)</div>
-            </c:if>
-          	
-            <c:out value="${listCategory[dto.category]}"/></li>
-            
-            <li class="hidden_btn" id="qu_qu" style="cursor:pointer;"><c:out value="${dto.question}"/>
-            <input type="hidden" name="hiddenbno" id="hiddenbno" value="${dto.num}">
-           	<input type="hidden" name="hiddenreadcount" id="hiddenreadcount" value="${dto.readcount}">
-           	<input type="hidden" name="hiddenanswer" id="hiddenanswer" value="${dto.answer}">
-            <div class="v_btn">V</div><div class="up_btn">Λ</div></li>
-
-            <li class="answers" class="an"><div class="showanswer"><c:out value="${dto.answer}"/>
-            </div>
-            </li>
-            </ul>
-		</c:forEach>
+<div class="totalcounts">총<b>0</b>개</div>
       
-	<div id="download">
+	<div id="download" class="download">
 	<a href="faqDownload.do" class="key_color"><img src="${pageContext.request.contextPath }/resources/images/faq/downloadImage.png" class="downima"><b>온라인클래스 자주묻는질문(FAQ) 다운로드</b></a>
 	</div>
 	     	<div class="loadMore">더보기 <b class=keyboard_down>∨</b></div>

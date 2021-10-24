@@ -19,7 +19,7 @@
 	select * from faq where readcount > 10 and (question like '%'||#{keyword}||'%' or answer like '%'||#{keyword}||'%') order by readcount desc
 </select>
 <select id="cnoFaqSearch" parameterType="HashMap" resultType="FaqDTO">
-	select * from faq where category = #{cno} and (question like '%'||#{keyword}||'%' or answer like '%'||#{keyword}||'%' order by readcount) desc
+	select * from faq where category = #{cno} and (question like '%'||#{keyword}||'%' or answer like '%'||#{keyword}||'%') order by readcount desc
 </select>
 <delete id="deleteFaq" parameterType="int">
 	delete from faq where num = #{num}

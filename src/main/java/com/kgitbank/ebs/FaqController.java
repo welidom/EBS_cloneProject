@@ -1,9 +1,5 @@
 package com.kgitbank.ebs;
 
-
-
-
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -40,6 +36,7 @@ public class FaqController {
 		req.setAttribute("cno", cno);
 		return "faq/listView";
 	}
+	
 	@RequestMapping(value = "/faqList.do", method = RequestMethod.POST)
 	public String search(HttpServletRequest req, @Param("keyword") String keyword, @Param("cno") int cno){
 		if(cno == 0) {
@@ -94,6 +91,13 @@ public class FaqController {
 		mav.addObject("url", url);
 		return mav;
 	}
+	@RequestMapping(value = "/faqNewqu.do", method = RequestMethod.GET)
+	public String insertForm(HttpServletRequest req) {
+		
+		req.setAttribute("categoryList", Includes.getFaqCategory());
+		req.setAttribute("footerContent", Includes.getFooter());
+		return "faq/newQuPage";
+	}
 	
 	
 	@ResponseBody
@@ -103,15 +107,25 @@ public class FaqController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/changeCategory.do")
+	@RequestMapping(value = "/changeCategory.do", produces = "application/text; charset=utf8")
 	public String categoryChanged(int cno) {
-		List<FaqDTO> faqDTOList = faqmapper.faqList(cno);
+		if(cno == 0) {
+			List<FaqDTO> list = faqmapper.faqReadcountList();
+			JsonObject jo = getJson(list);
+			jo.addProperty("cno", cno);
+			return jo.toString();
+		}else {
+			List<FaqDTO> list = faqmapper.faqList(cno);
+			JsonObject jo = getJson(list);
+			jo.addProperty("cno", cno);
+			return jo.toString();
+		}
+	}
+	public JsonObject getJson(List<FaqDTO> list) {
 		JsonObject jo = new JsonObject();
-		
 		JsonArray ja = new JsonArray();
-		for(FaqDTO dto: faqDTOList) {
+		for(FaqDTO dto: list) {
 			JsonObject jObj = new JsonObject();
-			System.out.println(dto.getQuestion());
 			jObj.addProperty("num", dto.getNum());
 			jObj.addProperty("cno", dto.getCategory());
 			jObj.addProperty("question", dto.getQuestion());
@@ -120,8 +134,13 @@ public class FaqController {
 			ja.add(jObj);
 		}
 		jo.add("FaqObj", ja);
-		
-		return jo.toString();
+		JsonArray cate = new JsonArray();
+		for(String str: Includes.getFaqCategory()) {
+			JsonObject jObj = new JsonObject();
+			jObj.addProperty("name", str);
+			cate.add(jObj);
+		}
+		jo.add("category", cate);
+		return jo;
 	}
-	
 }
