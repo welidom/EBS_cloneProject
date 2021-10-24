@@ -26,14 +26,22 @@
 
 	<beans:bean id="authInterceptor"
 		class="com.kgitbank.ebs.interceptor.AuthInterceptor"></beans:bean>
+	
+	<beans:bean id="permitInterceptor"
+		class="com.kgitbank.ebs.interceptor.PermitInterceptor"></beans:bean>
 
 	<interceptors>
 		<interceptor>
-			<mapping path="changeCategory.do" />
-			
-			<beans:ref bean="authInterceptor" />
+			<mapping path="/faqNewqu.do" />
+			<mapping path="/schoolMain.do" />
+			<mapping path="/faqDelete.do" />
+			<mapping path="/faqUpdate.do" />
+			<beans:ref bean="permitInterceptor"/>
 		</interceptor>
-
+<!-- 		<interceptor>
+			<mapping path="/schoolMain.do" />
+			<beans:ref bean="authInterceptor" />
+		</interceptor> -->
 	</interceptors>
 	
 </beans:beans>

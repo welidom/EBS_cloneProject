@@ -25,7 +25,7 @@ public class FaqController {
 	@Inject
 	private faqMapper faqmapper;
 	
-	@RequestMapping(value="/faqList.do", method=RequestMethod.POST)
+	@RequestMapping(value="/faqList.do", method=RequestMethod.GET)
 	public String list(HttpServletRequest req, @Param(value = "cno") int cno){
 		if(cno == 0) {
 			req.setAttribute("list", faqmapper.faqReadcountList());
@@ -42,10 +42,10 @@ public class FaqController {
 		int res = faqmapper.deleteFaq(bno);
 		String msg,url;
 		if(res > 0) {
-			msg = "faq »èÁ¦ ¼º°ø";
+			msg = "faq ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
 			url= "faqList.do?cno="+cno;
 		}else {
-			msg="faq »èÁ¦ ½ÇÆä";
+			msg="faq ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
 			url = "main.do";
 		}
 		ModelAndView mav = new ModelAndView("message");
@@ -65,13 +65,12 @@ public class FaqController {
 	@RequestMapping(value="faqUpdateQu.do", method = RequestMethod.POST)
 	public ModelAndView updatePro(@Param("cno") int cno, FaqDTO dto) {
 		int res = faqmapper.updateFaq(dto);
-		System.out.println(dto.toString());
 		String msg, url;
 		if(res > 0) {
-			msg="faq ¼öÁ¤ ¼º°ø";
+			msg="faq ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
 			url = "faqList.do?cno="+cno;
 		}else {
-			msg="faq ¼öÁ¤ ½ÇÆä";
+			msg="faq ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
 			url = "main.do";
 		}
 		ModelAndView mav = new ModelAndView("message");
@@ -91,10 +90,10 @@ public class FaqController {
 		int res = faqmapper.insertFaq(dto);
 		String msg, url;
 		if (res > 0){
-			msg = "faq Ãß°¡ ¼º°ø";
+			msg = "faq ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½";
 			url = "faqList.do?cno="+dto.getCategory();
 		}else {
-			msg = "faq Ãß°¡ ½ÇÆä";
+			msg = "faq ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½";
 			url = "main.do";
 		}
 		ModelAndView mav = new ModelAndView("message");

@@ -19,13 +19,6 @@ public class SchoolController {
 		String url="schoolMainPage.do";
 		String UserId = (String) session.getAttribute("UserId");
 		
-		if(UserId != null) {
-			if(!UserId.equals("1") && !UserId.equals("2") && !UserId.equals("3")) {
-				url="main.do";
-			}
-		}else {
-			url="main.do";
-		}
 		ModelAndView mav = new ModelAndView("pass");
 		mav.addObject("url", url);
 		return mav;

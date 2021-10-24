@@ -40,9 +40,6 @@ public class faqMapper {
 
 	public List<FaqDTO> faqReadcountList(String keyword) {
 		List<FaqDTO> list = sqlSession.selectList(namespace+".faqSearch", keyword);
-		for(FaqDTO dto: list) {
-			System.out.println(dto.getReadcount());
-		}
 		return list;
 	}
 

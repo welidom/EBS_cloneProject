@@ -8,8 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class AuthInterceptor extends HandlerInterceptorAdapter{
-	
+public class PermitInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler)
 			throws Exception {
@@ -18,9 +17,15 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
 		if(session.getAttribute("UserId") == null) {
-			out.println("<script>alert('로그인 되어 있지 않습니다.\\n로그인 해주세요'); location.href='main.do';</script>");
+			out.println("<script>alert('권한이 불충분합니다.'); location.href='main.do';</script>");
 			out.flush();
 			return false;
+		} else if(session.getAttribute("UserId") != null) {
+			if(!session.getAttribute("UserId").equals("3")) {
+				out.println("<script>alert('권한이 불충분합니다.'); location.href='main.do';</script>");
+				out.flush();
+				return false;
+			}
 		}
 		return true;
 	}
