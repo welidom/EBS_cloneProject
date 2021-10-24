@@ -8,10 +8,6 @@ $(document).ready(function(){
 		e.preventdefault();
 	} else{		
 	var formObj = $("form[name='writeform']");
-	var cnoObj = $("input[name='cno']");
-	var nameObj = $("input[name='name']");
-	nameObj.attr("value", $("#category option:selected").attr('value'));
-	cnoObj.attr("value", $("#category option:selected").attr('value2'));
 	formObj.attr("action", "faqNewqu.do");
 	formObj.attr("method", "post");
 	formObj.submit();	
@@ -20,7 +16,7 @@ $(document).ready(function(){
 	
 	
 	$(".cancel_btn").on("click", function(){
-		location.href= 'faqList.do?cno=1000';
+		location.href= 'faqList.do?cno=0';
 	})
 	
 	

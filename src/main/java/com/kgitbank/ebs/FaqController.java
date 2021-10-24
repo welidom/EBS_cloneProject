@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ public class FaqController {
 	@Inject
 	private faqMapper faqmapper;
 	
-	@RequestMapping(value="/faqList.do", method=RequestMethod.GET)
+	@RequestMapping(value="/faqList.do", method=RequestMethod.POST)
 	public String list(HttpServletRequest req, @Param(value = "cno") int cno){
 		if(cno == 0) {
 			req.setAttribute("list", faqmapper.faqReadcountList());
@@ -35,20 +36,7 @@ public class FaqController {
 		req.setAttribute("footerContent", Includes.getFooter());
 		req.setAttribute("cno", cno);
 		return "faq/listView";
-	}
-	
-	@RequestMapping(value = "/faqList.do", method = RequestMethod.POST)
-	public String search(HttpServletRequest req, @Param("keyword") String keyword, @Param("cno") int cno){
-		if(cno == 0) {
-			req.setAttribute("list", faqmapper.faqReadcountList(keyword));
-		}else {
-			req.setAttribute("list", faqmapper.faqList(cno, keyword));
-		}
-		req.setAttribute("listCategory", Includes.getFaqCategory());
-		req.setAttribute("footerContent", Includes.getFooter());
-		req.setAttribute("cno", cno);
-		return "faq/listView";
-	}
+	}	
 	@RequestMapping(value = "/faqDelete.do", method = RequestMethod.POST)
 	public ModelAndView delete(@Param("bno") int bno, @Param("cno") int cno) {
 		int res = faqmapper.deleteFaq(bno);
@@ -98,7 +86,22 @@ public class FaqController {
 		req.setAttribute("footerContent", Includes.getFooter());
 		return "faq/newQuPage";
 	}
-	
+	@RequestMapping(value="/faqNewqu.do", method = RequestMethod.POST)
+	public ModelAndView insertPro(HttpServletRequest req,FaqDTO dto) {
+		int res = faqmapper.insertFaq(dto);
+		String msg, url;
+		if (res > 0){
+			msg = "faq 추가 성공";
+			url = "faqList.do?cno="+dto.getCategory();
+		}else {
+			msg = "faq 추가 실페";
+			url = "main.do";
+		}
+		ModelAndView mav = new ModelAndView("message");
+		mav.addObject("msg", msg);
+		mav.addObject("url", url);
+		return mav;
+	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/faqReadcount.do")
@@ -106,18 +109,50 @@ public class FaqController {
 		faqmapper.faqreadcount(num);
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value="/searchFaq.do", produces = "application/text; charset=utf8")
+	public String search(String keyword, int cno, HttpServletRequest req){
+		HttpSession session = req.getSession();
+		int UserId = 0;
+		if(session.getAttribute("UserId") != null) {
+			UserId = Integer.parseInt((String) session.getAttribute("UserId"));
+		}
+		if(cno == 0) {
+			List<FaqDTO> list = faqmapper.faqReadcountList(keyword);
+			JsonObject jo = getJson(list);
+			jo.addProperty("cno", cno);
+			jo.addProperty("UserId", UserId);
+			return jo.toString();
+		}else {
+			List<FaqDTO> list =  faqmapper.faqList(cno, keyword);
+			JsonObject jo = getJson(list);
+			jo.addProperty("cno", cno);
+			jo.addProperty("UserId", UserId);
+			return jo.toString();
+		}
+	}
+	
+	
 	@ResponseBody
 	@RequestMapping(value = "/changeCategory.do", produces = "application/text; charset=utf8")
-	public String categoryChanged(int cno) {
+	public String categoryChanged(int cno, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		int UserId = 0;
+		if(session.getAttribute("UserId") != null) {
+			UserId = Integer.parseInt((String) session.getAttribute("UserId"));
+		}
 		if(cno == 0) {
 			List<FaqDTO> list = faqmapper.faqReadcountList();
 			JsonObject jo = getJson(list);
 			jo.addProperty("cno", cno);
+			jo.addProperty("UserId", UserId);
 			return jo.toString();
 		}else {
 			List<FaqDTO> list = faqmapper.faqList(cno);
 			JsonObject jo = getJson(list);
 			jo.addProperty("cno", cno);
+			jo.addProperty("UserId", UserId);
 			return jo.toString();
 		}
 	}

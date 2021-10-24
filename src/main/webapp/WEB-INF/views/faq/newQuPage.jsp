@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <meta charset="UTF-8">
 <style type="text/css">
 .newQuForm{
@@ -13,34 +9,30 @@ margin-right: 20%;
 margin-top : 10%;
 }
 </style>
-<script type="text/javascript" src='<c:url value="/resources/js/newqu.js"/>'></script>
 <link rel="stylesheet" href="<c:url value='/resources/css/newqu.css'/>">
-</head>
-<body>
 <%@include file="../include/header.jsp" %>
+<hr color="lightgray">
 <form name="writeform">
 <div class="newContainer">
 <table class="newQuForm">
 	<tr>
-	<th class="qu_title"><img src="/resources/images/faq/qu.png">새 질문 추가</th>
+	<th class="qu_title"><img src="${pageContext.request.contextPath }/resources/images/faq/qu.png">새 질문 추가</th>
 	</tr>
 	<tr>
 		<td class="keyva">카테고리 명</td>
 		<td>
 		<select name="category" id="category">
 			<optgroup label="카테고리">
-			<option value="회원" value2="1001">회원</option>
-			<option value="클래스 이용" value2="1002">클래스 이용</option>
-			<option value="학습" value2="1003">학습</option>
-			<option value="클래스 개설/관리" value2="1004">클래스 개설/관리</option>
-			<option value="학습 관리" value2="1005">학습 관리</option>
-			<option value="화상 수업" value2="1006">화상 수업</option>
-			<option value="강좌 관리" value2="1007">강좌 관리</option>
-			<option value="기타" value2="1008">기타 </option>
+			<option value="1">회원</option>
+			<option value="2">클래스 이용</option>
+			<option value="3">학습</option>
+			<option value="4">클래스 개설/관리</option>
+			<option value="5">학습 관리</option>
+			<option value="6">화상 수업</option>
+			<option value="7">강좌 관리</option>
+			<option value="8">기타 </option>
 			</optgroup>
 		</select>
-	<input type="hidden" name="cno" id="cno">
-	<input type="hidden" name="name" id="name" >
 		</td>
 	</tr>
 	
@@ -63,6 +55,6 @@ margin-top : 10%;
 </div>
 
 </form>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src='<c:url value="/resources/js/newqu.js"/>'></script>
 <%@include file="../include/footer.jsp" %> 
-</body>
-</html>

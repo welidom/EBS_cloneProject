@@ -43,7 +43,6 @@
        		<div class="writeQu" style="cursor:pointer;">항목 추가</div>
        	</c:if>
 <div class="totalcounts">총<b>0</b>개</div>
-      
 	<div id="download" class="download">
 	<a href="faqDownload.do" class="key_color"><img src="${pageContext.request.contextPath }/resources/images/faq/downloadImage.png" class="downima"><b>온라인클래스 자주묻는질문(FAQ) 다운로드</b></a>
 	</div>
@@ -52,6 +51,12 @@
 </form>
 </div>
 </div>
-<%@include file="../include/footer.jsp" %>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src='<c:url value="/resources/js/EBSfaq.js"/>'></script>
+<script>
+var cno = ${cno}
+$(document).ready(function(){
+	$("[cno='"+cno+"']").click();
+});
+</script>
+<%@include file="../include/footer.jsp" %>

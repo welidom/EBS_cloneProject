@@ -30,4 +30,7 @@
 <update id="updateFaq" parameterType="FaqDTO">
 	update faq set category = #{category}, question = #{question}, answer = #{answer} where num = #{num}
 </update>
+<insert id="insertFaq" parameterType="FaqDTO">
+	insert into faq values(faq_seq.nextval,  #{category}, #{question}, #{answer},0)
+</insert>
 </mapper>

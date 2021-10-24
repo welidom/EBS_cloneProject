@@ -46,7 +46,7 @@ public class faqMapper {
 		return list;
 	}
 
-	public Object faqList(int cno, String keyword) {
+	public List<FaqDTO> faqList(int cno, String keyword) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("cno", cno);
 		map.put("keyword", keyword);
@@ -66,6 +66,11 @@ public class faqMapper {
 
 	public int updateFaq(FaqDTO dto) {
 		int res = sqlSession.update(namespace+".updateFaq", dto);
+		return res;
+	}
+
+	public int insertFaq(FaqDTO dto) {
+		int res = sqlSession.insert(namespace+".insertFaq",dto);
 		return res;
 	}
 }

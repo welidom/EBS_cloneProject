@@ -40,7 +40,7 @@ a:hover.gts{
 }
 .ebsNoticeBanner{
 	padding:70px 14%;
-	background-image:url("images/ebsNoticeBanner.jpg");
+	background-image:url("../images/ebsNoticeBanner.jpg");
 	background-size: 100%;
 }
 a:hover.notice .moreNotice{
@@ -112,31 +112,31 @@ a:hover.faq{
 	font-size:15px;
 }
 .tob01:before{
-	content:url("images/teacher/teacher_obj01.png")
+	content:url("../images/teacher/teacher_obj01.png")
 }
 .tob02:before{
-	content:url("images/teacher/teacher_obj02.png")
+	content:url("../images/teacher/teacher_obj02.png")
 }
 .tob03:before{
-	content:url("images/teacher/teacher_obj03.png")
+	content:url("../images/teacher/teacher_obj03.png")
 }
 .tob04:before{
-	content:url("images/teacher/teacher_obj04.png")
+	content:url("../images/teacher/teacher_obj04.png")
 }
 .tob05:before{
-	content:url("images/teacher/teacher_obj05.png")
+	content:url("../images/teacher/teacher_obj05.png")
 }
 .sob01:before{
-	content:url("images/student/student_obj01.png")
+	content:url("../images/student/student_obj01.png")
 }
 .sob02:before{
-	content:url("images/student/student_obj02.png")
+	content:url("../images/student/student_obj02.png")
 }
 .sob03:before{
-	content:url("images/student/student_obj03.png")
+	content:url("../images/student/student_obj03.png")
 }
 .sob04:before{
-	content:url("images/student/student_obj04.png")
+	content:url("../images/student/student_obj04.png")
 }
 .lookMenual{
 	float: right;

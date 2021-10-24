@@ -16,10 +16,14 @@
 					
 					$(".actC").attr("class", "actC");
 					$(".actC[cno="+cno+"]").attr("class", "active actC");
+					$("input[name='hiddencno']").attr("value", cno);
 					
 					$(".myfaq").remove();
 					for(var i = 0; i < faqObj.length; i++){
-						var admin = "<c:if test='${UserId eq 3}'><div class='update_btn' style='cursor:pointer;' value='"+faqObj[i]['num']+"'>(수정/ </div><div class='delete_btn' style='cursor:pointer;' value='"+faqObj[i]['num']+"'>삭제)</div></c:if>";
+						var admin = "";
+						if(result['UserId'] == 3){
+							admin = "<div class='update_btn' style='cursor:pointer;' value='"+faqObj[i]['num']+"'>(수정/ </div><div class='delete_btn' style='cursor:pointer;' value='"+faqObj[i]['num']+"'>삭제)</div>"
+						}
 						var $obj = $("<ul class='myfaq'><li class='question' id='qu_bno'>" + (faqObj.length - i) +
 					          	"</li><li class='question' id='qu_name'>"+
 					          	admin+
@@ -37,7 +41,6 @@
 				}
 			})
 	  })
-	  
 	  
     $(document).on("click","li[class='hidden_btn']", function(){
     	var readcountcno = $("input[name='hiddencno']").val();
@@ -78,19 +81,42 @@
     		}
     	 })  
       })
-       	    var formObj = $("form[name='form']");
-			var inputObj = $("input[name='searchContent']");
-			var hid = $("input[name='hiddencno']");
-			var hidcno = $("input[name='hiddencno']").val();
-			var cate = $("input[name='catecno']");
-			var catecno = $("input[name='catecno']").val();
        	$(".search_btn").on("click", function(){
-			formObj.attr("action", "faqList.do");
-			inputObj.attr("name", "keyword");
-			hid.attr("name", "cno");
-			hid.attr("value", hidcno);
-			formObj.attr("method", "post");
-			formObj.submit();
+       		$.ajax({
+				url:"searchFaq.do",
+				type:"GET",
+				data: {"cno":$("input[name='hiddencno']").attr("value"), "keyword": $("#searchContent").val()},
+				success:function(data){
+					var result = JSON.parse(data);
+					var cno = result['cno'];
+					var faqObj = result['FaqObj'];
+					var category = result['category'];
+					$(".totalcounts").html("총<b>"+faqObj.length+"</b>개");
+					
+					$(".actC").attr("class", "actC");
+					$(".actC[cno="+cno+"]").attr("class", "active actC");
+					
+					$(".myfaq").remove();
+					for(var i = 0; i < faqObj.length; i++){
+						var admin = "";
+						if(result['UserId'] == 3){
+							admin = "<div class='update_btn' style='cursor:pointer;' value='"+faqObj[i]['num']+"'>(수정/ </div><div class='delete_btn' style='cursor:pointer;' value='"+faqObj[i]['num']+"'>삭제)</div>"
+						}
+						var $obj = $("<ul class='myfaq'><li class='question' id='qu_bno'>" + (faqObj.length - i) +
+					          	"</li><li class='question' id='qu_name'>"+
+					          	admin+
+					          	category[faqObj[i]['cno']]['name']+
+					        	"</li><li class='hidden_btn' id='qu_qu' style='cursor:pointer;'>"+
+					        	faqObj[i]['question']+
+					        	"<input type='hidden' name='hiddenbno' id='hiddenbno' value="+faqObj[i]["num"]+"><input type='hidden' name='hiddenreadcount' id='hiddenreadcount' value='"+faqObj[i]['readcount']+"'><input type='hidden' name='hiddenanswer' id='hiddenanswer' value='" + faqObj[i]['answer'] +"'><div class='v_btn'>V</div><div class='up_btn'>Λ</div></li><li class='answers' class='an'><div class='showanswer'>"+
+					        	faqObj[i]['answer']+"</div></li></ul>")
+						$(".download").before($obj);
+						
+						$(".answers").hide();
+						$(".up_btn").hide();
+					}
+				}	
+       		});
        	})
 
 		$(document).on("click", "div[class='delete_btn']", function(){
