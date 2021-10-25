@@ -118,7 +118,7 @@
 				}	
        		});
        	})
-
+       	var formObj = $("form[name='form']");
 		$(document).on("click", "div[class='delete_btn']", function(){
 			var hidn = $("input[name='hiddenbno']");
 			var hidbno=$(this).attr("value");
@@ -132,7 +132,6 @@
 			hidn.attr("value",hidbno);
 			formObj.submit();
 		})
-		
 		$(document).on("click", "div[class='update_btn']", function(){
 			var hidn = $("input[name='hiddenbno']");
 			var hidbno=$(this).attr("value");

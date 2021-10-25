@@ -55,10 +55,7 @@
 	<div style="background-color: white; padding:70px 14%;">
 		<b style="font-size:40px;">자주 묻는 질문</b>
 		<br>
-		<form action="faqList.do" method="post" name="goToFaq">
-		<input type="hidden" name="cno" value="0">
-		<a class="moreInfo" href="#" onclick="javascript:document.goToFaq.submit();">더보기 〉</a>
-		</form>
+		<a class="moreInfo" href="faqList.do">더보기 〉</a>
 		<br><br>
 		<c:forEach var="dto" items="${listFaq}">
 		<form action="faqList.do" method="post" name="goToFaq${dto.num }">
