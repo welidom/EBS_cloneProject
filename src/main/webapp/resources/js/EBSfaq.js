@@ -19,25 +19,28 @@
 					$("input[name='hiddencno']").attr("value", cno);
 					
 					$(".myfaq").remove();
-					for(var i = 0; i < faqObj.length; i++){
-						var admin = "";
-						if(result['UserId'] == 3){
-							admin = "<div class='update_btn' style='cursor:pointer;' value='"+faqObj[i]['num']+"'>(수정/ </div><div class='delete_btn' style='cursor:pointer;' value='"+faqObj[i]['num']+"'>삭제)</div>"
+					if(faqObj.length == 0){
+						$(".download").before("<ul class='myfaq'><li class='nodata'>조회된 데이터가 없습니다.</li></ul>");
+					}else{
+						for(var i = 0; i < faqObj.length; i++){
+							var admin = "";
+							if(result['UserId'] == 3){
+								admin = "<div class='update_btn' style='cursor:pointer;' value='"+faqObj[i]['num']+"'>(수정/ </div><div class='delete_btn' style='cursor:pointer;' value='"+faqObj[i]['num']+"'>삭제)</div>"
+							}
+							var $obj = $("<ul class='myfaq'><li class='question' id='qu_bno'>" + (faqObj.length - i) +
+						          	"</li><li class='question' id='qu_name'>"+
+						          	admin+
+						          	category[faqObj[i]['cno']]['name']+
+						        	"</li><li class='hidden_btn' id='qu_qu' style='cursor:pointer;'>"+
+						        	faqObj[i]['question']+
+						        	"<input type='hidden' name='hiddenbno' id='hiddenbno' value="+faqObj[i]["num"]+"><input type='hidden' name='hiddenreadcount' id='hiddenreadcount' value='"+faqObj[i]['readcount']+"'><input type='hidden' name='hiddenanswer' id='hiddenanswer' value='" + faqObj[i]['answer'] +"'><div class='v_btn'>V</div><div class='up_btn'>Λ</div></li><li class='answers' class='an'><div class='showanswer'>"+
+						        	faqObj[i]['answer']+"</div></li></ul>")
+							$(".download").before($obj);
+							
+							$(".answers").hide();
+							$(".up_btn").hide();
 						}
-						var $obj = $("<ul class='myfaq'><li class='question' id='qu_bno'>" + (faqObj.length - i) +
-					          	"</li><li class='question' id='qu_name'>"+
-					          	admin+
-					          	category[faqObj[i]['cno']]['name']+
-					        	"</li><li class='hidden_btn' id='qu_qu' style='cursor:pointer;'>"+
-					        	faqObj[i]['question']+
-					        	"<input type='hidden' name='hiddenbno' id='hiddenbno' value="+faqObj[i]["num"]+"><input type='hidden' name='hiddenreadcount' id='hiddenreadcount' value='"+faqObj[i]['readcount']+"'><input type='hidden' name='hiddenanswer' id='hiddenanswer' value='" + faqObj[i]['answer'] +"'><div class='v_btn'>V</div><div class='up_btn'>Λ</div></li><li class='answers' class='an'><div class='showanswer'>"+
-					        	faqObj[i]['answer']+"</div></li></ul>")
-						$(".download").before($obj);
-						
-						$(".answers").hide();
-						$(".up_btn").hide();
 					}
-					
 				}
 			})
 	  })
@@ -118,9 +121,8 @@
 				}	
        		});
        	})
-
+       	var formObj = $("form[name='form']");
 		$(document).on("click", "div[class='delete_btn']", function(){
-			var formObj=${}
 			var hidn = $("input[name='hiddenbno']");
 			var hidbno=$(this).attr("value");
 			formObj.attr("action", "faqDelete.do");
@@ -133,7 +135,6 @@
 			hidn.attr("value",hidbno);
 			formObj.submit();
 		})
-		
 		$(document).on("click", "div[class='update_btn']", function(){
 			var hidn = $("input[name='hiddenbno']");
 			var hidbno=$(this).attr("value");

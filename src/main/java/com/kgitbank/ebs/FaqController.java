@@ -26,6 +26,14 @@ public class FaqController {
 	private faqMapper faqmapper;
 	
 	@RequestMapping(value="/faqList.do", method=RequestMethod.GET)
+	public String list(HttpServletRequest req){
+		req.setAttribute("list", faqmapper.faqReadcountList());
+		req.setAttribute("listCategory", Includes.getFaqCategory());
+		req.setAttribute("footerContent", Includes.getFooter());
+		req.setAttribute("cno", 0);
+		return "faq/listView";
+	}
+	@RequestMapping(value="/faqList.do", method=RequestMethod.POST)
 	public String list(HttpServletRequest req, @Param(value = "cno") int cno){
 		if(cno == 0) {
 			req.setAttribute("list", faqmapper.faqReadcountList());
@@ -36,14 +44,14 @@ public class FaqController {
 		req.setAttribute("footerContent", Includes.getFooter());
 		req.setAttribute("cno", cno);
 		return "faq/listView";
-	}	
+	}
 	@RequestMapping(value = "/faqDelete.do", method = RequestMethod.POST)
 	public ModelAndView delete(@Param("bno") int bno, @Param("cno") int cno) {
 		int res = faqmapper.deleteFaq(bno);
 		String msg,url;
 		if(res > 0) {
 			msg = "faq ���� ����";
-			url= "faqList.do?cno="+cno;
+			url= "faqList.do";
 		}else {
 			msg="faq ���� ����";
 			url = "main.do";
@@ -63,12 +71,12 @@ public class FaqController {
 		return "faq/updateView";
 	}
 	@RequestMapping(value="faqUpdateQu.do", method = RequestMethod.POST)
-	public ModelAndView updatePro(@Param("cno") int cno, FaqDTO dto) {
+	public ModelAndView updatePro(FaqDTO dto) {
 		int res = faqmapper.updateFaq(dto);
 		String msg, url;
 		if(res > 0) {
 			msg="faq ���� ����";
-			url = "faqList.do?cno="+cno;
+			url = "faqList.do";
 		}else {
 			msg="faq ���� ����";
 			url = "main.do";
@@ -91,7 +99,7 @@ public class FaqController {
 		String msg, url;
 		if (res > 0){
 			msg = "faq �߰� ����";
-			url = "faqList.do?cno="+dto.getCategory();
+			url = "faqList.do";
 		}else {
 			msg = "faq �߰� ����";
 			url = "main.do";

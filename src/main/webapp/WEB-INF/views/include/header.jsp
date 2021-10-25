@@ -16,7 +16,7 @@
 			<td width="300px"></td>
 			<td><a href="manual.do" class="defaultButton">이용자메뉴얼</a></td>
 			<td><a href="notice.do" class="defaultButton">공지사항</a></td>
-			<td><a href="faqList.do?cno=0" class="defaultButton">FAQ</a></td>
+			<td><a class="defaultButton" href="faqList.do">FAQ</a></td>
 			<c:choose>
 				<c:when test="${UserId eq null}">
 					<td><a href="" class="defaultButton" style="border-radius:100px; background-color:#2580EB; color:white; padding: 7px 25px;">로그인</a></td>
