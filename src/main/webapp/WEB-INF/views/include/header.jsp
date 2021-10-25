@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>EBS 온라인클론스</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" type="text/css">
 </head>
 <body style="background-color: white;">
 	<div class="header">
@@ -19,7 +19,7 @@
 			<td><a class="defaultButton" href="faqList.do">FAQ</a></td>
 			<c:choose>
 				<c:when test="${UserPermit eq null}">
-					<td><a href="" class="defaultButton" style="border-radius:100px; background-color:#2580EB; color:white; padding: 7px 25px;">로그인</a></td>
+					<td><a href="login.do" class="defaultButton" style="border-radius:100px; background-color:#2580EB; color:white; padding: 7px 25px;">로그인</a></td>
 					<td><a href="" class="defaultButton" style="border-radius:100px; background-color:lightgray; color:black; padding: 7px 25px;">회원가입</a></td>
 				</c:when>
 				<c:otherwise>

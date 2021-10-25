@@ -14,8 +14,14 @@ public class SchoolController {
 	@RequestMapping(value = "/mainSchool.do")
 	public ModelAndView main(HttpServletRequest req) {
 		
+		HttpSession session = req.getSession();
 		
-		String url="schoolMainPage.do";
+		String url = "main.do";
+		if(session.getAttribute("UserPermit").equals("1")) {
+			url = "studentMain.do";
+		}else if(session.getAttribute("UserPermit").equals("2")) {
+			
+		}
 		
 		ModelAndView mav = new ModelAndView("pass");
 		mav.addObject("url", url);
@@ -23,7 +29,6 @@ public class SchoolController {
 	}
 	@RequestMapping(value = "/schoolMainPage.do")
 	public String pageMain(HttpServletRequest req) {
-		
 		
 		return "school/main";
 	}

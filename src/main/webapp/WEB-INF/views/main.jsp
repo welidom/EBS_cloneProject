@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
+<%@ include file="include/header.jsp" %>
 <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
 	<div style="background-color:#2580EB;padding: 0px 14%; display: inline-block;">
 		<div style="display:flex; flex-direction: row; width: 100%;">
@@ -90,4 +90,4 @@
 			<b class="sob04 menualObj"><br>학습이력 확인</b>
 		</div>
 	</div>
-<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+<%@ include file="include/footer.jsp" %>

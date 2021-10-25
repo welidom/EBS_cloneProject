@@ -1,0 +1,96 @@
+a{
+text-decoration:none;
+}
+body{
+background-color:white;
+}
+h5{
+	margin: 0;
+}
+.defaultButton{
+ 	color: black;
+  	padding: 7px 0px;
+  	margin:10px;
+  	text-decoration: none;
+  	display: inline-block;
+}
+.form-control{
+	margin: 0;
+}
+<!--S.login-->
+.defaultBtn{
+	color: black;
+  	padding: 7px 0px;
+  	text-decoration: none;
+  	display: inline-block;
+  	<!--어째서인진 모르겠으나 없애면 버그 발생-->
+}
+.btn{
+text-decoration:none;
+padding:5px;
+border-radius:0.3em;
+margin:5px;
+padding:8px 8px;
+background-color:grey;
+color:white;
+border:0;
+outline:0;
+cursor:pointer;
+}
+.btn:hover{
+background-color:#646464;
+}
+.login{
+	margin: 0 auto;
+	margin-bottom: 50px;
+	line-height:50px;
+	background-color:#f0f0f0;
+	vertical-align: middle;
+	width:44%;
+	padding:50px 82px;
+	line-height:20px;
+	outline:0.5px solid lightgrey;
+}
+.img_one{
+height:50px;
+background-color:#ffffff;
+width:44%;
+padding:30px 82px;
+margin:0 auto;
+outline:0.5px solid lightgrey;
+}
+.snslogo{ 
+border-radius:1em;
+background:#ffffff;
+padding:10px 25px;
+width:380px;
+position:relative;
+top:5px;
+vertical-align:middle;
+}
+.snsloginBtn{
+display:table-cell;
+text-decoration:none;
+border-radius:10em;
+margin:5px;
+padding:8px 8px;
+background-color:grey;
+color:white;
+border:0;
+outline:0;
+cursor:pointer;
+width:30px;
+height:30px;
+float:left;
+font-weight:bold;
+text-align:center;
+vertical-align:middle;
+font-size:30px;
+position:relative;
+margin:0px;
+}
+.blank{
+background-color:white;
+width:100%;
+height:50px;
+}
