@@ -24,7 +24,7 @@
 					}else{
 						for(var i = 0; i < faqObj.length; i++){
 							var admin = "";
-							if(result['UserId'] == 3){
+							if(result['UserPermit'] == 3){
 								admin = "<div class='update_btn' style='cursor:pointer;' value='"+faqObj[i]['num']+"'>(수정/ </div><div class='delete_btn' style='cursor:pointer;' value='"+faqObj[i]['num']+"'>삭제)</div>"
 							}
 							var $obj = $("<ul class='myfaq'><li class='question' id='qu_bno'>" + (faqObj.length - i) +
@@ -73,7 +73,7 @@
       $(".myfaq").hide();
       $(".myfaq").slice(0,15).show();
       $(function(){
-    	  if($(".myfaq > .answers").length < 15){
+    	  if($(".myfaq").length < 15){
     	  $(".loadMore").hide();
     	  }
     	$(".loadMore").click(function(e){
@@ -102,7 +102,7 @@
 					$(".myfaq").remove();
 					for(var i = 0; i < faqObj.length; i++){
 						var admin = "";
-						if(result['UserId'] == 3){
+						if(result['UserPermit'] == 3){
 							admin = "<div class='update_btn' style='cursor:pointer;' value='"+faqObj[i]['num']+"'>(수정/ </div><div class='delete_btn' style='cursor:pointer;' value='"+faqObj[i]['num']+"'>삭제)</div>"
 						}
 						var $obj = $("<ul class='myfaq'><li class='question' id='qu_bno'>" + (faqObj.length - i) +
@@ -125,7 +125,7 @@
 		$(document).on("click", "div[class='delete_btn']", function(){
 			var hidn = $("input[name='hiddenbno']");
 			var hidbno=$(this).attr("value");
-			formObj.attr("action", "faqDelete.do");
+			formObj.attr("action", "deleteFaq.do");
 			formObj.attr("method", "post");
 			var hid = $("input[name='hiddencno']");
 			var hidcno = $("input[name='hiddencno']").val();
@@ -144,7 +144,7 @@
 			hid.attr("value",hidcno);
 			hidn.attr("name","bno");
 			hidn.attr("value",hidbno)
-			formObj.attr("action", "faqUpdate.do");
+			formObj.attr("action", "updateFaq.do");
 			formObj.attr("method", "post");
 			formObj.submit();
 		})
@@ -156,7 +156,7 @@ $(".cancelenter").keydown(function() {
 });
 		$(".writeQu").on("click",function(){
 			var formAdd = $("form[name='addForm']");
-			formAdd.attr("action" ,"faqNewqu.do");
+			formAdd.attr("action" ,"insertFaq.do");
 			formAdd.attr("method", "get");
 			formAdd.submit();
 		})

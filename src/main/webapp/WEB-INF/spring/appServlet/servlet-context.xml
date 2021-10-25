@@ -32,16 +32,15 @@
 
 	<interceptors>
 		<interceptor>
-			<mapping path="/faqNewqu.do" />
-			<mapping path="/schoolMain.do" />
-			<mapping path="/faqDelete.do" />
-			<mapping path="/faqUpdate.do" />
+			<mapping path="/insert*.do" />
+			<mapping path="/delete*.do" />
+			<mapping path="/update*.do" />
 			<beans:ref bean="permitInterceptor"/>
 		</interceptor>
-<!-- 		<interceptor>
-			<mapping path="/schoolMain.do" />
+		<interceptor>
+			<mapping path="/mainSchool.do" />
 			<beans:ref bean="authInterceptor" />
-		</interceptor> -->
+		</interceptor>
 	</interceptors>
 	
 </beans:beans>

@@ -32,9 +32,9 @@ public class MainController {
 		
 		if (user != null) {
 			if(user.equals("0")) {
-				session.setAttribute("UserId", null);
+				session.setAttribute("UserPermit", null);
 			}else {
-				session.setAttribute("UserId", req.getParameter("login"));
+				session.setAttribute("UserPermit", req.getParameter("login"));
 			}
 		}
 		

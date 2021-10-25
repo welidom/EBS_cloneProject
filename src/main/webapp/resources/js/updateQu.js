@@ -8,7 +8,7 @@ $(document).ready(function(){
 		e.preventdefault();
 	} else{		
 	var formObj = $("form[name='writeform']");
-	formObj.attr("action", "faqUpdateQu.do");
+	formObj.attr("action", "updateFaqQu.do");
 	formObj.attr("method", "post");
 	formObj.attr("accept-charset", "UTF-8")
 	formObj.submit();

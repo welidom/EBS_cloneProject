@@ -7,7 +7,7 @@
 			<b style="font-size:20px;color:#ACCFF7; ">세상에서 가장 빠른 등교</b>
 			<b style="color:white;font-size:50px">EBS 온라인클론스</b>
 			<p style="color:#A8CCF7; font-size:15px; margin-bottom: 20px;">언제ㆍ어디서나 등교할 수 있는 EBS온라인클론스에서 선생님과 친구들을 만나볼까요?</p><br>
-			<b><a href="schoolMain.do" class="gtsButton gts gts" >등교하기  〉</a></b>
+			<b><a href="mainSchool.do" class="gtsButton gts gts" >등교하기  〉</a></b>
 			</div>
 			<img style="width: 800px; height: 350px" alt="mainBanner" src="${pageContext.request.contextPath}/resources/images/mainBanner.png">
 		</div>

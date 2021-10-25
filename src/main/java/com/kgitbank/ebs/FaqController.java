@@ -45,15 +45,15 @@ public class FaqController {
 		req.setAttribute("cno", cno);
 		return "faq/listView";
 	}
-	@RequestMapping(value = "/faqDelete.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteFaq.do", method = RequestMethod.POST)
 	public ModelAndView delete(@Param("bno") int bno, @Param("cno") int cno) {
 		int res = faqmapper.deleteFaq(bno);
 		String msg,url;
 		if(res > 0) {
-			msg = "faq ���� ����";
+			msg = "faq 삭제 성공";
 			url= "faqList.do";
 		}else {
-			msg="faq ���� ����";
+			msg="faq 삭제 실페";
 			url = "main.do";
 		}
 		ModelAndView mav = new ModelAndView("message");
@@ -62,7 +62,7 @@ public class FaqController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/faqUpdate.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateFaq.do", method = RequestMethod.POST)
 	public String updateForm(HttpServletRequest req ,@Param("bno") int bno, @Param("cno") int cno) {
 		
 		req.setAttribute("cno", cno);
@@ -70,15 +70,15 @@ public class FaqController {
 		req.setAttribute("listCategory", Includes.getFaqCategory());
 		return "faq/updateView";
 	}
-	@RequestMapping(value="faqUpdateQu.do", method = RequestMethod.POST)
+	@RequestMapping(value="updateFaqQu.do", method = RequestMethod.POST)
 	public ModelAndView updatePro(FaqDTO dto) {
 		int res = faqmapper.updateFaq(dto);
 		String msg, url;
 		if(res > 0) {
-			msg="faq ���� ����";
+			msg="faq 수정  성공";
 			url = "faqList.do";
 		}else {
-			msg="faq ���� ����";
+			msg="faq 수정 실페";
 			url = "main.do";
 		}
 		ModelAndView mav = new ModelAndView("message");
@@ -86,14 +86,14 @@ public class FaqController {
 		mav.addObject("url", url);
 		return mav;
 	}
-	@RequestMapping(value = "/faqNewqu.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/insertFaq.do", method = RequestMethod.GET)
 	public String insertForm(HttpServletRequest req) {
 		
 		req.setAttribute("categoryList", Includes.getFaqCategory());
 		req.setAttribute("footerContent", Includes.getFooter());
 		return "faq/newQuPage";
 	}
-	@RequestMapping(value="/faqNewqu.do", method = RequestMethod.POST)
+	@RequestMapping(value="/insertFaq.do", method = RequestMethod.POST)
 	public ModelAndView insertPro(HttpServletRequest req,FaqDTO dto) {
 		int res = faqmapper.insertFaq(dto);
 		String msg, url;
@@ -121,21 +121,21 @@ public class FaqController {
 	@RequestMapping(value="/searchFaq.do", produces = "application/text; charset=utf8")
 	public String search(String keyword, int cno, HttpServletRequest req){
 		HttpSession session = req.getSession();
-		int UserId = 0;
-		if(session.getAttribute("UserId") != null) {
-			UserId = Integer.parseInt((String) session.getAttribute("UserId"));
+		int UserPermit = 0;
+		if(session.getAttribute("UserPermit") != null) {
+			UserPermit = Integer.parseInt((String) session.getAttribute("UserPermit"));
 		}
 		if(cno == 0) {
 			List<FaqDTO> list = faqmapper.faqReadcountList(keyword);
 			JsonObject jo = getJson(list);
 			jo.addProperty("cno", cno);
-			jo.addProperty("UserId", UserId);
+			jo.addProperty("UserPermit", UserPermit);
 			return jo.toString();
 		}else {
 			List<FaqDTO> list =  faqmapper.faqList(cno, keyword);
 			JsonObject jo = getJson(list);
 			jo.addProperty("cno", cno);
-			jo.addProperty("UserId", UserId);
+			jo.addProperty("UserPermit", UserPermit);
 			return jo.toString();
 		}
 	}
@@ -145,21 +145,21 @@ public class FaqController {
 	@RequestMapping(value = "/changeCategory.do", produces = "application/text; charset=utf8")
 	public String categoryChanged(int cno, HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		int UserId = 0;
-		if(session.getAttribute("UserId") != null) {
-			UserId = Integer.parseInt((String) session.getAttribute("UserId"));
+		int UserPermit = 0;
+		if(session.getAttribute("UserPermit") != null) {
+			UserPermit = Integer.parseInt((String) session.getAttribute("UserPermit"));
 		}
 		if(cno == 0) {
 			List<FaqDTO> list = faqmapper.faqReadcountList();
 			JsonObject jo = getJson(list);
 			jo.addProperty("cno", cno);
-			jo.addProperty("UserId", UserId);
+			jo.addProperty("UserPermit", UserPermit);
 			return jo.toString();
 		}else {
 			List<FaqDTO> list = faqmapper.faqList(cno);
 			JsonObject jo = getJson(list);
 			jo.addProperty("cno", cno);
-			jo.addProperty("UserId", UserId);
+			jo.addProperty("UserPermit", UserPermit);
 			return jo.toString();
 		}
 	}

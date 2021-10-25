@@ -14,7 +14,6 @@ public class SchoolController {
 	@RequestMapping(value = "/mainSchool.do")
 	public ModelAndView main(HttpServletRequest req) {
 		
-		HttpSession session = req.getSession();
 		
 		String url="schoolMainPage.do";
 		

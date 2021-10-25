@@ -16,12 +16,12 @@ public class PermitInterceptor extends HandlerInterceptorAdapter{
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
-		if(session.getAttribute("UserId") == null) {
+		if(session.getAttribute("UserPermit") == null) {
 			out.println("<script>alert('권한이 불충분합니다.'); location.href='main.do';</script>");
 			out.flush();
 			return false;
-		} else if(session.getAttribute("UserId") != null) {
-			if(!session.getAttribute("UserId").equals("3")) {
+		} else if(session.getAttribute("UserPermit") != null) {
+			if(!session.getAttribute("UserPermit").equals("3")) {
 				out.println("<script>alert('권한이 불충분합니다.'); location.href='main.do';</script>");
 				out.flush();
 				return false;

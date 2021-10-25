@@ -39,7 +39,7 @@
    </c:forEach>
    </ul>
 		<c:if test="${list ne null}">
-		<c:if test="${UserId eq 3}">
+		<c:if test="${UserPermit eq 3}">
        		<div class="writeQu" style="cursor:pointer;">항목 추가</div>
        	</c:if>
 <div class="totalcounts">총<b>0</b>개</div>

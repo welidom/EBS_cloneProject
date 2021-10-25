@@ -17,7 +17,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
-		if(session.getAttribute("UserId") == null) {
+		if(session.getAttribute("UserPermit") == null) {
 			out.println("<script>alert('로그인 되어 있지 않습니다.\\n로그인 해주세요'); location.href='main.do';</script>");
 			out.flush();
 			return false;

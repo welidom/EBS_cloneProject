@@ -18,8 +18,10 @@
 		<div style="font-weight: bold;display: flex; justify-content:space-between;">
 			<div>
 				총<span style="color:#2580EB;">${fn:length(notMustList) + fn:length(mustList) }</span>개
+				<c:if test="${UserPermit eq 3}">
 				<a href="insertNotice.do" class="btn_noticePlus"></a>
 				<a href="deleteNotice.do" class="btn_noticeSub"></a>
+				</c:if>
 			</div>
 			<form action="notice.do" method="post">
 			<div style="float: right; display: block;">

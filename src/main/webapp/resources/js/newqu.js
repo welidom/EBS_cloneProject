@@ -8,7 +8,7 @@ $(document).ready(function(){
 		e.preventdefault();
 	} else{		
 	var formObj = $("form[name='writeform']");
-	formObj.attr("action", "faqNewqu.do");
+	formObj.attr("action", "insertFaq.do");
 	formObj.attr("method", "post");
 	formObj.submit();	
 	}
