@@ -120,6 +120,7 @@
        	})
 
 		$(document).on("click", "div[class='delete_btn']", function(){
+			var formObj=${}
 			var hidn = $("input[name='hiddenbno']");
 			var hidbno=$(this).attr("value");
 			formObj.attr("action", "faqDelete.do");

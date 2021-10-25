@@ -17,7 +17,6 @@ public class SchoolController {
 		HttpSession session = req.getSession();
 		
 		String url="schoolMainPage.do";
-		String UserId = (String) session.getAttribute("UserId");
 		
 		ModelAndView mav = new ModelAndView("pass");
 		mav.addObject("url", url);

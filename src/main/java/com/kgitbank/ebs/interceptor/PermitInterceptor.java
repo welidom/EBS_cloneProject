@@ -16,7 +16,7 @@ public class PermitInterceptor extends HandlerInterceptorAdapter{
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
-		if(session.getAttribute("UserId") == null) {
+		if(session.getAttribute("aaUserId") == null) {
 			out.println("<script>alert('권한이 불충분합니다.'); location.href='main.do';</script>");
 			out.flush();
 			return false;
