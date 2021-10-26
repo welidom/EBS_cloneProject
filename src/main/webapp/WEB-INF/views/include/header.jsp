@@ -20,14 +20,11 @@
 			<c:choose>
 				<c:when test="${UserPermit eq null}">
 					<td><a href="login.do" class="defaultButton" style="border-radius:100px; background-color:#2580EB; color:white; padding: 7px 25px;">로그인</a></td>
-					<td><a href="" class="defaultButton" style="border-radius:100px; background-color:lightgray; color:black; padding: 7px 25px;">회원가입</a></td>
+					<td><a href="signUp.do" class="defaultButton" style="border-radius:100px; background-color:lightgray; color:black; padding: 7px 25px;">회원가입</a></td>
 				</c:when>
 				<c:otherwise>
 					<td>
-						<form action="main.do" method="post" id="login">
-							<input type="hidden" value="0" name="login">
-							<a href="#" onclick="javascript:document.getElementById('login').submit();" class="defaultButton" style="border-radius:100px; background-color:#2580EB; color:white; padding: 7px 25px;">로그아웃</a>
-						</form>
+						<a href="logout.do" class="defaultButton" style="border-radius:100px; background-color:#2580EB; color:white; padding: 7px 25px;">로그아웃</a>
 					</td>
 				</c:otherwise>
 			</c:choose>

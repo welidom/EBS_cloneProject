@@ -147,7 +147,7 @@ public class FaqController {
 		HttpSession session = req.getSession();
 		int UserPermit = 0;
 		if(session.getAttribute("UserPermit") != null) {
-			UserPermit = Integer.parseInt((String) session.getAttribute("UserPermit"));
+			UserPermit = (int) session.getAttribute("UserPermit");
 		}
 		if(cno == 0) {
 			List<FaqDTO> list = faqmapper.faqReadcountList();

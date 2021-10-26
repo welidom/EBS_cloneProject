@@ -16,8 +16,11 @@ public class SchoolController {
 		
 		HttpSession session = req.getSession();
 		
+		int userPermit = (int) session.getAttribute("UserPermit");
+		System.out.println(userPermit);
+		
 		String url = "main.do";
-		if(session.getAttribute("UserPermit").equals("1")) {
+		if(userPermit == 1) {
 			url = "studentMain.do";
 		}else if(session.getAttribute("UserPermit").equals("2")) {
 			
@@ -31,5 +34,9 @@ public class SchoolController {
 	public String pageMain(HttpServletRequest req) {
 		
 		return "school/main";
+	}
+	@RequestMapping(value = "studentMain.do")
+	public String studentMain() {
+		return "";
 	}
 }

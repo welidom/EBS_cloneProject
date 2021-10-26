@@ -26,18 +26,6 @@ public class MainController {
 
 	@RequestMapping(value="/main.do")
 	public String mainNotice(HttpServletRequest req) {
-		HttpSession session = req.getSession();
-		
-		String user = req.getParameter("login");
-		
-		if (user != null) {
-			if(user.equals("0")) {
-				session.setAttribute("UserPermit", null);
-			}else {
-				session.setAttribute("UserPermit", req.getParameter("login"));
-			}
-		}
-		
 		List<NoticeDTO> list = noticemapper.listNotice("mainPage");
 		if(list.size() > 4) {
 			list = list.subList(0, 4);

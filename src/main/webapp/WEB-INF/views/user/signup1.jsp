@@ -80,7 +80,7 @@ cursor:pointer;
 	<hr width=99%; color=#3232ff;>
 	<br>
 	<div class="img_one">
-		<img src="/views/img/EBSimg.PNG" style="position:relative;left:20%;float:left;">
+		<img src="${pageContext.request.contextPath}/resources/images/signUp.png" style="position:relative;left:20%;float:left;">
 	</div>
 	<div class="welcome">
 		<h1>창의 교육·미래 방송 EBS 회원가입을 환영합니다.</h1>
@@ -562,7 +562,7 @@ cursor:pointer;
 					</tr>
 				</tbody>
 			</table></div>
-			<form action="dosignup1" method="POST"> 
+			<form action="term.do" method="POST" name="term" id="term"> 
 			<p class="agreement">
 				<input type="checkbox" class="check01 next-focus" id="agree1" name="y1" value="Y1" >
 				<label for="agree1" class="st_label01"><i></i>약관을 충분히 이해하였으며 동의 합니다.</label>
@@ -633,8 +633,19 @@ cursor:pointer;
 		</p>
 		<br>
 		<div style="text-align:center;display:flex;justify-content: center;">
-			<button type="button" class="btn">확인</button>
+			<button type="button" class="btn" onclick="check();">확인</button>
 		</div>
 		</form>
 </body>
+<script type="text/javascript">
+function check() {
+	var form = document.term;
+	console.log();
+	if(!form.y1.checked || !form.y2.checked){
+		alert("이용약관에 동의해주세요.")
+	}else{
+		form.submit();
+	}
+}
+</script>
 </html>

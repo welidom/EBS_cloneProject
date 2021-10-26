@@ -60,6 +60,7 @@ cursor:pointer;
 	</div>
 	<hr width=99%; color=#3232ff;>
 	<h2 style="position:relative;left:20%;">>정보입력 및 본인확인</h2>
+	<form name="signup">
 	<table style="position:relative;left:20%;width:60%;height:100px;">
 	<colgroup>
 		<col width="250">
@@ -68,26 +69,35 @@ cursor:pointer;
 	<tbody>
 	<tr>
 		<th>아이디</th>
-		<td><input id="id" name="user_id" class="inp" type="text" minlength="6" maxlength="12" ><button class=btn>중복확인</button></td>
+		<td><input id="id" name="id" class="inp" type="text" minlength="6" maxlength="12" check=false><a class="btn checkOverlap">중복확인</a>
+			<br><span id="idNotice"></span>
+		</td>
 	</tr>
 	<tr>
 		<th>비밀번호</th>
-		<td><input id="password" name="user_pw" class="inp" type="password" minlength="6" maxlength="12"></td>
+		<td><input id="pw" name="pw" class="inp" type="password" minlength="6" maxlength="12" check=false>
+			<br><span id="pwNotice"></span>
+		</td>
 	</tr>
 	<tr>
 		<th>비밀번호 확인</th>
-		<td><input id="password" name="user_pwcheck" class="inp" type="password" minlength="8" maxlength="12"></td>
+		<td><input id="pwCheck" name="user_pwcheck" class="inp" type="password" minlength="8" maxlength="12" check=false>
+			<br><span id="pwCheckNotice"></span>
+		</td>
 	</tr>
 	<tr>
 		<th>이름</th>
-		<td><input id="name" class="inp" type="text"></td>
+		<td><input id="name" name="name" class="inp" type="text" check=false>
+			<br><span id="nameNotice"></span>
+		</td>
 	</tr>
 	<tr>
 		<th>성별</th>
 		<td>
-		<input id="sex" name="user_sex" type="radio" value="male">남성 
-		<input id="sex" name="user_sex" type="radio" value="female">여성<br>
-		<input id="agree_sex" name="sy" type="checkbox" value="agree_sex">선택정보(성별) 수집 및 이용 동의
+		<input type="hidden" name="gender"/>
+		<input id="male" name="user_gender" type="radio" value="1">남성 
+		<input id="female" name="user_gender" type="radio" value="2">여성<br>
+		<input id="agree_gender" name="sy" type="checkbox">선택정보(성별) 수집 및 이용 동의
 			<table style="word-break:keep-all;width:100%;">
 			<colgroup>
 				<col width="42%">
@@ -112,10 +122,9 @@ cursor:pointer;
 			</td>
 	</tr>
 	<tr>
-	<th>생년월일</th>
+	<th>생년월일<input type="hidden" name="birth"></th>
 	<td>
 	<div style="float:left;">
-	<form method="post" action="selectYear">
 		<select id="year" name="year" style="font-size:17px;padding:2px 15px 2px 2px;">
 			<option value="1900">1900</option>
 			<option value="1901">1901</option>
@@ -241,10 +250,8 @@ cursor:pointer;
 			<option value="2001">2021</option>
 		</select>
 		<label>년 </label>
-	</form>
 	</div>
 	<div style="float:left;">
-	<form method="post" action="selectMonth">
 		<select id="month" name="month"style="font-size:17px;padding:2px 15px 2px 2px;">
 			<option value="1">1</option>
 			<option value="2">2</option>
@@ -260,10 +267,8 @@ cursor:pointer;
 			<option value="12">12</option>
 		</select>
 		<label>월 </label> 
-	</form>
 	</div>
 	<div style="float:left;">
-	<form method="post" action="selectDate">
 		<select id="date" name="date"style="font-size:17px;padding:2px 15px 2px 2px;">
 			<option value="1">1</option>
 			<option value="2">2</option>
@@ -298,16 +303,15 @@ cursor:pointer;
 			<option value="31">31</option>
 		</select>
 		<label>일</label> 
-	</form>
 	</div>
 	</tr>
 	<tr>
-		<th>이메일</th>
+		<th>이메일<input type="hidden" name="email"></th>
 		<td><input id="email_name" class="inp" type="text" style="width:25%;"> @ <input id="email_address" class="inp" type="text" style="width:25%;"><p style="color:purple;font-size:15px;">아이디나 비밀번호를 찾기위해 사용되오니 정확한 정보로 입력하시기 바랍니다.</p></td>
 	</tr>
 	<tr>
 		<th>휴대폰</th>
-		<td><input id="phoneNumber" name="user_pnum" type="text" class="inp"><br>
+		<td><input id="phoneNum" name="phoneNum" type="text" class="inp"><br>
 		<input id="agree_pnum" name="py" type="checkbox" value="agree_pnum">선택정보(휴대폰) 수집 및 이용 동의
 			<table style="word-break:keep-all;width:100%;">
 			<colgroup>
@@ -333,24 +337,14 @@ cursor:pointer;
 			<p style="color:purple;font-size:15px;">아이디나 비밀번호를 찾기위해 사용되오니 정확한 정보로 입력하시기 바랍니다.</p>
 			</td>
 	</tr>
-	<tr>
-	<th>인증방법</th>
-		<td><input id="phoneCert" name="auth_method" type="radio" value="phoneCert">휴대폰 
-		<input id="emailCert" name="auth_method" type="radio" value="emailCert">이메일
-		<button class="btn">인증</button>
-		<br>
-		<p style="color:purple;font-size:15px;">휴대폰 인증을 위한 인증번호 발송은 1일 최대 3회까지 가능합니다.</p>
-		</td>
-	</tr>
-	<tr>
-	<th>인증번호</th>
-		<td><input id="phoneCertNumber" name="auth_num" type="text" class="inp"><button class="btn">확인</button></td>
-	</tr>
 	</tbody>
 	</table>
+	</form>
 	<div style="position:relative;left:20%;"><p>※ 교사 회원님을 위한 교사인증은 가입 후 회원정보수정에서 인증하실 수 있습니다.</p></div>
 	<div style="text-align:center;display:flex;justify-content: center;">
-			<button type="submit" class="button">확인</button>
+			<button id="submit" class="button">확인</button>
 	</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/signup.js"></script>
 </body>
 </html>
