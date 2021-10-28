@@ -7,6 +7,9 @@
 	select * from account where id = #{userId}
 </select>
 <insert id="newUser" parameterType="UserDTO">
-	insert into account values(#{id}, #{pw}, #{name}, #{gender}, #{birth}, #{email}, #{phoneNum}, 1, 1, 1, null)
+	insert into account values(#{id}, #{pw}, #{name}, #{gender}, #{birth}, #{email}, #{phoneNum}, 1, 1, 1, null,null,null)
 </insert>
+<update id="updateUser" parameterType="UserDTO">
+	update account set schoolId = #{schoolId}, set classNum = #{classNum}, num = #{num},notice = #{notice}, sms = #{sms}  where id = #{id}
+</update>
 </mapper>

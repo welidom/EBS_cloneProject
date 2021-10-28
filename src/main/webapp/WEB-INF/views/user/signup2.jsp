@@ -312,7 +312,7 @@ cursor:pointer;
 	<tr>
 		<th>휴대폰</th>
 		<td><input id="phoneNum" name="phoneNum" type="text" class="inp"><br>
-		<input id="agree_pnum" name="py" type="checkbox" value="agree_pnum">선택정보(휴대폰) 수집 및 이용 동의
+		<input id="agree_pnum" name="py" type="checkbox">선택정보(휴대폰) 수집 및 이용 동의
 			<table style="word-break:keep-all;width:100%;">
 			<colgroup>
 				<col width="42%">

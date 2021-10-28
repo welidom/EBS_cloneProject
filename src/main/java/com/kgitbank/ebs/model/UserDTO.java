@@ -11,6 +11,9 @@ public class UserDTO {
 	private int notice;
 	private int sms;
 	private int permit;
+	private String schoolId;
+	private String classNum;
+	private int num;
 	
 	public String getId() {
 		return id;
@@ -71,6 +74,26 @@ public class UserDTO {
 	}
 	public void setPermit(int permit) {
 		this.permit = permit;
+	}
+	
+	
+	public String getSchoolId() {
+		return schoolId;
+	}
+	public void setSchoolId(String schoolId) {
+		this.schoolId = schoolId;
+	}
+	public String getClassNum() {
+		return classNum;
+	}
+	public void setClassNum(String classNum) {
+		this.classNum = classNum;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
 	}
 	@Override
 	public String toString() {

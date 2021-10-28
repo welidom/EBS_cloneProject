@@ -24,13 +24,19 @@
 	<context:component-scan base-package="com.kgitbank.ebs" />
 	
 
-	<beans:bean id="authInterceptor"
-		class="com.kgitbank.ebs.interceptor.AuthInterceptor"></beans:bean>
+	<beans:bean id="loginInterceptor"
+		class="com.kgitbank.ebs.interceptor.LoginInterceptor"></beans:bean>
 	
 	<beans:bean id="permitInterceptor"
 		class="com.kgitbank.ebs.interceptor.PermitInterceptor"></beans:bean>
-
+	<beans:bean id="profileInterceptor"
+		class= "com.kgitbank.ebs.interceptor.ProfileInterceptor" />
+	
 	<interceptors>
+		<interceptor>
+			<mapping path="/profile.do" />
+			<beans:ref bean="profileInterceptor"/>
+		</interceptor>
 		<interceptor>
 			<mapping path="/insert*.do" />
 			<mapping path="/delete*.do" />
@@ -39,8 +45,7 @@
 		</interceptor>
 		<interceptor>
 			<mapping path="/mainSchool.do" />
-			<beans:ref bean="authInterceptor" />
+			<beans:ref bean="loginInterceptor" />
 		</interceptor>
 	</interceptors>
-	
 </beans:beans>

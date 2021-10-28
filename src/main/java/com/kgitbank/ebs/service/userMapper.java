@@ -31,5 +31,9 @@ public class userMapper {
 		UserDTO dto = sqlSession.selectOne(namespace+".getUser", userId);
 		return dto;
 	}
+
+	public void updateUser(UserDTO dto) {
+		sqlSession.update(namespace+".updateUser", dto);
+	}
 	
 }

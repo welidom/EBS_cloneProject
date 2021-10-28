@@ -1,6 +1,8 @@
 package com.kgitbank.ebs;
 
 
+import java.util.Calendar;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -67,7 +69,6 @@ public class UserController {
 	}
 	@RequestMapping(value = "signUp.do", method=RequestMethod.POST)
 	public String mainSignUp(HttpServletRequest req,UserDTO dto) {
-		System.out.println(dto.toString());
 		usermapper.newUser(dto);
 		HttpSession session = req.getSession();
 		session.setAttribute("UserId", dto.getId());
@@ -84,6 +85,39 @@ public class UserController {
 		mav.addObject("url", "main.do");
 		return mav;
 	}
+	@RequestMapping(value = "profile.do")
+	public ModelAndView profile() {
+		ModelAndView mav = new ModelAndView("pass");
+		mav.addObject("url", "main.do");
+		return mav;
+	}
+	@RequestMapping(value = "studentProfile.do")
+	public String studentProfile(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		UserDTO dto = usermapper.getUser((String) session.getAttribute("UserId"));
+		String birth = "";
+		for(int i = 0; i<4; i++) {
+			birth += dto.getBirth().split("")[i];
+		}
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		int age = year - Integer.parseInt(birth);
+		String grade;
+		if(age >= 8 && age <= 13) {
+			grade = "초등학생 "+(age-7)+"학년";
+		}else if(age > 13 && age <= 16) {
+			grade = "중학생 " + (age-13)+"학년";
+		}else if(age > 16 && age < 20) {
+			grade = "고등학생 " + (age-16)+"학년";
+		}else {
+			grade = "---";
+		}
+		
+		req.setAttribute("dto", dto);
+		req.setAttribute("grade", grade);
+		req.setAttribute("footerContent", Includes.getFooter());
+		return "user/profile";
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "checkOverlab.do")
 	public boolean checkOverlab(String userId) {

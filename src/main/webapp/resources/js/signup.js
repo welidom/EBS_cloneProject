@@ -100,11 +100,15 @@ $(document).ready(function(){
 			var email = $("input[name='email']");
 			var gender = $("input[name='gender']");
 			var birth = $("input[name='birth']");
+			var pNum = $("input[name='phoneNum']")
 			email.attr("value", $("#email_name").val()+"@"+$("#email_address").val());
-			if($("#agree_gender").attr("checked")){
+			if($("input:checkbox[id='agree_gender']:checked").length == 0){
 				gender.attr("value", "0");
 			}else{
-				gender.attr("value", $("input[name='user_gender']").val())
+				gender.attr("value", $("input[name='user_gender']:checked").val())
+			}
+			if($("input:checkbox[id='agree_pnum']:checked").length == 0){
+				pNum.attr("value", null);
 			}
 			birth.attr("value", $("#year").val()+"."+$("#month").val()+"."+$("#date").val());
 			form.attr("action", "signUp.do");
