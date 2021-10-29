@@ -549,7 +549,7 @@ cursor:pointer;
 						<td>Intel Core Duo<br>1.83GHz 이상</td>
 					</tr>
 					<tr>
-						<th rowspan="2">EBS<br>온라인클래스</th>
+						<th rowspan="2">EBS<br>온라인클론스</th>
 						<td>Windows 10</td>
 						<td>Core i5 3.0 이상</td>
 						<td rowspan="2">선생님 : 8G 이상<br>학생 : 4G 이상</td>

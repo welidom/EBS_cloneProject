@@ -10,7 +10,7 @@
 		<div style="color: white; margin-bottom: 20px;">Home 〉 FAQ</div>
 		<div>
 		<div style="font-weight: bold; font-size: 25px; color: white;">FAQ</div>
-		<div style="color:white;">온라인 클래스 이용시 자주 묻는 질문과 답변을 안내합니다.</div>
+		<div style="color:white;">온라인 클론스 이용시 자주 묻는 질문과 답변을 안내합니다.</div>
 		</div>
 	</div>
 </div>

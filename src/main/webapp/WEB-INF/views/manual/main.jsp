@@ -10,7 +10,7 @@
 	<br>
 	<b style="font-size: 25px;">이용자메뉴얼</b><br>
 	EBS온라인클레스 이용 메뉴얼입니다.<br>
-	매뉴얼은 온라인 클래스의 새로운 기능을 업데이트하고 있습니다.<br>
+	매뉴얼은 온라인 클론스의 새로운 기능을 업데이트하고 있습니다.<br>
 	</span>
 	<img style="float: right;" alt="manual.png" src="${pageContext.request.contextPath}/resources/images/manual.png">
 </div>

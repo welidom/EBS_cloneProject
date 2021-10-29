@@ -56,7 +56,7 @@
 		<a class="moreInfo" href="">더보기 〉</a>
 		<br><br>
 		<c:forEach var="dto" items="${listFaq}">
-		<a class="faq" style="" href="">
+		<a class="faq" href="">
 			<span class="faqc" style="">${dto.category}</span><span class="slice">|</span><span>${dto.question}</span>
 			<span class="moreInfo">〉</span>
 		</a>
