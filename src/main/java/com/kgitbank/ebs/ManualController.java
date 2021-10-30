@@ -50,14 +50,14 @@ public class ManualController {
 		return "manual/insertForm";
 	}
 	
-	@PostMapping(value="/insertManualPro.do")
+	@RequestMapping(value="/insertManualPro.do", method=RequestMethod.POST)
 	public ModelAndView upload(@RequestParam("file") MultipartFile uploadFile, MultipartHttpServletRequest req){
 		
 		ManualDTO dto = new ManualDTO();
 		
 		dto.setType(1);
 		
-		String savePath = "D:/manualFiles/manualFiles";
+		String savePath = "D:/Files/manualFiles";
 		
 		String originalFileName= null;
 		
@@ -76,10 +76,10 @@ public class ManualController {
 		int res = manualmapper.insertManual(dto);
 		String msg,url;
 		if(res > 0) {
-			msg="占쌨댐옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙";
+			msg="메뉴얼 추가 성공";
 			url = "manual.do";
 		}else {
-			msg="占쌨댐옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙";
+			msg="메뉴얼 추가 실페";
 			url = "insertManual.do";
 		}
 		req.setAttribute("footerContent", Includes.getFooter());
@@ -93,10 +93,10 @@ public class ManualController {
 		int res = manualmapper.insertManual(dto);
 		String msg,url;
 		if(res > 0) {
-			msg="占쌨댐옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙";
+			msg="메뉴얼 추가 성공";
 			url = "manual.do";
 		}else {
-			msg="占쌨댐옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙";
+			msg="메뉴얼 추가 실페";
 			url = "insertManual.do";
 		}
 		req.setAttribute("footerContent", Includes.getFooter());
@@ -127,14 +127,14 @@ public class ManualController {
 			res = manualmapper.deleteManual(nums);
 		}
 		if(res > 0) {
-			msg="占쌨댐옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙";
+			msg="메뉴얼 삭제 성공";
 			url="manual.do";
 		} else if(res < 0) {
-			msg = "占쏙옙占쏙옙占쏙옙 占쌨댐옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쌍쇽옙占쏙옙";
+			msg = "삭제할 메뉴얼을 선택해주세요";
 			url="deleteManual.do";
 		}
 		else {
-			msg="占쌨댐옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙";
+			msg="메뉴얼 삭제 실페";
 			url="main.do";
 		}
 		ModelAndView mav = new ModelAndView("message");

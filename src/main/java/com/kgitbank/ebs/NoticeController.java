@@ -119,10 +119,10 @@ public class NoticeController {
 		int res = noticemapper.insertNotice(dto);
 		String msg,url;
 		if(res > 0) {
-			msg="���� ��� ����";
+			msg="공지사항 추가성공";
 			url = "notice.do";
 		}else {
-			msg="���� ��� ����";
+			msg="공지사항 추가 실페";
 			url = "main.do";
 		}
 		req.setAttribute("footerContent", Includes.getFooter());
@@ -159,14 +159,14 @@ public class NoticeController {
 			}
 		}
 		if(res > 0) {
-			msg="�޴��� ���� ����";
+			msg="공지사항 삭제 성공";
 			url="notice.do";
 		} else if(res < 0) {
-			msg = "������ �޴����� �������ּ���";
+			msg = "삭제할 공지사항을 선택해주세요.";
 			url="deleteNotice.do";
 		}
 		else {
-			msg="�޴��� ���� ����";
+			msg="공지사항 삭제 실페";
 			url="main.do";
 		}
 		ModelAndView mav = new ModelAndView("message");

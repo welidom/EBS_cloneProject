@@ -1,5 +1,8 @@
 package com.kgitbank.ebs.service;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -32,8 +35,27 @@ public class userMapper {
 		return dto;
 	}
 
-	public void updateUser(UserDTO dto) {
-		sqlSession.update(namespace+".updateUser", dto);
+	public int updateUser(UserDTO dto) {
+		int res = sqlSession.update(namespace+".updateUser", dto);
+		return res;
 	}
-	
+
+	public List<UserDTO> userList() {
+		List<UserDTO> list = sqlSession.selectList(namespace+".userList");
+		return list;
+	}
+
+	public void setSchool(String schoolId, String userId) {
+		HashMap<String, String> hm = new HashMap<String, String>();
+		hm.put("schoolId", schoolId);
+		hm.put("userId", userId);
+		sqlSession.update(namespace+".setSchool", hm);
+	}
+
+	public void setPermit(String id, int permit) {
+		HashMap<String, Object> hm = new HashMap<String, Object>();
+		hm.put("id", id);
+		hm.put("permit", permit);
+		sqlSession.update(namespace+".setPermit", hm);
+	}
 }

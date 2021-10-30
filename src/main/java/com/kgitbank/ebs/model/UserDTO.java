@@ -15,6 +15,18 @@ public class UserDTO {
 	private String classNum;
 	private int num;
 	
+	public int getNotice() {
+		return notice;
+	}
+	public void setNotice(int notice) {
+		this.notice = notice;
+	}
+	public int getSms() {
+		return sms;
+	}
+	public void setSms(int sms) {
+		this.sms = sms;
+	}
 	public String getId() {
 		return id;
 	}
@@ -57,26 +69,12 @@ public class UserDTO {
 	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
 	}
-	public int getNotice() {
-		return notice;
-	}
-	public void setNotice(int notice) {
-		this.notice = notice;
-	}
-	public int getSms() {
-		return sms;
-	}
-	public void setSms(int sms) {
-		this.sms = sms;
-	}
 	public int getPermit() {
 		return permit;
 	}
 	public void setPermit(int permit) {
 		this.permit = permit;
 	}
-	
-	
 	public String getSchoolId() {
 		return schoolId;
 	}
@@ -94,11 +92,5 @@ public class UserDTO {
 	}
 	public void setNum(int num) {
 		this.num = num;
-	}
-	@Override
-	public String toString() {
-		return "UserDTO [id=" + id + ", pw=" + pw + ", name=" + name + ", gender=" + gender + ", birth=" + birth
-				+ ", email=" + email + ", phoneNum=" + phoneNum + ", notice=" + notice + ", sms=" + sms + ", permit="
-				+ permit + "]";
 	}
 }

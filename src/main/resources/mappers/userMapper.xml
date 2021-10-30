@@ -10,6 +10,15 @@
 	insert into account values(#{id}, #{pw}, #{name}, #{gender}, #{birth}, #{email}, #{phoneNum}, 1, 1, 1, null,null,null)
 </insert>
 <update id="updateUser" parameterType="UserDTO">
-	update account set schoolId = #{schoolId}, set classNum = #{classNum}, num = #{num},notice = #{notice}, sms = #{sms}  where id = #{id}
+	update account set classNum = #{classNum}, num = #{num},notice = #{notice}, sms = #{sms}  where id = #{id}
+</update>
+<select id="userList" resultType="UserDTO">
+	select * from account where permit != 3
+</select>
+<update id="setSchool" parameterType="hashMap">
+	update account set schoolid = #{schoolId} where id = #{userId}
+</update>
+<update id="setPermit" parameterType="hashMap">
+	update account set permit = #{permit} where id = #{id}
 </update>
 </mapper>

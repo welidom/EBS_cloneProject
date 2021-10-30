@@ -6,11 +6,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+
 public class LoginInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler)
 			throws Exception {
 		HttpSession session = req.getSession();
-		if(session.getAttribute("UserPermit") == null) {
+		if(session.getAttribute("UserId") == null) {
 			resp.sendRedirect("login.do");
 			return false;
 		}

@@ -3,7 +3,7 @@
 <%@ include file="../include/header.jsp"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profile.css" type="text/css">
 <div style="padding: 0 14%;">
-<div style="text-align: left;"><span>기본정보</span> <span>회원가입 시 입력한 기본정보를 확인합니다.</span></div>
+<div style="text-align: left;"><span style="font-weight: bold; font-size: 18px; color: darkgreen;">기본정보</span> <span>회원가입 시 입력한 기본정보를 확인합니다.</span></div>
 <div class="basicInfo" style="border-top: 2px solid darkgreen; width:100%; margin-bottom: 30px;">
 	<div>
 		<span class="th" style="">아이디</span>
@@ -16,32 +16,27 @@
 		<span class="td" style="width: 700px"><a style="text-align: left;" class="btn" href="certification.do">교사인증</a>※ 교사인증을 위해 EBS 회원정보 수정 페이지로 이동합니다.</span>
 	</div>
 </div>
-<div style="text-align: left;"><span>나의 학교정보</span> <span>온라인클론스 이용 시 필요한 부가정보를 입력합니다.입력한 정보는 클래스 가입 및 강좌 수강 시 참고됨니다.</span></div>
+<div style="text-align: left;"><span style="font-weight: bold; font-size: 18px; color: darkgreen;">나의 학교정보</span> <span>온라인클론스 이용 시 필요한 부가정보를 입력합니다.입력한 정보는 클래스 가입 및 강좌 수강 시 참고됨니다.</span></div>
 <div class="basicInfo" style="border-top: 2px solid darkgreen; width:100%; margin-bottom: 50px;">
-<form action="profile.do" method="post" id="sendProfile">
+<form action="profileUpdate.do" method="post" id="sendProfile">
 	<div class="info">
 		<span class="th">구분</span>
 		<span class="td">
-			<c:if test="${dto.permit eq 1}">
-				학생
-			</c:if>
-			<c:if test="${dto.permit eq 2 }">
-				교사
-			</c:if>
+			학생
 		</span>
 	</div>
 	<div class="info">
 		<span class="th">학교</span>
-		<span class="td" style="width: 500px">${school.name}
+		<span class="td" style="width: 70%">${school.name}
 		<c:choose>
 		<c:when test="${lecture eq null}">
-			<a class="btn" href="getSchool.do">학교찾기</a>
+			<a class="btn" href="javascript:openpopup();">학교찾기</a>
 		</c:when>
 		<c:otherwise>
 			<a class="disabled">학교찾기</a>
 		</c:otherwise>
 		</c:choose>
-		<input type="hidden" name="schoolId" id="schoolId" value="${school.id }">
+		<input type="hidden" name="schoolId" id="schoolId" value="${dto.schoolId }">
 		※ 학교찾기 진행후 정보를 수정할 수 있습니다.
 		</span>
 	</div>
@@ -100,6 +95,7 @@
 <div style="color:darkgreen">※ ‘나의 학교정보’는 클래스 가입 시 영향을 줄 수 있습니다.</div>
 <div style="color:darkgreen"> &nbsp; &nbsp;정확한 정보를 입력해 주세요.</div>
 </div>
+<span id="target"></span>
 </div>
 <script>
 function check(){
@@ -115,8 +111,17 @@ function check(){
 	}else if(document.getElementById("num").value==""){
 		alert("번호를 입력해주세요");
 	}else{
-		
+		form.submit();
 	}
+}
+function openpopup(){
+	var popup = window.open('getSchool.do','popup','width=500, height=500, left=0, top=0');
+	var timer = setInterval(function() {   
+	    if(popup.closed) {
+	        clearInterval(timer);  
+	        window.location.reload();
+	    }  
+	}, 1000); 
 }
 </script>
 <%@ include file="../include/footer.jsp"%>
