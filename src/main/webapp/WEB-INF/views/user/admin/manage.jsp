@@ -7,7 +7,7 @@
 <span style="font-weight: bold; font-size: 20px; border: 1px dotted; width: 100%; display: inline-block; text-align: center;">회원관리</span>
 <ul>
 	<c:forEach items="${userList}" var="user">
-	<li style="margin-bottom: 30px">이름: ${user.name}<span style="float: right;"><a>(계정 삭제)</a></span>
+	<li style="margin-bottom: 30px">이름: ${user.name}<span style="float: right;"><a href="#" onclick="deleteAccount(this);" style="color: red;" value="${user.id }">(계정 삭제)</a></span>
 	<ul><li>생년월일: ${user.birth} 구분: 
 	<c:if test="${user.permit eq 1}">
 		학생 
@@ -40,4 +40,15 @@
 </ul>
 </div>
 </div>
+<script>
+function deleteAccount(obj){
+	var popup = window.open('deleteAccount.do?id=','popup','width=500, height=250, left=1000, top=100');
+	var timer = setInterval(function() {   
+	    if(popup.closed) {
+	        clearInterval(timer);  
+	        window.location.reload();
+	    }  
+	}, 1000); 
+}
+</script>
 <%@include file="../../include/footer.jsp"%>
