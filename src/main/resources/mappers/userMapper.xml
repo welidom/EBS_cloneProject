@@ -27,4 +27,7 @@
 <select id="checkUser" parameterType="hashMap" resultType="UserDTO">
 	select * from account where email = #{email} and auth = #{key}
 </select>
+<delete id="deleteUser" parameterType="String">
+	delete from account where id = #{id}
+</delete>
 </mapper>

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.kgitbank.ebs.model.SchoolDTO;
 import com.kgitbank.ebs.model.UserDTO;
 import com.kgitbank.ebs.service.MailService;
@@ -147,12 +149,6 @@ public class UserController {
 		req.setAttribute("footerContent", Includes.getFooter());
 		return "user/admin/manage";
 	}
-	@RequestMapping(value = "/deleteUser")
-	public ModelAndView deleteUser(String id) {
-		
-		ModelAndView mav = new ModelAndView();
-		return mav;
-	}
 	@RequestMapping("/auth")
 	public String signUp(String email, HttpServletRequest req) {
 		HttpSession session = req.getSession();
@@ -193,5 +189,35 @@ public class UserController {
 	public boolean checkOverlab(String userId) {
 		boolean check = userService.checkOverlab(userId);
 		return check;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/userDelete", produces = "application/text; charset=utf8")
+	public String deleteUser(String id) {
+		userService.deleteUser(id);
+		List<UserDTO> list = userService.userList();
+		
+		JsonObject jo = new JsonObject();
+		JsonArray ja = new JsonArray();
+		for(UserDTO dto: list) {
+			if(dto.getPermit() != 3) {
+				JsonObject Jobj = new JsonObject();
+				Jobj.addProperty("name", dto.getName());
+				Jobj.addProperty("birth", dto.getBirth());
+				if(dto.getPermit() == 1) {
+					Jobj.addProperty("permit", "학생");
+				}else {
+					Jobj.addProperty("permit", "교사");
+				}
+				if(schoolService.getSchool(dto.getSchoolId()) != null) {
+				Jobj.addProperty("school", schoolService.getSchool(dto.getSchoolId()).getName());
+				}else {
+					Jobj.addProperty("school", "없음");
+				}
+				ja.add(Jobj);
+			}
+		}
+		jo.add("users", ja);
+		return jo.toString();
 	}
 }

@@ -72,4 +72,8 @@ public class UserService {
 		UserDTO dto = sqlSession.selectOne(namespace+".checkUser", hm);
 		return dto;
 	}
+
+	public void deleteUser(String id) {
+		sqlSession.delete("deleteUser", id);
+	}
 }

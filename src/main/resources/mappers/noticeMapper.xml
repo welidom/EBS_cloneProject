@@ -26,7 +26,7 @@
 			subject 
 		</when>
 	</choose>
-	like '%'||#{search}||'%' and mustRead = 0 order by mustRead desc, num desc
+	like CONCAT('%', #{search}, '%') and mustRead = 0 order by mustRead desc, num desc
 </select>
 
 <select id="getNotice" resultType="NoticeDTO" parameterType="int">
@@ -34,7 +34,7 @@
 </select>
 
 <insert id="insertNotice" parameterType="NoticeDTO">
-	insert into notice values(notice_seq.nextval, #{mustRead}, #{category}, #{subject},  #{content},  #{attach}, sysdate, 0)
+	insert into notice(mustRead, category, subject,content,attach, reg_date, readcount) values(#{mustRead}, #{category}, #{subject},  #{content},  #{attach}, sysdate, 0)
 </insert>
 
 <update id="addNoticeReadCount" parameterType="int">
