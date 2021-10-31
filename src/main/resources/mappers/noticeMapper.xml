@@ -34,7 +34,7 @@
 </select>
 
 <insert id="insertNotice" parameterType="NoticeDTO">
-	insert into notice(mustRead, category, subject,content,attach, reg_date, readcount) values(#{mustRead}, #{category}, #{subject},  #{content},  #{attach}, sysdate, 0)
+	insert into notice(mustRead, category, subject,content,attach, reg_date, readcount) values(#{mustRead}, #{category}, #{subject},  #{content},  #{attach}, now(), 0)
 </insert>
 
 <update id="addNoticeReadCount" parameterType="int">

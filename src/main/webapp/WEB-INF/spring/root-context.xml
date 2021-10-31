@@ -7,7 +7,7 @@
 	<bean id="dataSource" 
 			class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/sjb?useSSL=false&amp;serverTimezone=Asia/Seoul" />
+		<property name="url" value="jdbc:mysql://database-1.caiuxc49ro1c.ap-northeast-2.rds.amazonaws.com:3306/sjb?useSSL=false&amp;serverTimezone=Asia/Seoul" />
 		<property name="username" value="admin" />
 		<property name="password" value="eric0222" />			
 	</bean>	
@@ -27,7 +27,7 @@
 	</beans:bean>
 
 	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="D:/Files">
+		<beans:constructor-arg value="/resources/Files/manualFiles">
 		</beans:constructor-arg>
 	</beans:bean>
 	

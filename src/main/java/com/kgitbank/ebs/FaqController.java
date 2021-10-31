@@ -150,13 +150,21 @@ public class FaqController {
 			List<FaqDTO> list = faqService.faqReadcountList();
 			JsonObject jo = getJson(list);
 			jo.addProperty("cno", cno);
-			jo.addProperty("UserPermit", dto.getPermit());
+			if(dto != null) {
+				jo.addProperty("UserPermit", dto.getPermit());
+			}else {
+				jo.addProperty("UserPermit", 0);
+			}
 			return jo.toString();
 		}else {
 			List<FaqDTO> list = faqService.faqList(cno);
 			JsonObject jo = getJson(list);
 			jo.addProperty("cno", cno);
-			jo.addProperty("UserPermit", dto.getPermit());
+			if(dto != null) {
+				jo.addProperty("UserPermit", dto.getPermit());
+			}else {
+				jo.addProperty("UserPermit", 0);
+			}
 			return jo.toString();
 		}
 	}

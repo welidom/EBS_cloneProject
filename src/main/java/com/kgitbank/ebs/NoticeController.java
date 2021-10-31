@@ -90,7 +90,8 @@ public class NoticeController {
 		
 		MultipartFile uploadFile = req.getFile("file");
 		
-		String savePath = "D:/Files/noticeFiles";
+		String root_path = req.getSession().getServletContext().getRealPath("/"); 
+		String savePath = root_path+"resources/Files/noticeFiles";
 		
 		String originalFileName= "";
 			
@@ -196,7 +197,8 @@ public class NoticeController {
 		
 		MultipartFile uploadFile = req.getFile("file");
 		
-		String savePath = "D:/Files/noticeFiles";
+		String root_path = req.getSession().getServletContext().getRealPath("/"); 
+		String savePath = root_path+"resources/Files/noticeFiles";
 		
 		String originalFileName= "";
 			

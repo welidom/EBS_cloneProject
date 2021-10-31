@@ -56,7 +56,8 @@ public class ManualController {
 		
 		dto.setType(1);
 		
-		String savePath = "D:/Files/manualFiles";
+		String root_path = req.getSession().getServletContext().getRealPath("/");  
+		String savePath = root_path+"resources/Files/manualFiles";
 		
 		String originalFileName= null;
 		

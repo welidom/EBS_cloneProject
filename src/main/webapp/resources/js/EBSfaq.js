@@ -17,10 +17,10 @@
 					$(".actC").attr("class", "actC");
 					$(".actC[cno="+cno+"]").attr("class", "active actC");
 					$("input[name='hiddencno']").attr("value", cno);
-					
+					console.log(faqObj.length);
 					$(".myfaq").remove();
 					if(faqObj.length == 0){
-						$("wnload").before("<ul class='myfaq'><li class='nodata'>조회된 데이터가 없습니다.</li></ul>");
+						$(".download").before("<ul class='myfaq'><li class='nodata'>조회된 데이터가 없습니다.</li></ul>");
 					}else{
 						for(var i = 0; i < faqObj.length; i++){
 							var admin = "";
@@ -35,7 +35,7 @@
 						        	faqObj[i]['question']+
 						        	"<input type='hidden' name='hiddenbno' id='hiddenbno' value="+faqObj[i]["num"]+"><input type='hidden' name='hiddenreadcount' id='hiddenreadcount' value='"+faqObj[i]['readcount']+"'><input type='hidden' name='hiddenanswer' id='hiddenanswer' value='" + faqObj[i]['answer'] +"'><div class='v_btn'>V</div><div class='up_btn'>Λ</div></li><li class='answers' class='an'><div class='showanswer'>"+
 						        	faqObj[i]['answer']+"</div></li></ul>")
-							$("wnload").before($obj);
+							$(".download").before($obj);
 							
 							$(".answers").hide();
 							$(".up_btn").hide();
@@ -113,7 +113,7 @@
 					        	faqObj[i]['question']+
 					        	"<input type='hidden' name='hiddenbno' id='hiddenbno' value="+faqObj[i]["num"]+"><input type='hidden' name='hiddenreadcount' id='hiddenreadcount' value='"+faqObj[i]['readcount']+"'><input type='hidden' name='hiddenanswer' id='hiddenanswer' value='" + faqObj[i]['answer'] +"'><div class='v_btn'>V</div><div class='up_btn'>Λ</div></li><li class='answers' class='an'><div class='showanswer'>"+
 					        	faqObj[i]['answer']+"</div></li></ul>")
-						$("wnload").before($obj);
+						$(".download").before($obj);
 						
 						$(".answers").hide();
 						$(".up_btn").hide();

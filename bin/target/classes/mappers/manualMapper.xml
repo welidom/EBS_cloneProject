@@ -9,7 +9,7 @@
 </select>
 
 <insert id="insertManual" parameterType="ManualDTO">
-	insert into manual values(manual_seq.nextval, #{category}, #{subject}, #{content}, sysdate, #{type})
+	insert into manual(category, subject, content, reg_date, type) values(#{category}, #{subject}, #{content}, now(), #{type})
 </insert>
 
 <delete id="deleteManual" parameterType="int">

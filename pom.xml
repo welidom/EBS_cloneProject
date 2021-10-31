@@ -132,22 +132,6 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
-		<!--oracle
-		<dependency>
-			<groupId>com.zaxxer</groupId>
-			<artifactId>HikariCP</artifactId>
-			<version>3.1.0</version>
-		</dependency>
-		jdbc
-		<dependency>
-			<groupId>oracle.jdbc</groupId>
-			<artifactId>jdbc</artifactId>
-			<version>12.2.0.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/ojdbc8.jar</systemPath>
-		</dependency> -->
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>

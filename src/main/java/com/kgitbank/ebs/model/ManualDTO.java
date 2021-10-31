@@ -45,4 +45,10 @@ public class ManualDTO {
 	public void setType(int type) {
 		this.type = type;
 	}
+	@Override
+	public String toString() {
+		return "ManualDTO [num=" + num + ", category=" + category + ", subject=" + subject + ", content=" + content
+				+ ", reg_date=" + reg_date + ", type=" + type + "]";
+	}
+	
 }
