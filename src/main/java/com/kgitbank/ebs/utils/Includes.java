@@ -24,7 +24,7 @@ public class Includes {
 		file.transferTo(targetPath);
 	}
 	public static String[] getFaqCategory() {
-		String[] category = {"ÀÚÁÖ Ã£´Â Áú¹®","È¸¿ø","Å¬·¡½º ÀÌ¿ë", "ÇĞ½À", "Å¬·¡½º °³¼³/°ü¸®", "ÇĞ½À °ü¸®", "È­»ó ¼ö¾÷", "°­ÁÂ °ü¸®", "±âÅ¸"};
+		String[] category = {"ìì£¼ ì°¾ëŠ” ì§ˆë¬¸","íšŒì›","í´ë˜ìŠ¤ ì´ìš©", "í•™ìŠµ", "í´ë˜ìŠ¤ ê°œì„¤/ê´€ë¦¬", "í•™ìŠµ ê´€ë¦¬", "í™”ìƒ ìˆ˜ì—…", "ê°•ì¢Œ ê´€ë¦¬", "ê¸°íƒ€"};
 		return category;
 	}
 }

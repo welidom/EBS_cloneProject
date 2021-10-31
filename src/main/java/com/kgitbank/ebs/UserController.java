@@ -162,7 +162,7 @@ public class UserController {
 		UserDTO dto = userService.checkUser(email, authKey);
 		HttpSession session = req.getSession();
 		String msg,url;
-		if(dto.getId() != null) {
+		if(dto != null) {
 			msg="인증되었습니다.";
 			url = "main";
 			session.setAttribute("UserId", dto.getId());

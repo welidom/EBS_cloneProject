@@ -33,16 +33,16 @@ public class MailService {
 
         try {
             MailUtils sendMail = new MailUtils(mailSender);
-            sendMail.setSubject("ÀÌ¸ŞÀÏ ÀÎÁõ");
-            sendMail.setText(new StringBuffer().append("<h1>[ÀÌ¸ŞÀÏ ÀÎÁõ]</h1>")
-            .append("<p>¾Æ·¡ ¸µÅ©¸¦ Å¬¸¯ÇÏ½Ã¸é ÀÌ¸ŞÀÏ ÀÎÁõÀÌ ¿Ï·áµË´Ï´Ù.</p>")
+            sendMail.setSubject("ì˜¨ë¼ì¸ í´ë¡ ìŠ¤ ì´ë©”ì¼ ì¸ì¦");
+            sendMail.setText(new StringBuffer().append("<h1>[ì´ë©”ì¼ ì¸ì¦]</h1>")
+            .append("<p>ì•„ë˜ ì£¼ì†Œë¥¼ ëˆ„ë¥´ë©´ ì¸ì¦ì´ ì™„ë£Œë¨ë‹ˆë‹¤</p>")
             .append("<a href='http://localhost:8080/ebs/check?email=")
             .append(email)
             .append("&authKey=")
             .append(authKey)
-            .append("' target='_blenk'>ÀÌ¸ŞÀÏ ÀÎÁõ È®ÀÎ</a>")
+            .append("' target='_blenk'>ì´ë©”ì¼ ì¸ì¦ í™•ì¸</a>")
             .toString());
-            sendMail.setFrom("EBSOnlineClones@gmail.com", "EBS¿Â¶óÀÎÅ¬·Ğ½º");
+            sendMail.setFrom("EBSOnlineClones@gmail.com", "EBSì˜¨ë¼ì¸í´ë˜ìŠ¤");
             sendMail.setTo(email);
             sendMail.send();
         } catch (MessagingException e) {

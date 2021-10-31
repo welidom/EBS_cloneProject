@@ -12,7 +12,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			throws Exception {
 		HttpSession session = req.getSession();
 		if(session.getAttribute("UserId") == null) {
-			resp.sendRedirect("login.do");
+			resp.sendRedirect("login");
 			return false;
 		}
 		return true;
