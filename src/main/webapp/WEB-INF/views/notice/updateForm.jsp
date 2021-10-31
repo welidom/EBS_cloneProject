@@ -12,7 +12,7 @@
 	<img style="float: right;" alt="manual.png" src="${pageContext.request.contextPath}/resources/images/manual.png">
 </div>
 <div style="padding: 50px 14%;">
-	<form action="updateNotice.do" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+	<form action="updateNotice" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
 	<input type="hidden" name="num" id="num" value="${dto.num }"/>
 	<table>
 	<tr>
@@ -39,7 +39,7 @@
 	<tr>
 		<th>첨부파일:</th>
 		<td><input type="file" id="file" name="file"></td>
-		<td colspan="2" align="right"><input type="button" onclick="location.href='updateNotice.do?num=${dto.num}'" value="초기화"><input type="submit" value="수정"></td>
+		<td colspan="2" align="right"><input type="button" onclick="location.href='updateNotice?num=${dto.num}'" value="초기화"><input type="submit" value="수정"></td>
 	</tr>
 	</table>
 	</form>

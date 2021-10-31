@@ -7,7 +7,7 @@
 			<b style="font-size:20px;color:#ACCFF7; ">세상에서 가장 빠른 등교</b>
 			<b style="color:white;font-size:50px">EBS 온라인클론스</b>
 			<p style="color:#A8CCF7; font-size:15px; margin-bottom: 20px;">언제ㆍ어디서나 등교할 수 있는 EBS온라인클론스에서 선생님과 친구들을 만나볼까요?</p><br>
-			<b><a href="mainSchool.do" class="gtsButton gts gts" >등교하기  〉</a></b>
+			<b><a href="mainSchool" class="gtsButton gts gts" >등교하기  〉</a></b>
 			</div>
 			<img style="width: 800px; height: 350px" alt="mainBanner" src="${pageContext.request.contextPath}/resources/images/mainBanner.png">
 		</div>
@@ -19,11 +19,11 @@
 				<td style="width: 50%; vertical-align: top; height:50%;">
 				<p class="banner" style= "width: 85%; height: 50%">
 					<span>공지사항</span>
-					<a class="moreInfo" href="notice.do">더보기 〉</a>
+					<a class="moreInfo" href="notice">더보기 〉</a>
 					<br>
 					<c:forEach var="dto" items="${listNotice}">
 						<br><span style="font-size:15px; color:#525252; float: left;">ㆍ</span>
-						<a href="noticeContent.do?num=${dto.num }&&no=${dto.mustRead}" class="notice">
+						<a href="noticeContent?num=${dto.num }&&no=${dto.mustRead}" class="notice">
 							<span class="moreNotice">${dto.subject}</span>
 							<span class="moreNoticed">${dto.reg_date}</span>
 						</a>
@@ -31,7 +31,7 @@
 				</p>
 				</td>
 				<td rowspan="2" align="left"><p class="banner" style=" height:100%;display: inline-block;"><span style="float: left;">서비스 업데이트</span>
-					<a class="moreInfo" href="noticeContent.do?num=${getServiceNotice.num }">더보기 〉</a><br><br>
+					<a class="moreInfo" href="noticeContent?num=${getServiceNotice.num }">더보기 〉</a><br><br>
 					<span style="font-weight: normal; font-size: 16px; float:left;">
 					${getServiceNotice.content}
 					</span>
@@ -41,7 +41,7 @@
 				<td style="width: 50%; height:50%;">
 				<p class="banner" style="width: 85%; height: 100%; margin-bottom: 0%;  line-height: 80%">
 					<span>화상수업 업데이트</span>
-					<a class="moreInfo" href="noticeContent.do?num=${getNotice.num }">더보기 〉</a>
+					<a class="moreInfo" href="noticeContent?num=${getNotice.num }">더보기 〉</a>
 					<span style="font-size:13px; color:#525252;">
 					<br>
 					<br>
@@ -55,10 +55,10 @@
 	<div style="background-color: white; padding:70px 14%;">
 		<b style="font-size:40px;">자주 묻는 질문</b>
 		<br>
-		<a class="moreInfo" href="faqList.do">더보기 〉</a>
+		<a class="moreInfo" href="faqList">더보기 〉</a>
 		<br><br>
 		<c:forEach var="dto" items="${listFaq}">
-		<form action="faqList.do" method="post" name="goToFaq${dto.num }">
+		<form action="faqList" method="post" name="goToFaq${dto.num }">
 		<input type="hidden" name="cno" value="${dto.category}">
 		<a class="faq" href="javascript:document.goToFaq${dto.num }.submit();">
 			<span class="faqc" style="">${faqCategoryList[dto.category] }</span><span class="slice">|</span><span>${dto.question}</span>
@@ -71,7 +71,7 @@
 		<b style="font-size: 40px; margin-bottom: 40px; display: inline-block;">온라인 클래스를<br>
 		스마트하게.</b>
 		<div style="margin-bottom: 40px;">
-		<b style="font-size: 40px; color:#0b73bc;">선생님이시라면</b><a class="lookMenual" style="background-color: #0b73bc; " href="manual.do">메뉴얼보기 〉</a>
+		<b style="font-size: 40px; color:#0b73bc;">선생님이시라면</b><a class="lookMenual" style="background-color: #0b73bc; " href="manual">메뉴얼보기 〉</a>
 		</div>
 		<div style="display: flex; flex-direction: row; flex-wrap: wrap;justify-content: space-between;">
 			<b class="tob01 menualObj"><br>클래스 개설·관리</b>
@@ -81,7 +81,7 @@
 			<b class="tob05 menualObj"><br>학습 독려</b>
 		</div>
 		<div style="margin: 80px 0 40px;">
-		<b style="font-size: 40px; color:#ffc13d;">학생이라면</b><a class="lookMenual" style="background-color: #ffc13d; " href="manual.do">메뉴얼보기 〉</a>
+		<b style="font-size: 40px; color:#ffc13d;">학생이라면</b><a class="lookMenual" style="background-color: #ffc13d; " href="manual">메뉴얼보기 〉</a>
 		</div>
 		<div style="display: flex; flex-direction: row; flex-wrap: wrap;justify-content: space-between;">
 			<b class="sob01 menualObj"><br>클래스 가입</b>

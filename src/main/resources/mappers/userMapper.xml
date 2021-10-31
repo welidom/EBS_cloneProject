@@ -7,7 +7,7 @@
 	select * from account where id = #{userId}
 </select>
 <insert id="newUser" parameterType="UserDTO">
-	insert into account values(#{id}, #{pw}, #{name}, #{gender}, #{birth}, #{email}, #{phoneNum}, 1, 1, 1, null,null,null)
+	insert into account (id, pw, name, gender, birth, email, phoneNum, notice, sms, permit) values(#{id}, #{pw}, #{name}, #{gender}, #{birth}, #{email}, #{phoneNum}, 1, 1, 1)
 </insert>
 <update id="updateUser" parameterType="UserDTO">
 	update account set classNum = #{classNum}, num = #{num},notice = #{notice}, sms = #{sms}  where id = #{id}
@@ -21,4 +21,10 @@
 <update id="setPermit" parameterType="hashMap">
 	update account set permit = #{permit} where id = #{id}
 </update>
+<update id="setAuth" parameterType="hashMap">
+	update account set auth = #{key} where id = #{id}
+</update>
+<select id="checkUser" parameterType="hashMap" resultType="UserDTO">
+	select * from account where email = #{email} and auth = #{key}
+</select>
 </mapper>

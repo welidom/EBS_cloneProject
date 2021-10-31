@@ -32,9 +32,9 @@
 	</div>
 	<div style="margin: 50px 0; float: right;">
 		<c:if test="${UserPermit eq 3 }">
-		<a href="updateNotice.do?num=${dto.num }" class="btn_update">수정</a>
+		<a href="updateNotice?num=${dto.num }" class="btn_update">수정</a>
 		</c:if>
-		<a href="notice.do" class="btn_list">목록</a>
+		<a href="notice" class="btn_list">목록</a>
 	</div>
 </div>
 <%@ include file="../include/footer.jsp" %>

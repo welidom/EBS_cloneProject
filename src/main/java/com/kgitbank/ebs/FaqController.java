@@ -18,46 +18,46 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.kgitbank.ebs.model.FaqDTO;
 import com.kgitbank.ebs.model.UserDTO;
-import com.kgitbank.ebs.service.faqMapper;
-import com.kgitbank.ebs.service.userMapper;
+import com.kgitbank.ebs.service.FaqService;
+import com.kgitbank.ebs.service.UserService;
 import com.kgitbank.ebs.utils.Includes;
 
 @Controller
 public class FaqController {
 	@Inject
-	private faqMapper faqmapper;
+	private FaqService faqService;
 	@Inject
-	private userMapper usermapper;
-	@RequestMapping(value="/faqList.do", method=RequestMethod.GET)
+	private UserService userService;
+	@RequestMapping(value="/faqList", method=RequestMethod.GET)
 	public String list(HttpServletRequest req){
-		req.setAttribute("list", faqmapper.faqReadcountList());
+		req.setAttribute("list", faqService.faqReadcountList());
 		req.setAttribute("listCategory", Includes.getFaqCategory());
 		req.setAttribute("footerContent", Includes.getFooter());
 		req.setAttribute("cno", 0);
 		return "faq/listView";
 	}
-	@RequestMapping(value="/faqList.do", method=RequestMethod.POST)
+	@RequestMapping(value="/faqList", method=RequestMethod.POST)
 	public String list(HttpServletRequest req, @Param(value = "cno") int cno){
 		if(cno == 0) {
-			req.setAttribute("list", faqmapper.faqReadcountList());
+			req.setAttribute("list", faqService.faqReadcountList());
 		}else {
-			req.setAttribute("list", faqmapper.faqList(cno));
+			req.setAttribute("list", faqService.faqList(cno));
 		}
 		req.setAttribute("listCategory", Includes.getFaqCategory());
 		req.setAttribute("footerContent", Includes.getFooter());
 		req.setAttribute("cno", cno);
 		return "faq/listView";
 	}
-	@RequestMapping(value = "/deleteFaq.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteFaq", method = RequestMethod.POST)
 	public ModelAndView delete(@Param("bno") int bno, @Param("cno") int cno) {
-		int res = faqmapper.deleteFaq(bno);
+		int res = faqService.deleteFaq(bno);
 		String msg,url;
 		if(res > 0) {
 			msg = "faq 삭제성공";
-			url= "faqList.do";
+			url= "faqList";
 		}else {
 			msg="faq 삭제 실페s";
-			url = "main.do";
+			url = "main";
 		}
 		ModelAndView mav = new ModelAndView("message");
 		mav.addObject("msg", msg);
@@ -65,47 +65,47 @@ public class FaqController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/updateFaq.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateFaq", method = RequestMethod.POST)
 	public String updateForm(HttpServletRequest req ,@Param("bno") int bno, @Param("cno") int cno) {
 		
 		req.setAttribute("cno", cno);
-		req.setAttribute("update", faqmapper.getFaq(bno));
+		req.setAttribute("update", faqService.getFaq(bno));
 		req.setAttribute("listCategory", Includes.getFaqCategory());
 		return "faq/updateView";
 	}
-	@RequestMapping(value="updateFaqQu.do", method = RequestMethod.POST)
+	@RequestMapping(value="updateFaqQu", method = RequestMethod.POST)
 	public ModelAndView updatePro(FaqDTO dto) {
-		int res = faqmapper.updateFaq(dto);
+		int res = faqService.updateFaq(dto);
 		String msg, url;
 		if(res > 0) {
 			msg="faq 수정성공";
-			url = "faqList.do";
+			url = "faqList";
 		}else {
 			msg="faq 수정실페";
-			url = "main.do";
+			url = "main";
 		}
 		ModelAndView mav = new ModelAndView("message");
 		mav.addObject("msg", msg);
 		mav.addObject("url", url);
 		return mav;
 	}
-	@RequestMapping(value = "/insertFaq.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/insertFaq", method = RequestMethod.GET)
 	public String insertForm(HttpServletRequest req) {
 		
 		req.setAttribute("categoryList", Includes.getFaqCategory());
 		req.setAttribute("footerContent", Includes.getFooter());
 		return "faq/newQuPage";
 	}
-	@RequestMapping(value="/insertFaq.do", method = RequestMethod.POST)
+	@RequestMapping(value="/insertFaq", method = RequestMethod.POST)
 	public ModelAndView insertPro(HttpServletRequest req,FaqDTO dto) {
-		int res = faqmapper.insertFaq(dto);
+		int res = faqService.insertFaq(dto);
 		String msg, url;
 		if (res > 0){
 			msg = "faq 추가 성공";
-			url = "faqList.do";
+			url = "faqList";
 		}else {
 			msg = "faq 추가실페";
-			url = "main.do";
+			url = "main";
 		}
 		ModelAndView mav = new ModelAndView("message");
 		mav.addObject("msg", msg);
@@ -114,25 +114,25 @@ public class FaqController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/faqReadcount.do")
+	@RequestMapping(value = "/faqReadcount")
 	public void readcounts(@RequestParam(value="bno") int num) throws Exception{
-		faqmapper.faqreadcount(num);
+		faqService.faqreadcount(num);
 	}
 	
 	
 	@ResponseBody
-	@RequestMapping(value="/searchFaq.do", produces = "application/text; charset=utf8")
+	@RequestMapping(value="/searchFaq", produces = "application/text; charset=utf8")
 	public String search(String keyword, int cno, HttpServletRequest req){
 		HttpSession session = req.getSession();
-		UserDTO dto = usermapper.getUser((String) session.getAttribute("UserId"));
+		UserDTO dto = userService.getUser((String) session.getAttribute("UserId"));
 		if(cno == 0) {
-			List<FaqDTO> list = faqmapper.faqReadcountList(keyword);
+			List<FaqDTO> list = faqService.faqReadcountList(keyword);
 			JsonObject jo = getJson(list);
 			jo.addProperty("cno", cno);
 			jo.addProperty("UserPermit", dto.getPermit());
 			return jo.toString();
 		}else {
-			List<FaqDTO> list =  faqmapper.faqList(cno, keyword);
+			List<FaqDTO> list =  faqService.faqList(cno, keyword);
 			JsonObject jo = getJson(list);
 			jo.addProperty("cno", cno);
 			jo.addProperty("UserPermit", dto.getPermit());
@@ -142,18 +142,18 @@ public class FaqController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value = "/changeCategory.do", produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/changeCategory", produces = "application/text; charset=utf8")
 	public String categoryChanged(int cno, HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		UserDTO dto = usermapper.getUser((String) session.getAttribute("UserId"));
+		UserDTO dto = userService.getUser((String) session.getAttribute("UserId"));
 		if(cno == 0) {
-			List<FaqDTO> list = faqmapper.faqReadcountList();
+			List<FaqDTO> list = faqService.faqReadcountList();
 			JsonObject jo = getJson(list);
 			jo.addProperty("cno", cno);
 			jo.addProperty("UserPermit", dto.getPermit());
 			return jo.toString();
 		}else {
-			List<FaqDTO> list = faqmapper.faqList(cno);
+			List<FaqDTO> list = faqService.faqList(cno);
 			JsonObject jo = getJson(list);
 			jo.addProperty("cno", cno);
 			jo.addProperty("UserPermit", dto.getPermit());

@@ -8,7 +8,7 @@ $(document).ready(function(){
 		e.preventdefault();
 	} else{		
 	var formObj = $("form[name='writeform']");
-	formObj.attr("action", "updateFaqQu.do");
+	formObj.attr("action", "updateFaqQu");
 	formObj.attr("method", "post");
 	formObj.attr("accept-charset", "UTF-8")
 	formObj.submit();
@@ -17,7 +17,7 @@ $(document).ready(function(){
 	
 	
 	$(".cancel_btn").on("click", function(){
-		location.href= 'faqList.do?cno='+ $("input[name='cno']");
+		location.href= 'faqList?cno='+ $("input[name='cno']");
 	})
 	
 	

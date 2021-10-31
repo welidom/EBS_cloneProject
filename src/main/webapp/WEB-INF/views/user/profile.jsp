@@ -13,12 +13,12 @@
 	</div>
 	<div>
 		<span class="th">교사인증</span>
-		<span class="td" style="width: 700px"><a style="text-align: left;" class="btn" href="certification.do">교사인증</a>※ 교사인증을 위해 EBS 회원정보 수정 페이지로 이동합니다.</span>
+		<span class="td" style="width: 700px"><a style="text-align: left;" class="btn" href="auth?email=${dto.email }">교사인증</a>※ 교사인증을 위한 이메일을 발송합니다.</span>
 	</div>
 </div>
 <div style="text-align: left;"><span style="font-weight: bold; font-size: 18px; color: darkgreen;">나의 학교정보</span> <span>온라인클론스 이용 시 필요한 부가정보를 입력합니다.입력한 정보는 클래스 가입 및 강좌 수강 시 참고됨니다.</span></div>
 <div class="basicInfo" style="border-top: 2px solid darkgreen; width:100%; margin-bottom: 50px;">
-<form action="profileUpdate.do" method="post" id="sendProfile">
+<form action="profileUpdate" method="post" id="sendProfile">
 	<div class="info">
 		<span class="th">구분</span>
 		<span class="td">
@@ -115,7 +115,7 @@ function check(){
 	}
 }
 function openpopup(){
-	var popup = window.open('getSchool.do','popup','width=500, height=500, left=0, top=0');
+	var popup = window.open('getSchool','popup','width=500, height=500, left=0, top=0');
 	var timer = setInterval(function() {   
 	    if(popup.closed) {
 	        clearInterval(timer);  

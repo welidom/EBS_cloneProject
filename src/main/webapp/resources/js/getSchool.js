@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	$("#searchSchool").on("click", function(){
 		$.ajax({
-			url:"searchSchool.do",
+			url:"searchSchool",
 			type:"GET",
 			data:{"searchFor":$("input[name='schoolName']").val()},
 			success:function(data){
@@ -18,7 +18,7 @@ $(document).ready(function(){
 })
 function set(obj){
 	$.ajax({
-		url:"changeSchool.do",
+		url:"changeSchool",
 		type:"GET",
 		data:{"schoolId":$(obj).attr("value")},
 		success:function(data){

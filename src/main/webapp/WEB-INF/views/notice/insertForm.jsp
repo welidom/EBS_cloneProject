@@ -12,7 +12,7 @@
 	<img style="float: right;" alt="manual.png" src="${pageContext.request.contextPath}/resources/images/manual.png">
 </div>
 <div style="padding: 50px 14%;">
-	<form action="insertNotice.do" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+	<form action="insertNotice" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
 	<table>
 	<tr>
 		<th>작성자:</th>

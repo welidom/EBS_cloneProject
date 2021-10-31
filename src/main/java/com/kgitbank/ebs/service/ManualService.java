@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kgitbank.ebs.model.ManualDTO;
 
 @Service
-public class manualMapper {
+public class ManualService {
 	
 	@Inject SqlSession sqlSession;
 	

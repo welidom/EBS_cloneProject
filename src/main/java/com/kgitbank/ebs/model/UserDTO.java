@@ -12,9 +12,16 @@ public class UserDTO {
 	private int sms;
 	private int permit;
 	private String schoolId;
-	private String classNum;
 	private int num;
+	private String classNum;
+	private String auth;
 	
+	public String getAuth() {
+		return auth;
+	}
+	public void setAuth(String auth) {
+		this.auth = auth;
+	}
 	public int getNotice() {
 		return notice;
 	}

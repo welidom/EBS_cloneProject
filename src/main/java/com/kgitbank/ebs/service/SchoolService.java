@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kgitbank.ebs.model.SchoolDTO;
 
 @Service
-public class schoolMapper {
+public class SchoolService {
 	@Inject
 	private SqlSession sqlSession;
 	private static String namespace="com.kgitbank.ebs.mapper.schoolMapper";

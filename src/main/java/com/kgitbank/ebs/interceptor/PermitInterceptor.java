@@ -10,17 +10,17 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.kgitbank.ebs.model.UserDTO;
-import com.kgitbank.ebs.service.userMapper;
+import com.kgitbank.ebs.service.UserService;
 
 public class PermitInterceptor extends HandlerInterceptorAdapter{
 	@Inject
-	private userMapper usermapper;
+	private UserService userService;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler)
 			throws Exception {
 		HttpSession session = req.getSession();
-		UserDTO dto = usermapper.getUser((String) session.getAttribute("UserId"));
+		UserDTO dto = userService.getUser((String) session.getAttribute("UserId"));
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();

@@ -16,39 +16,42 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kgitbank.ebs.model.SchoolDTO;
 import com.kgitbank.ebs.model.UserDTO;
-import com.kgitbank.ebs.service.schoolMapper;
-import com.kgitbank.ebs.service.userMapper;
+import com.kgitbank.ebs.service.MailService;
+import com.kgitbank.ebs.service.SchoolService;
+import com.kgitbank.ebs.service.UserService;
 import com.kgitbank.ebs.utils.Includes;
 
 @Controller
 public class UserController {
 	@Inject
-	private userMapper usermapper;
+	private UserService userService;
 	@Inject
-	private schoolMapper schoolmapper;
+	private SchoolService schoolService;
+	@Inject
+	private MailService mailService;
 	
-	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginForm(HttpServletRequest req) {
 		
 		req.setAttribute("footerContent", Includes.getFooter());
 		return "user/login";
 	}
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView loginPro(HttpServletRequest req, UserDTO dto) {
-		UserDTO check = usermapper.getUser(dto.getId());
+		UserDTO check = userService.getUser(dto.getId());
 		
 		String url,msg,path;
 		HttpSession session = req.getSession();
 		
 		if(check == null || !check.getPw().equals(dto.getPw())) {
 			path = "message";
-			url = "login.do";
+			url = "login";
 			msg = "아이디 또는 비밀번호가 일치하지 않습니다 .";
 		}else{
 			session.setAttribute("UserId", check.getId());
 			session.setAttribute("UserPermit", check.getPermit());
 			path = "pass";
-			url = "main.do";
+			url = "main";
 			msg = "";
 		}
 		
@@ -58,60 +61,60 @@ public class UserController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/signUp.do", method=RequestMethod.GET)
+	@RequestMapping(value = "/signUp", method=RequestMethod.GET)
 	public String signUp() {
 		
 		return "user/signup1";
 	}
-	@RequestMapping(value = "/term.do")
+	@RequestMapping(value = "/term")
 	public String term(){
 		
 		return "user/signup2";
 	}
-	@RequestMapping(value = "/signUp.do", method=RequestMethod.POST)
+	@RequestMapping(value = "/signUp", method=RequestMethod.POST)
 	public String mainSignUp(HttpServletRequest req,UserDTO dto) {
-		usermapper.newUser(dto);
+		userService.newUser(dto);
 		HttpSession session = req.getSession();
 		session.setAttribute("UserId", dto.getId());
 		return "user/signup3";
 	}
-	@RequestMapping(value = "/logout.do")
+	@RequestMapping(value = "/logout")
 	public ModelAndView logout(HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		session.removeAttribute("UserId");
 		
 		ModelAndView mav = new ModelAndView("pass");
-		mav.addObject("url", "main.do");
+		mav.addObject("url", "main");
 		return mav;
 	}
-	@RequestMapping(value = "/profile.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView profile() {
 		ModelAndView mav = new ModelAndView("pass");
-		mav.addObject("url", "main.do");
+		mav.addObject("url", "main");
 		return mav;
 	}
-	@RequestMapping(value = "/profileUpdate.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/profileUpdate", method = RequestMethod.POST)
 	public ModelAndView updateProfile(UserDTO dto, HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		dto.setId((String) session.getAttribute("UserId"));
-		int res = usermapper.updateUser(dto);
+		int res = userService.updateUser(dto);
 		String msg,url;
 		if(res > 0) {
 			msg = "프로필 수정 성공";
-			url = "mainSchool.do";
+			url = "mainSchool";
 		}else {
 			msg = "프로필 수정 실페";
-			url = "profile.do";
+			url = "profile";
 		}
 		ModelAndView mav = new ModelAndView("message");
 		mav.addObject("msg", msg);
 		mav.addObject("url", url);
 		return mav;
 	}
-	@RequestMapping(value = "/studentProfile.do")
+	@RequestMapping(value = "/studentProfile")
 	public String studentProfile(HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		UserDTO dto = usermapper.getUser((String) session.getAttribute("UserId"));
+		UserDTO dto = userService.getUser((String) session.getAttribute("UserId"));
 		String birth = "";
 		for(int i = 0; i<4; i++) {
 			birth += dto.getBirth().split("")[i];
@@ -128,57 +131,67 @@ public class UserController {
 		}else {
 			grade = "---";
 		}
-		req.setAttribute("school", schoolmapper.getSchool(dto.getSchoolId()));
+		req.setAttribute("school", schoolService.getSchool(dto.getSchoolId()));
 		req.setAttribute("dto", dto);
 		req.setAttribute("grade", grade);
 		req.setAttribute("footerContent", Includes.getFooter());
 		return "user/profile";
 	}
-	@RequestMapping(value="/manage.do", method = RequestMethod.GET)
+	@RequestMapping(value="/manage", method = RequestMethod.GET)
 	public String manage(HttpServletRequest req) {
-		List<UserDTO> userList = usermapper.userList();
-		List<SchoolDTO> schoolList = schoolmapper.schoolList();
+		List<UserDTO> userList = userService.userList();
+		List<SchoolDTO> schoolList = schoolService.schoolList();
 		
 		req.setAttribute("userList", userList);
 		req.setAttribute("schoolList", schoolList);
 		req.setAttribute("footerContent", Includes.getFooter());
 		return "user/admin/manage";
 	}
-	@RequestMapping(value = "/certification.do", method = RequestMethod.GET)
-	public String certificationForm() {
+	@RequestMapping(value = "/deleteUser")
+	public ModelAndView deleteUser(String id) {
 		
-		return "user/teacher/certification";
+		ModelAndView mav = new ModelAndView();
+		return mav;
 	}
-	@RequestMapping(value = "/certification.do", method = RequestMethod.POST)
-	public ModelAndView certificationPro(HttpServletRequest req, SchoolDTO dto) {
+	@RequestMapping("/auth")
+	public String signUp(String email, HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		SchoolDTO check = schoolmapper.getSchool(dto.getId());
+		String authKey = mailService.sendAuthMail(email);
+		userService.setAuth(authKey,(String) session.getAttribute("UserId"));
+		return "user/teacher/auth";
+	}
+
+	@RequestMapping("/check")
+	public ModelAndView check(String email, String authKey, HttpServletRequest req) {
+		UserDTO dto = userService.checkUser(email, authKey);
+		HttpSession session = req.getSession();
 		String msg,url;
-		if(dto.getName().equals(check.getName())){
-			usermapper.setSchool(dto.getId(), (String) session.getAttribute("UserId"));
-			usermapper.setPermit((String) session.getAttribute("UserId"), 2);
-			msg= "교사 인증 성공";
-			url = "mainSchool.do";
+		if(dto.getId() != null) {
+			msg="인증되었습니다.";
+			url = "main";
+			session.setAttribute("UserId", dto.getId());
+			userService.setPermit(dto.getId(), 2);
 		}else {
-			msg="교사 인증 실페";
-			url="profile.do";
+			msg="인증에 실페하셨습니다 .";
+			url = "main";
 		}
 		ModelAndView mav = new ModelAndView("message");
 		mav.addObject("msg", msg);
 		mav.addObject("url", url);
 		return mav;
 	}
+	
 	@ResponseBody
-	@RequestMapping(value = "/changeSchool.do")
+	@RequestMapping(value = "/changeSchool")
 	public void changeSchool(String schoolId, HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		usermapper.setSchool(schoolId, (String) session.getAttribute("UserId"));
+		userService.setSchool(schoolId, (String) session.getAttribute("UserId"));
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/checkOverlab.do")
+	@RequestMapping(value = "/checkOverlab")
 	public boolean checkOverlab(String userId) {
-		boolean check = usermapper.checkOverlab(userId);
+		boolean check = userService.checkOverlab(userId);
 		return check;
 	}
 }

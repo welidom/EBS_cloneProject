@@ -12,7 +12,7 @@
 	</span>
 </div>
 <div style="padding: 0 14%; display: flex; width: 36%; justify-content: space-between;">
-<form action="insertManualPro.do" name="insertDocManual" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+<form action="insertManualPro" name="insertDocManual" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
 	<table style="padding: 10px 0;">
 	<caption style="font-weight: bold; font-size: 20px;">문서 메뉴얼 추가</caption>
 	<tr>
@@ -38,7 +38,7 @@
 	</tr>
 	</table>
 </form>
-<form action="insertManualPro.do" name="insertVideoManual" method="get">
+<form action="insertManualPro" name="insertVideoManual" method="get">
 	<table style="padding: 10px 0;">
 	<caption style="font-weight: bold; font-size: 20px;">동영상 메뉴얼 추가</caption>
 	<tr>

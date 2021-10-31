@@ -4,7 +4,7 @@
 	  
 	  $(".actC").on("click", function(){
 		  $.ajax({
-				url:"changeCategory.do",
+				url:"changeCategory",
 				type:"GET",
 				data: {"cno":$(this).attr("cno")},
 				success:function(data){
@@ -20,7 +20,7 @@
 					
 					$(".myfaq").remove();
 					if(faqObj.length == 0){
-						$(".download").before("<ul class='myfaq'><li class='nodata'>조회된 데이터가 없습니다.</li></ul>");
+						$("wnload").before("<ul class='myfaq'><li class='nodata'>조회된 데이터가 없습니다.</li></ul>");
 					}else{
 						for(var i = 0; i < faqObj.length; i++){
 							var admin = "";
@@ -35,7 +35,7 @@
 						        	faqObj[i]['question']+
 						        	"<input type='hidden' name='hiddenbno' id='hiddenbno' value="+faqObj[i]["num"]+"><input type='hidden' name='hiddenreadcount' id='hiddenreadcount' value='"+faqObj[i]['readcount']+"'><input type='hidden' name='hiddenanswer' id='hiddenanswer' value='" + faqObj[i]['answer'] +"'><div class='v_btn'>V</div><div class='up_btn'>Λ</div></li><li class='answers' class='an'><div class='showanswer'>"+
 						        	faqObj[i]['answer']+"</div></li></ul>")
-							$(".download").before($obj);
+							$("wnload").before($obj);
 							
 							$(".answers").hide();
 							$(".up_btn").hide();
@@ -50,7 +50,7 @@
     	var readcountbno = $(this).find("input[name='hiddenbno']").val();
 			if($(this).find(".up_btn").css("display") == "none"){
 				$.ajax({
-					url:"faqReadcount.do",
+					url:"faqReadcount",
 					type:"GET",
 					data: {"cno":readcountcno, "bno":readcountbno},
 					success:function(data){
@@ -86,7 +86,7 @@
       })
        	$(".search_btn").on("click", function(){
        		$.ajax({
-				url:"searchFaq.do",
+				url:"searchFaq",
 				type:"GET",
 				data: {"cno":$("input[name='hiddencno']").attr("value"), "keyword": $("#searchContent").val()},
 				success:function(data){
@@ -113,7 +113,7 @@
 					        	faqObj[i]['question']+
 					        	"<input type='hidden' name='hiddenbno' id='hiddenbno' value="+faqObj[i]["num"]+"><input type='hidden' name='hiddenreadcount' id='hiddenreadcount' value='"+faqObj[i]['readcount']+"'><input type='hidden' name='hiddenanswer' id='hiddenanswer' value='" + faqObj[i]['answer'] +"'><div class='v_btn'>V</div><div class='up_btn'>Λ</div></li><li class='answers' class='an'><div class='showanswer'>"+
 					        	faqObj[i]['answer']+"</div></li></ul>")
-						$(".download").before($obj);
+						$("wnload").before($obj);
 						
 						$(".answers").hide();
 						$(".up_btn").hide();
@@ -125,7 +125,7 @@
 		$(document).on("click", "div[class='delete_btn']", function(){
 			var hidn = $("input[name='hiddenbno']");
 			var hidbno=$(this).attr("value");
-			formObj.attr("action", "deleteFaq.do");
+			formObj.attr("action", "deleteFaq");
 			formObj.attr("method", "post");
 			var hid = $("input[name='hiddencno']");
 			var hidcno = $("input[name='hiddencno']").val();
@@ -144,7 +144,7 @@
 			hid.attr("value",hidcno);
 			hidn.attr("name","bno");
 			hidn.attr("value",hidbno)
-			formObj.attr("action", "updateFaq.do");
+			formObj.attr("action", "updateFaq");
 			formObj.attr("method", "post");
 			formObj.submit();
 		})
@@ -156,7 +156,7 @@ $(".cancelenter").keydown(function() {
 });
 		$(".writeQu").on("click",function(){
 			var formAdd = $("form[name='addForm']");
-			formAdd.attr("action" ,"insertFaq.do");
+			formAdd.attr("action" ,"insertFaq");
 			formAdd.attr("method", "get");
 			formAdd.submit();
 		})
@@ -165,7 +165,7 @@ $(".cancelenter").keydown(function() {
 		var cateCno = $("input[name='catecno']");
 		var cateCnoV = $(this).find(".catecno").attr("value");
 		var formca = $("form[name='cate']");
-		formca.attr("action", "faqList.do");
+		formca.attr("action", "faqList");
 		formca.attr("method", "get");
 		cateCno.attr("name", "cno");
 		cateCno.attr("value", cateCnoV);
@@ -175,7 +175,7 @@ $(".cancelenter").keydown(function() {
 	
 $(".act_B").on("click", function(){
       var ajcno = $(this).siblings(".ajacno").val();
-        $(".aja").load("faqList.do?cno="+ajcno)
+        $(".aja").load("faqList?cno="+ajcno)
 		$(this).parent().addClass("active");
 		$(this).parent().siblings().removeClass("active");
    })

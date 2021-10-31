@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,60 +17,60 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.kgitbank.ebs.model.SchoolDTO;
 import com.kgitbank.ebs.model.UserDTO;
-import com.kgitbank.ebs.service.schoolMapper;
-import com.kgitbank.ebs.service.userMapper;
+import com.kgitbank.ebs.service.SchoolService;
+import com.kgitbank.ebs.service.UserService;
 
 @Controller
 public class SchoolController {
 	@Inject
-	private userMapper usermapper;
+	private UserService userService;
 	
 	@Inject
-	private schoolMapper schoolmapper;
+	private SchoolService schoolService;
 	
-	@RequestMapping(value = "/mainSchool.do")
+	@RequestMapping(value = "/mainSchool")
 	public ModelAndView main(HttpServletRequest req) {
 		
 		HttpSession session = req.getSession();
 
-		UserDTO dto = usermapper.getUser((String) session.getAttribute("UserId"));
+		UserDTO dto = userService.getUser((String) session.getAttribute("UserId"));
 		int userPermit = dto.getPermit();
-		String url = "main.do";
+		String url = "main";
 		if(userPermit == 1) {
-			url = "studentMain.do";
+			url = "studentMain";
 		}else if(userPermit == 2) {
-			url = "teacherMain.do";
+			url = "teacherMain";
 		}
 		if(dto.getSchoolId() == null) {
-			url = "profile.do";
+			url = "profile";
 		}
 		ModelAndView mav = new ModelAndView("pass");
 		mav.addObject("url", url);
 		return mav;
 	}
-	@RequestMapping(value = "studentMain.do")
+	@RequestMapping(value = "studentMain")
 	public String studentMain() {
 		return "";
 	}
-	@RequestMapping(value="getSchool.do", method = RequestMethod.GET)
+	@RequestMapping(value="getSchool", method = RequestMethod.GET)
 	public String getSchoolForm(HttpServletRequest req) {
 		
 		return "school/getSchoolForm";
 	}
-	@RequestMapping(value = "getSchool.do", method = RequestMethod.POST)
+	@RequestMapping(value = "getSchool", method = RequestMethod.POST)
 	public ModelAndView getSchoolPro(UserDTO dto) {
 		
-		usermapper.updateUser(dto);
+		userService.updateUser(dto);
 		
 		ModelAndView mav = new ModelAndView("pass");
-		mav.addObject("url", "mainSchool.do");
+		mav.addObject("url", "mainSchool");
 		return mav;
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/searchSchool.do", produces = "application/text; charset=utf8")
+	@RequestMapping(value="/searchSchool", produces = "application/text; charset=utf8")
 	public String listSchool(String searchFor) {
-		List<SchoolDTO> list = schoolmapper.searchSchool(searchFor);
+		List<SchoolDTO> list = schoolService.searchSchool(searchFor);
 		JsonObject jo = new JsonObject();
 		JsonArray ja = new JsonArray();
 		for(SchoolDTO dto: list) {

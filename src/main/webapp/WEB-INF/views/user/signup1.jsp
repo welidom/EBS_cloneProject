@@ -562,7 +562,7 @@ cursor:pointer;
 					</tr>
 				</tbody>
 			</table></div>
-			<form action="term.do" method="POST" name="term" id="term"> 
+			<form action="term" method="POST" name="term" id="term"> 
 			<p class="agreement">
 				<input type="checkbox" class="check01 next-focus" id="agree1" name="y1" value="Y1" >
 				<label for="agree1" class="st_label01"><i></i>약관을 충분히 이해하였으며 동의 합니다.</label>

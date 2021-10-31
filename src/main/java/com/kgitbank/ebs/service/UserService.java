@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kgitbank.ebs.model.UserDTO;
 
 @Service
-public class userMapper {
+public class UserService {
 	@Inject
 	private SqlSession sqlSession;
 	
@@ -57,5 +57,19 @@ public class userMapper {
 		hm.put("id", id);
 		hm.put("permit", permit);
 		sqlSession.update(namespace+".setPermit", hm);
+	}
+
+	public void setAuth(String authKey, String userId) {
+		HashMap<String, String> hm = new HashMap<String, String>();
+		hm.put("id", userId);
+		hm.put("key", authKey);
+		sqlSession.update(namespace+".setAuth", hm);
+	}
+	public UserDTO checkUser(String email, String authKey) {
+		HashMap<String, String> hm = new HashMap<String, String>();
+		hm.put("email", email);
+		hm.put("key", authKey);
+		UserDTO dto = sqlSession.selectOne(namespace+".checkUser", hm);
+		return dto;
 	}
 }

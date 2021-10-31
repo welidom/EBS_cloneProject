@@ -7,6 +7,6 @@
 <title>index</title>
 </head>
 <body>
-<h1><a href="main.do">온라인 클론스로 이동</a></h1>
+<h1><a href="main">온라인 클론스로 이동</a></h1>
 </body>
 </html>

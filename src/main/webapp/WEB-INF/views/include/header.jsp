@@ -12,19 +12,19 @@
 	<div class="header">
 		<table>
 		<tr>
-			<th width="700spx"><a href="main.do" class="defaultButton">EBS 온라인클론스</a></th>
+			<th width="700spx"><a href="main" class="defaultButton">EBS 온라인클론스</a></th>
 			<td width="300px"></td>
-			<td><a href="manual.do" class="defaultButton">이용자메뉴얼</a></td>
-			<td><a href="notice.do" class="defaultButton">공지사항</a></td>
-			<td><a class="defaultButton" href="faqList.do">FAQ</a></td>
+			<td><a href="manual" class="defaultButton">이용자메뉴얼</a></td>
+			<td><a href="notice" class="defaultButton">공지사항</a></td>
+			<td><a class="defaultButton" href="faqList">FAQ</a></td>
 			<c:choose>
 				<c:when test="${UserId eq null}">
-					<td><a href="login.do" class="defaultButton" style="border-radius:100px; background-color:#2580EB; color:white; padding: 7px 25px;">로그인</a></td>
-					<td><a href="signUp.do" class="defaultButton" style="border-radius:100px; background-color:lightgray; color:black; padding: 7px 25px;">회원가입</a></td>
+					<td><a href="login" class="defaultButton" style="border-radius:100px; background-color:#2580EB; color:white; padding: 7px 25px;">로그인</a></td>
+					<td><a href="signUp" class="defaultButton" style="border-radius:100px; background-color:lightgray; color:black; padding: 7px 25px;">회원가입</a></td>
 				</c:when>
 				<c:otherwise>
 					<td>
-						<a href="logout.do" class="defaultButton" style="border-radius:100px; background-color:#2580EB; color:white; padding: 7px 25px;">로그아웃</a>
+						<a href="logout" class="defaultButton" style="border-radius:100px; background-color:#2580EB; color:white; padding: 7px 25px;">로그아웃</a>
 					</td>
 				</c:otherwise>
 			</c:choose>

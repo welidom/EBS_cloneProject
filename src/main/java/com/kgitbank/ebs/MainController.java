@@ -5,28 +5,26 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kgitbank.ebs.model.FaqDTO;
 import com.kgitbank.ebs.model.NoticeDTO;
-import com.kgitbank.ebs.service.faqMapper;
-import com.kgitbank.ebs.service.noticeMapper;
+import com.kgitbank.ebs.service.FaqService;
+import com.kgitbank.ebs.service.NoticeService;
 import com.kgitbank.ebs.utils.Includes;
 
 @Controller
 public class MainController {
 	@Inject
-	private faqMapper faqmapper;
+	private FaqService faqService;
 	@Inject
-	private noticeMapper noticemapper;
+	private NoticeService noticeService;
 
-	@RequestMapping(value="/main.do")
+	@RequestMapping(value="/main")
 	public String mainNotice(HttpServletRequest req) {
-		List<NoticeDTO> list = noticemapper.listNotice("mainPage");
+		List<NoticeDTO> list = noticeService.listNotice("mainPage");
 		if(list.size() > 4) {
 			list = list.subList(0, 4);
 		}
@@ -42,11 +40,11 @@ public class MainController {
 				list.get(i).setSubject(str+"...");
 			}
 		}
-		NoticeDTO dto = noticemapper.getNotice(1, "ex");
+		NoticeDTO dto = noticeService.getNotice(1, "ex");
 		dto.setContent(cut(dto.getContent(), 7));
-		NoticeDTO service = noticemapper.getNotice(2, "ex");
+		NoticeDTO service = noticeService.getNotice(2, "ex");
 		service.setContent(cut(service.getContent(), 20));
-		List<FaqDTO> faqlist = faqmapper.faqList();
+		List<FaqDTO> faqlist = faqService.faqList();
 		if(faqlist.size() > 8) {
 			faqlist = faqlist.subList(0, 8);
 		}

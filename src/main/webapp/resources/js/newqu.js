@@ -8,7 +8,7 @@ $(document).ready(function(){
 		e.preventdefault();
 	} else{		
 	var formObj = $("form[name='writeform']");
-	formObj.attr("action", "insertFaq.do");
+	formObj.attr("action", "insertFaq");
 	formObj.attr("method", "post");
 	formObj.submit();	
 	}
@@ -16,7 +16,7 @@ $(document).ready(function(){
 	
 	
 	$(".cancel_btn").on("click", function(){
-		location.href= 'faqList.do?cno=0';
+		location.href= 'faqList?cno=0';
 	})
 	
 	

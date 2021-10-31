@@ -16,20 +16,20 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kgitbank.ebs.model.NoticeDTO;
-import com.kgitbank.ebs.service.noticeMapper;
+import com.kgitbank.ebs.service.NoticeService;
 import com.kgitbank.ebs.utils.Includes;
 
 @Controller
 public class NoticeController {
 
 	@Inject
-	private noticeMapper noticemapper;
+	private NoticeService noticeService;
 	
 	
-	@RequestMapping(value = "/notice.do", method=RequestMethod.GET)
+	@RequestMapping(value = "/notice", method=RequestMethod.GET)
 	public String noticeMain(HttpServletRequest req) {
-		List<NoticeDTO> mustList = noticemapper.listNotice("must");
-		List<NoticeDTO> notMustList = noticemapper.listNotice("notMust");
+		List<NoticeDTO> mustList = noticeService.listNotice("must");
+		List<NoticeDTO> notMustList = noticeService.listNotice("notMust");
 		
 		
 		req.setAttribute("mustList", setDate(mustList));
@@ -38,7 +38,7 @@ public class NoticeController {
 		
 		return "notice/main";
 	}
-	@RequestMapping(value = "/notice.do", method=RequestMethod.POST)
+	@RequestMapping(value = "/notice", method=RequestMethod.POST)
 	public String searchNotice(HttpServletRequest req) {
 		String search = "";
 		try {
@@ -50,8 +50,8 @@ public class NoticeController {
 		
 		String mode = req.getParameter("searchFor");
 		
-		List<NoticeDTO> mustList = noticemapper.listNotice("must");
-		List<NoticeDTO> notMustList = noticemapper.searchNotice(search, mode);
+		List<NoticeDTO> mustList = noticeService.listNotice("must");
+		List<NoticeDTO> notMustList = noticeService.searchNotice(search, mode);
 		
 		req.setAttribute("mustList", setDate(mustList));
 		req.setAttribute("notMustList", setDate(notMustList));
@@ -66,9 +66,9 @@ public class NoticeController {
 		}
 		return list;
 	}
-	@RequestMapping(value="/noticeContent.do", method = RequestMethod.GET)
+	@RequestMapping(value="/noticeContent", method = RequestMethod.GET)
 	public String showContent(HttpServletRequest req, @Param("num") int num) {
-		NoticeDTO dto = noticemapper.getNotice(num, "read");
+		NoticeDTO dto = noticeService.getNotice(num, "read");
 		
 		dto.setReg_date(dto.getReg_date().substring(0, 10));
 		dto.setReg_date(dto.getReg_date().replaceAll("-", "."));
@@ -77,13 +77,13 @@ public class NoticeController {
 		req.setAttribute("dto", dto);
 		return "notice/content";
 	}
-	@RequestMapping(value = "/insertNotice.do", method= RequestMethod.GET)
+	@RequestMapping(value = "/insertNotice", method= RequestMethod.GET)
 	public String insertForm(HttpServletRequest req) {
 
 		req.setAttribute("footerContent", Includes.getFooter());
 		return "notice/insertForm";
 	}
-	@RequestMapping(value="insertNotice.do", method=RequestMethod.POST)
+	@RequestMapping(value="insertNotice", method=RequestMethod.POST)
 	public ModelAndView uploadPro(MultipartHttpServletRequest req){
 		
 		NoticeDTO dto = new NoticeDTO();
@@ -116,14 +116,14 @@ public class NoticeController {
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 		
 		
-		int res = noticemapper.insertNotice(dto);
+		int res = noticeService.insertNotice(dto);
 		String msg,url;
 		if(res > 0) {
 			msg="공지사항 추가성공";
-			url = "notice.do";
+			url = "notice";
 		}else {
 			msg="공지사항 추가 실페";
-			url = "main.do";
+			url = "main";
 		}
 		req.setAttribute("footerContent", Includes.getFooter());
 		ModelAndView mav = new ModelAndView("message");
@@ -131,10 +131,10 @@ public class NoticeController {
 		mav.addObject("url", url);
 		return mav;
 	}
-	@RequestMapping(value = "/deleteNotice.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteNotice", method = RequestMethod.GET)
 	public String deleteForm(HttpServletRequest req) {
-		List<NoticeDTO> mustList = noticemapper.listNotice("must");
-		List<NoticeDTO> notMustList = noticemapper.listNotice("notMust");
+		List<NoticeDTO> mustList = noticeService.listNotice("must");
+		List<NoticeDTO> notMustList = noticeService.listNotice("notMust");
 		
 		
 		req.setAttribute("mustList", setDate(mustList));
@@ -143,7 +143,7 @@ public class NoticeController {
 		
 		return "notice/deleteForm";
 	}
-	@RequestMapping(value = "/deleteNotice.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteNotice", method = RequestMethod.POST)
 	public ModelAndView deletePro(HttpServletRequest req) {
 		int res = -1;
 		String msg,url;
@@ -155,28 +155,28 @@ public class NoticeController {
 				}
 			}
 			if(!nums.isEmpty()) {
-				res = noticemapper.deleteNotice(nums);
+				res = noticeService.deleteNotice(nums);
 			}
 		}
 		if(res > 0) {
 			msg="공지사항 삭제 성공";
-			url="notice.do";
+			url="notice";
 		} else if(res < 0) {
 			msg = "삭제할 공지사항을 선택해주세요.";
-			url="deleteNotice.do";
+			url="deleteNotice";
 		}
 		else {
 			msg="공지사항 삭제 실페";
-			url="main.do";
+			url="main";
 		}
 		ModelAndView mav = new ModelAndView("message");
 		mav.addObject("msg", msg);
 		mav.addObject("url", url);
 		return mav;
 	}
-	@RequestMapping(value="/updateNotice.do", method = RequestMethod.GET)
+	@RequestMapping(value="/updateNotice", method = RequestMethod.GET)
 	public String updateForm(HttpServletRequest req, @Param("num") int num) {
-		NoticeDTO dto = noticemapper.getNotice(num, "read");
+		NoticeDTO dto = noticeService.getNotice(num, "read");
 		
 		dto.setReg_date(dto.getReg_date().substring(0, 10));
 		dto.setReg_date(dto.getReg_date().replaceAll("-", "."));
@@ -187,7 +187,7 @@ public class NoticeController {
 		req.setAttribute("dto", dto);
 		return "notice/updateForm";
 	}
-	@RequestMapping(value="updateNotice.do", method=RequestMethod.POST)
+	@RequestMapping(value="updateNotice", method=RequestMethod.POST)
 	public ModelAndView updatePro(MultipartHttpServletRequest req, @Param("num") int num){
 		
 		NoticeDTO dto = new NoticeDTO();
@@ -221,14 +221,14 @@ public class NoticeController {
 		
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 		
-		int res = noticemapper.updateNotice(dto);
+		int res = noticeService.updateNotice(dto);
 		String msg,url;
 		if(res > 0) {
 			msg="공지사항 수정 성공";
-			url = "notice.do";
+			url = "notice";
 		}else {
 			msg="공지사항 수정 실페";
-			url = "main.do";
+			url = "main";
 		}
 		req.setAttribute("footerContent", Includes.getFooter());
 		ModelAndView mav = new ModelAndView("message");

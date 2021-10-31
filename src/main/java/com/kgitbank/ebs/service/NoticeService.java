@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kgitbank.ebs.model.NoticeDTO;
 
 @Service
-public class noticeMapper {
+public class NoticeService {
 
 	@Inject
 	private SqlSession sqlSession;

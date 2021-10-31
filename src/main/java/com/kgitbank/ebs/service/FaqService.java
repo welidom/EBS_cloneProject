@@ -1,6 +1,5 @@
 package com.kgitbank.ebs.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kgitbank.ebs.model.FaqDTO;
 
 @Service
-public class faqMapper {
+public class FaqService {
 
 	@Inject
 	private SqlSession sqlSession;

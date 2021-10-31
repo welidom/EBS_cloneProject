@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,19 +16,19 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kgitbank.ebs.model.ManualDTO;
-import com.kgitbank.ebs.service.manualMapper;
+import com.kgitbank.ebs.service.ManualService;
 import com.kgitbank.ebs.utils.Includes;
 
 @Controller
 public class ManualController {
 	
 	@Inject
-	private manualMapper manualmapper;
+	private ManualService manualService;
 
-	@RequestMapping(value="/manual.do", method = RequestMethod.GET)
+	@RequestMapping(value="/manual", method = RequestMethod.GET)
 	public String manual(HttpServletRequest req) {
-		List<ManualDTO> videoManual = manualmapper.getManual(0);
-		List<ManualDTO> documentManual = manualmapper.getManual(1);
+		List<ManualDTO> videoManual = manualService.getManual(0);
+		List<ManualDTO> documentManual = manualService.getManual(1);
 		
 		req.setAttribute("videoManual", setDate(videoManual));
 		req.setAttribute("documentManual", setDate(documentManual));
@@ -44,13 +43,13 @@ public class ManualController {
 		return list;
 	}
 	
-	@RequestMapping(value="/insertManual.do", method=RequestMethod.GET)
+	@RequestMapping(value="/insertManual", method=RequestMethod.GET)
 	public String insertManualForm(HttpServletRequest req) {
 		req.setAttribute("footerContent", Includes.getFooter());
 		return "manual/insertForm";
 	}
 	
-	@RequestMapping(value="/insertManualPro.do", method=RequestMethod.POST)
+	@RequestMapping(value="/insertManualPro", method=RequestMethod.POST)
 	public ModelAndView upload(@RequestParam("file") MultipartFile uploadFile, MultipartHttpServletRequest req){
 		
 		ManualDTO dto = new ManualDTO();
@@ -73,14 +72,14 @@ public class ManualController {
 			e.printStackTrace();
 		}
 		
-		int res = manualmapper.insertManual(dto);
+		int res = manualService.insertManual(dto);
 		String msg,url;
 		if(res > 0) {
 			msg="메뉴얼 추가 성공";
-			url = "manual.do";
+			url = "manual";
 		}else {
 			msg="메뉴얼 추가 실페";
-			url = "insertManual.do";
+			url = "insertManual";
 		}
 		req.setAttribute("footerContent", Includes.getFooter());
 		ModelAndView mav = new ModelAndView("message");
@@ -88,16 +87,16 @@ public class ManualController {
 		mav.addObject("url", url);
 		return mav;
 	}
-	@RequestMapping(value="/insertManualPro.do", method = RequestMethod.GET)
+	@RequestMapping(value="/insertManualPro", method = RequestMethod.GET)
 	public ModelAndView insertManualPro(HttpServletRequest req ,ManualDTO dto){
-		int res = manualmapper.insertManual(dto);
+		int res = manualService.insertManual(dto);
 		String msg,url;
 		if(res > 0) {
 			msg="메뉴얼 추가 성공";
-			url = "manual.do";
+			url = "manual";
 		}else {
 			msg="메뉴얼 추가 실페";
-			url = "insertManual.do";
+			url = "insertManual";
 		}
 		req.setAttribute("footerContent", Includes.getFooter());
 		ModelAndView mav = new ModelAndView("message");
@@ -105,17 +104,17 @@ public class ManualController {
 		mav.addObject("url", url);
 		return mav;
 	}
-	@RequestMapping(value="/deleteManual.do", method=RequestMethod.GET)
+	@RequestMapping(value="/deleteManual", method=RequestMethod.GET)
 	public String deleteManualForm(HttpServletRequest req) {
-		List<ManualDTO> videoManual = manualmapper.getManual(0);
-		List<ManualDTO> documentManual = manualmapper.getManual(1);
+		List<ManualDTO> videoManual = manualService.getManual(0);
+		List<ManualDTO> documentManual = manualService.getManual(1);
 		
 		req.setAttribute("videoManual", setDate(videoManual));
 		req.setAttribute("documentManual", setDate(documentManual));
 		req.setAttribute("footerContent", Includes.getFooter());
 		return "manual/deleteForm";
 	}
-	@RequestMapping(value = "/deleteManual.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteManual", method = RequestMethod.POST)
 	public ModelAndView deleteManualPro(HttpServletRequest req) {
 		int res = -1;
 		String msg,url;
@@ -124,18 +123,18 @@ public class ManualController {
 			for(String i: req.getParameterValues("nums")) {
 				nums.add(Integer.parseInt(i));
 			}
-			res = manualmapper.deleteManual(nums);
+			res = manualService.deleteManual(nums);
 		}
 		if(res > 0) {
 			msg="메뉴얼 삭제 성공";
-			url="manual.do";
+			url="manual";
 		} else if(res < 0) {
 			msg = "삭제할 메뉴얼을 선택해주세요";
-			url="deleteManual.do";
+			url="deleteManual";
 		}
 		else {
 			msg="메뉴얼 삭제 실페";
-			url="main.do";
+			url="main";
 		}
 		ModelAndView mav = new ModelAndView("message");
 		mav.addObject("msg", msg);

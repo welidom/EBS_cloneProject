@@ -34,18 +34,18 @@
 	
 	<interceptors>
 		<interceptor>
-			<mapping path="/profile.do" />
+			<mapping path="/profile" />
 			<beans:ref bean="profileInterceptor"/>
 		</interceptor>
 		<interceptor>
-			<mapping path="/insert*.do" />
-			<mapping path="/delete*.do" />
-			<mapping path="/manageAccount.do"/>
-			<mapping path="/update*.do" />
+			<mapping path="/insert*" />
+			<mapping path="/delete*" />
+			<mapping path="/manageAccount"/>
+			<mapping path="/update*" />
 			<beans:ref bean="permitInterceptor"/>
 		</interceptor>
 		<interceptor>
-			<mapping path="/mainSchool.do" />
+			<mapping path="/mainSchool" />
 			<beans:ref bean="loginInterceptor" />
 		</interceptor>
 	</interceptors>
