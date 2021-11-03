@@ -6,7 +6,7 @@ $(document).ready(function(){
 	$(".checkOverlap").on("click", function(){
 		var UserId = $("#id").val();
 		$.ajax({
-			url:"checkOverlab?userId="+UserId,
+			url:"checkUserOverlab?userId="+UserId,
 			type:"GET",
 			success:function(data){
 				if(data == true && pattern_eng.test(UserId)){
@@ -111,7 +111,7 @@ $(document).ready(function(){
 				pNum.attr("value", null);
 			}
 			birth.attr("value", $("#year").val()+"."+$("#month").val()+"."+$("#date").val());
-			form.attr("action", "signUp");
+			form.attr("action", "signUpPro");
 			form.attr("method", "post");
 			form.submit();
 		}

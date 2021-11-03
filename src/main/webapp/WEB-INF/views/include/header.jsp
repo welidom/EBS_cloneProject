@@ -20,7 +20,7 @@
 			<c:choose>
 				<c:when test="${UserId eq null}">
 					<td><a href="login" class="defaultButton" style="border-radius:100px; background-color:#2580EB; color:white; padding: 7px 25px;">로그인</a></td>
-					<td><a href="signUp" class="defaultButton" style="border-radius:100px; background-color:lightgray; color:black; padding: 7px 25px;">회원가입</a></td>
+					<td><a href="term" class="defaultButton" style="border-radius:100px; background-color:lightgray; color:black; padding: 7px 25px;">회원가입</a></td>
 				</c:when>
 				<c:otherwise>
 					<td>

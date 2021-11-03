@@ -25,7 +25,7 @@
 				| <a href="https://sso.ebs.co.kr/policy/termsInfo">이용약관/회원약관</a>
 				| <a href="https://home.ebs.co.kr/copyright/main">저작권 침해 제보</a>
 				| <a href="https://www.ebsoc.co.kr/onlineclass">온라인클론스 소개</a>
-				| <a href="manual.do">이용 매뉴얼</a>
+				| <a href="manual">이용 매뉴얼</a>
 				<div style=" color:gray;">
 				<br>(10393) 경기도 고양시 일산동구 한류월드로 281 한국교육방송공사<br>
 				사업자등록번호 : 229-82-01343 (한국교육방송공사사장 김명중) 부가통신사업신고 10077 통신판매신고 : 고양일산동 1415호<br>

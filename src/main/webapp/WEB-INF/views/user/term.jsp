@@ -1,84 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>EBS온라인클론스</title>
-<style type="text/css">
-body{
-overflow-x:hidden;
-}
-.regheader{
-background-color:white;
-padding:40px 40px 0px
-}
-.welcome{
-position:relative;
-left:20%;
-width:55%;
-word-break:keep-all;
-}
-.imgur{
-height:200px;
-width:280px;
-position:relative;
-left:20%;
-background-color:black;
-}
-.scroll{
-height:260px;
-width:60%;
-overflow:auto;
-outline:0.5px solid lightgrey;
-position:relative;
-left:20%;
-}
-.table_pc{
-border: 1px solid #444444;
-border-collapse: collapse;
-}
-th, td{
-border: 1px solid #444444;
-padding:10px;
-}
-.agreement{
-position:relative;
-left:20%;
-}
-.btn{
-text-decoration:none;
-margin:10px;
-padding:20px 80px;
-background-color:#323295;
-color:white;
-font-weight:bold;
-font-size:20px;
-border:0;
-outline:0;
-cursor:pointer;
-}
-.img_one{
-    color: #666;
-    font: 12px/1.168em /*'Noto Sans KR',*/'맑은 고딕','Malgun Gothic','돋움','Dotum','AppleGothic',sans-serif;
-    line-height: 1.42857143;
-    font-weight: normal;
-    box-sizing: border-box;
-    margin: 0;
-    word-break: keep-all;
-    word-wrap: break-word;
-    position: relative;
-    padding: 50px 0 0px 260px;
-}
-</style>
-</head>
-<body>
-	<div class="regheader">
-		<a style="position:relative;left:20%;font-size:30px;font-weight:bold;color:#323295;">EBS</a>
-		<a style="position:relative;left:20%;font-size:20px;color:#323295;">회원가입</a>
-	</div>
-	<hr width=99%; color=#3232ff;>
-	<br>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@include file="include/header.jsp" %>
+<link rel="stylesheet" href="<c:url value='/resources/css/signup.css'/>">
 	<div class="img_one">
 		<img src="${pageContext.request.contextPath}/resources/images/signUp.png" style="position:relative;left:20%;float:left;">
 	</div>
@@ -562,7 +486,7 @@ cursor:pointer;
 					</tr>
 				</tbody>
 			</table></div>
-			<form action="term" method="POST" name="term" id="term"> 
+			<form action="signUpForm" method="POST" name="term" id="term"> 
 			<p class="agreement">
 				<input type="checkbox" class="check01 next-focus" id="agree1" name="y1" value="Y1" >
 				<label for="agree1" class="st_label01"><i></i>약관을 충분히 이해하였으며 동의 합니다.</label>
@@ -633,7 +557,7 @@ cursor:pointer;
 		</p>
 		<br>
 		<div style="text-align:center;display:flex;justify-content: center;">
-			<button type="button" class="btn" onclick="check();">확인</button>
+			<button type="button" class="btn_term" onclick="check();">확인</button>
 		</div>
 		</form>
 </body>

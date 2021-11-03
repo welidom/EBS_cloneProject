@@ -2,6 +2,7 @@ package com.kgitbank.ebs.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -17,7 +18,7 @@ public class UserService {
 	
 	private static String namespace="com.kgitbank.ebs.mapper.userMapper";
 		
-	public boolean checkOverlab(String userId) {
+	public boolean checkUserOverlab(String userId) {
 		UserDTO dto = getUser(userId);
 		if(dto == null) {
 			return false;

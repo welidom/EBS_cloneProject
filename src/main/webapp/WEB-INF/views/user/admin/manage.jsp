@@ -30,10 +30,10 @@
 </ul>
 </div>
 <div style="width: 50%; margin: 0 auto;border: 1px dashed; margin-bottom: 50px;">
-<span style="font-weight: bold; font-size: 20px; border: 1px dotted; width: 100%; display: inline-block; text-align: center;">학교관리<span style="float: right;font-weight: normal;font-size: 20px">추가</span></span>
+<span style="font-weight: bold; font-size: 20px; border: 1px dotted; width: 100%; display: inline-block; text-align: center;">학교관리<span style="float: right;font-weight: normal;font-size: 20px"><a href="javascript:addSchool();">추가</a></span></span>
 <ul>
 	<c:forEach items="${schoolList}" var="school">
-	<li style="margin-bottom: 30px">${school.name}<span style="float: right;"><a>삭제</a>/<a>수정</a></span>
+	<li style="margin-bottom: 30px">${school.name}<span style="float: right;color: red;cursor: pointer;"><a id="deleteSchool" value="${school.id }">(삭제</a>/<a style="color:red;" href="javascript:updateSchool('${school.id}');">수정)</a></span>
 	<ul><li>아이디: ${school.id} 비밀번호: ${school.pw }
 	<c:set var="check" value="0"/>
 	관리자: <c:forEach items="${userList }" var="user">
@@ -52,4 +52,7 @@
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src='<c:url value="/resources/js/manage.js"/>'></script>
+<script>
+
+</script>
 <%@include file="../../include/footer.jsp"%>

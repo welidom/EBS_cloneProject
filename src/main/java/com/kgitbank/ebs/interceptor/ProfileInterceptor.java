@@ -20,16 +20,10 @@ public class ProfileInterceptor extends HandlerInterceptorAdapter{
 		HttpSession session = req.getSession();
 		UserDTO dto = userService.getUser((String) session.getAttribute("UserId"));
 		if(dto == null) {
-			resp.sendRedirect("login.do");
-			return false;
-		}else if(dto.getPermit() == 1) {
-			resp.sendRedirect("studentProfile.do");
-			return false;
-		}else if(dto.getPermit() == 2) {
-			resp.sendRedirect("teacherProfile.do");
+			resp.sendRedirect("login");
 			return false;
 		}else if(dto.getPermit() == 3) {
-			resp.sendRedirect("manage.do");
+			resp.sendRedirect("manage");
 			return false;
 		}
 		return true;

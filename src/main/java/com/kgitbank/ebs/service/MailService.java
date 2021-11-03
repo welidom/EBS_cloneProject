@@ -36,7 +36,7 @@ public class MailService {
             sendMail.setSubject("온라인 클론스 이메일 인증");
             sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
             .append("<p>아래 주소를 누르면 인증이 완료됨니다</p>")
-            .append("<a href='http://eocs.kro.kr/check?email=")
+            .append("<a href='http://www.eocs.kro.kr/check?email=")
             .append(email)
             .append("&authKey=")
             .append(authKey)

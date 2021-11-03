@@ -66,7 +66,7 @@
 		<b style="font-size: 40px; margin-bottom: 40px; display: inline-block;">온라인 클래스를<br>
 		스마트하게.</b>
 		<div style="margin-bottom: 40px;">
-		<b style="font-size: 40px; color:#0b73bc;">선생님이시라면</b><a class="lookMenual" style="background-color: #0b73bc; " href="manual.do">메뉴얼보기 〉</a>
+		<b style="font-size: 40px; color:#0b73bc;">선생님이시라면</b><a class="lookMenual" style="background-color: #0b73bc; " href="manual">메뉴얼보기 〉</a>
 		</div>
 		<div style="display: flex; flex-direction: row; flex-wrap: wrap;justify-content: space-between;">
 			<b class="tob01 menualObj"><br>클래스 개설·관리</b>
@@ -76,7 +76,7 @@
 			<b class="tob05 menualObj"><br>학습 독려</b>
 		</div>
 		<div style="margin: 80px 0 40px;">
-		<b style="font-size: 40px; color:#ffc13d;">학생이라면</b><a class="lookMenual" style="background-color: #ffc13d; " href="manual.do">메뉴얼보기 〉</a>
+		<b style="font-size: 40px; color:#ffc13d;">학생이라면</b><a class="lookMenual" style="background-color: #ffc13d; " href="manual">메뉴얼보기 〉</a>
 		</div>
 		<div style="display: flex; flex-direction: row; flex-wrap: wrap;justify-content: space-between;">
 			<b class="sob01 menualObj"><br>클래스 가입</b>

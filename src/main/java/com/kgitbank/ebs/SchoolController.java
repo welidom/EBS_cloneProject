@@ -52,12 +52,12 @@ public class SchoolController {
 	public String studentMain() {
 		return "";
 	}
-	@RequestMapping(value="getSchool", method = RequestMethod.GET)
+	@RequestMapping(value="/getSchool", method = RequestMethod.GET)
 	public String getSchoolForm(HttpServletRequest req) {
 		
 		return "school/getSchoolForm";
 	}
-	@RequestMapping(value = "getSchool", method = RequestMethod.POST)
+	@RequestMapping(value = "/getSchool", method = RequestMethod.POST)
 	public ModelAndView getSchoolPro(UserDTO dto) {
 		
 		userService.updateUser(dto);
@@ -66,7 +66,38 @@ public class SchoolController {
 		mav.addObject("url", "mainSchool");
 		return mav;
 	}
+	@RequestMapping(value = "/insertSchool", method = RequestMethod.GET)
+	public String insertSchoolForm() {
+		
+		return "user/admin/addSchool";
+	}
+	@RequestMapping(value = "/updateSchool", method = RequestMethod.GET)
+	public String updateSchoolForm(String schoolId,HttpServletRequest req) {
+		SchoolDTO dto = schoolService.getSchool(schoolId);
+		req.setAttribute("dto", dto);
+		return "user/admin/updateSchool";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/updateSchool", method = RequestMethod.POST)
+	public void updateSchoolPro(SchoolDTO dto) {
+		schoolService.updateSchool(dto);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/insertSchool", method = RequestMethod.POST)
+	public void insertSchoolPro(String schoolName, String schoolManager) {
+		schoolService.insertSchool(schoolName, schoolManager);
+	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/checkSchoolOverlab")
+	public boolean checkSchoolOverlab(String schoolName) {
+		return schoolService.checkSchool(schoolName);
+	}
+	@ResponseBody
+	@RequestMapping(value="/deleteSchool")
+	public void deleteSchool(String id) {
+		schoolService.deleteSchool(id);
+	}
 	@ResponseBody
 	@RequestMapping(value="/searchSchool", produces = "application/text; charset=utf8")
 	public String listSchool(String searchFor) {

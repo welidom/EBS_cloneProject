@@ -63,22 +63,21 @@ public class UserController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/signUp", method=RequestMethod.GET)
-	public String signUp() {
+	@RequestMapping(value = "/term", method=RequestMethod.GET)
+	public String term() {
 		
-		return "user/signup1";
+		return "user/term";
 	}
-	@RequestMapping(value = "/term")
-	public String term(){
-		
-		return "user/signup2";
+	@RequestMapping(value = "/signUpForm", method = RequestMethod.POST)
+	public String signUpForm(){
+		return "user/signup";
 	}
-	@RequestMapping(value = "/signUp", method=RequestMethod.POST)
+	@RequestMapping(value = "/signUpPro", method=RequestMethod.POST)
 	public String mainSignUp(HttpServletRequest req,UserDTO dto) {
 		userService.newUser(dto);
 		HttpSession session = req.getSession();
 		session.setAttribute("UserId", dto.getId());
-		return "user/signup3";
+		return "user/signupCompl";
 	}
 	@RequestMapping(value = "/logout")
 	public ModelAndView logout(HttpServletRequest req) {
@@ -90,9 +89,19 @@ public class UserController {
 		return mav;
 	}
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public ModelAndView profile() {
+	public ModelAndView profile(HttpServletRequest req) {
+		UserDTO dto = userService.getUser((String) req.getSession().getAttribute("UserId"));
+		String url;
+		if(dto.getPermit() == 1) {
+			url = "studentProfile.do";
+		}else if(dto.getPermit() == 2) {
+			url = "teacherProfile.do";
+		}else {
+			url = "main";
+		}
 		ModelAndView mav = new ModelAndView("pass");
-		mav.addObject("url", "main");
+		mav.addObject("url", url);
+		
 		return mav;
 	}
 	@RequestMapping(value = "/profileUpdate", method = RequestMethod.POST)
@@ -133,7 +142,7 @@ public class UserController {
 		}else {
 			grade = "---";
 		}
-		req.setAttribute("school", schoolService.getSchool(dto.getSchoolId()));
+		req.setAttribute("school", schoolService.getSchool(dto.getSchoolId()).getName());
 		req.setAttribute("dto", dto);
 		req.setAttribute("grade", grade);
 		req.setAttribute("footerContent", Includes.getFooter());
@@ -185,39 +194,15 @@ public class UserController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/checkOverlab")
-	public boolean checkOverlab(String userId) {
-		boolean check = userService.checkOverlab(userId);
+	@RequestMapping(value = "/checkUserOverlab")
+	public boolean checkUserOverlab(String userId) {
+		boolean check = userService.checkUserOverlab(userId);
 		return check;
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/userDelete", produces = "application/text; charset=utf8")
-	public String deleteUser(String id) {
+	@RequestMapping(value = "/deleteUser")
+	public void deleteUser(String id) {
 		userService.deleteUser(id);
-		List<UserDTO> list = userService.userList();
-		
-		JsonObject jo = new JsonObject();
-		JsonArray ja = new JsonArray();
-		for(UserDTO dto: list) {
-			if(dto.getPermit() != 3) {
-				JsonObject Jobj = new JsonObject();
-				Jobj.addProperty("name", dto.getName());
-				Jobj.addProperty("birth", dto.getBirth());
-				if(dto.getPermit() == 1) {
-					Jobj.addProperty("permit", "학생");
-				}else {
-					Jobj.addProperty("permit", "교사");
-				}
-				if(schoolService.getSchool(dto.getSchoolId()) != null) {
-				Jobj.addProperty("school", schoolService.getSchool(dto.getSchoolId()).getName());
-				}else {
-					Jobj.addProperty("school", "없음");
-				}
-				ja.add(Jobj);
-			}
-		}
-		jo.add("users", ja);
-		return jo.toString();
 	}
 }

@@ -1,46 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>EBS온라인클론스</title>
-<style>
-body{
-overflow-x:hidden;
-}
-.regheader{
-background-color:white;
-padding:40px 40px 0px
-}
-.btn{
- 	color: black;
-  	padding: 7px 0px;
-  	margin:10px;
-  	text-decoration: none;
-  	display: inline-block;
-}
-.button{
-text-decoration:none;
-margin:10px;
-padding:20px 80px;
-background-color:#323295;
-color:white;
-font-weight:bold;
-font-size:20px;
-border:0;
-outline:0;
-cursor:pointer;
-}
-</style>
-</head>
-<body>
-	<div class="regheader">
-		<a style="position:relative;left:20%;font-size:30px;font-weight:bold;color:#323295;">EBS</a>
-		<a style="position:relative;left:20%;font-size:20px;color:#323295;">회원가입</a>
-	</div>
-	<hr width=99%; color=#3232ff;>
-	<br>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@include file="include/header.jsp" %>
+<link rel="stylesheet" href="<c:url value='/resources/css/signup.css'/>">
 	<h2 style="position:relative;left:20%;">>회원가입 완료</h2>
 	<div style="width:60%;position:relative;left:20%;padding:10px 30px 5px;border:0.5px solid grey;">
 		<h2 style="color:blue;">EBS 회원가입이 성공적으로 완료 되었습니다!</h2>
