@@ -33,15 +33,11 @@
 	<h5 style="text-align:center">한번의 가입으로 EBS와 EBS 패밀리 사이트의 서비스를편리하게 이용하실 수 있습니다.</h5>
 	<div style="text-align:center;display:flex;justify-content: center;">
 		<button type="button" class="btn" onclick="location.href='signUp'">회원가입</button>
-		<button type="button" class="btn">아이디찾기</button>
+		<button type="button" class="btn" onclick="location.href='findId'">아이디찾기</button>
 		<button type="button" class="btn">비밀번호 찾기</button>
 	</div>
 </div>
-<script
-	src="https://code.jquery.com/jquery-3.6.0.min.js"
-	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-	crossorigin="anonymous">
-</script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 function preFooter() {
 	var margin = document.getElementById("footerBanner").style.marginLeft

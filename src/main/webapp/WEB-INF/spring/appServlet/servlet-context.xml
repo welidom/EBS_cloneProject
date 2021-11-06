@@ -25,13 +25,14 @@
 	
 
 	<beans:bean id="loginInterceptor"
-		class="com.kgitbank.ebs.interceptor.LoginInterceptor"></beans:bean>
-	
+		class="com.kgitbank.ebs.interceptor.LoginInterceptor"/>
 	<beans:bean id="permitInterceptor"
-		class="com.kgitbank.ebs.interceptor.PermitInterceptor"></beans:bean>
+		class="com.kgitbank.ebs.interceptor.PermitInterceptor"/>
 	<beans:bean id="profileInterceptor"
 		class= "com.kgitbank.ebs.interceptor.ProfileInterceptor" />
-	
+	<beans:bean id="inMakingInterceptor"
+		class= "com.kgitbank.ebs.interceptor.InMakingInterceptor" />
+		
 	<interceptors>
 		<interceptor>
 			<mapping path="/profile" />
@@ -47,6 +48,11 @@
 		<interceptor>
 			<mapping path="/mainSchool" />
 			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+		<interceptor>
+			<mapping path="/teacherMain"/>
+			<mapping path="/studentMain"/>
+			<beans:ref bean="inMakingInterceptor" />
 		</interceptor>
 	</interceptors>
 </beans:beans>

@@ -134,7 +134,7 @@ public class ManualController {
 		}
 		else {
 			msg="메뉴얼 삭제 실페";
-			url="main";
+			url="/";
 		}
 		ModelAndView mav = new ModelAndView("message");
 		mav.addObject("msg", msg);

@@ -25,7 +25,7 @@ public class PermitInterceptor extends HandlerInterceptorAdapter{
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
 		if(dto == null || dto.getPermit() != 3) {
-			out.println("<script>alert('권한이 불충분합니다.'); location.href='main';</script>");
+			out.println("<script>alert('권한이 불충분합니다.'); location.href='/';</script>");
 			out.flush();
 			return false;
 		}	

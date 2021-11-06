@@ -30,4 +30,7 @@
 <delete id="deleteUser" parameterType="String">
 	delete from account where id = #{id}
 </delete>
+<select id="emailUserList" parameterType="String" resultType="UserDTO">
+	select * from account where email = #{email}
+</select>
 </mapper>

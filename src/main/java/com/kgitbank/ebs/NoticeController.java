@@ -118,7 +118,7 @@ public class NoticeController {
 			url = "notice";
 		}else {
 			msg="공지사항 추가 실페";
-			url = "main";
+			url = "/";
 		}
 		req.setAttribute("footerContent", Includes.getFooter());
 		ModelAndView mav = new ModelAndView("message");
@@ -162,7 +162,7 @@ public class NoticeController {
 		}
 		else {
 			msg="공지사항 삭제 실페";
-			url="main";
+			url="/";
 		}
 		ModelAndView mav = new ModelAndView("message");
 		mav.addObject("msg", msg);
@@ -224,7 +224,7 @@ public class NoticeController {
 			url = "notice";
 		}else {
 			msg="공지사항 수정 실페";
-			url = "main";
+			url = "/";
 		}
 		req.setAttribute("footerContent", Includes.getFooter());
 		ModelAndView mav = new ModelAndView("message");

@@ -76,4 +76,9 @@ public class UserService {
 	public void deleteUser(String id) {
 		sqlSession.delete("deleteUser", id);
 	}
+
+	public List<UserDTO> emailUserList(String email) {
+		List<UserDTO> list = sqlSession.selectList(namespace+".emailUserList", email);
+		return list;
+	}
 }

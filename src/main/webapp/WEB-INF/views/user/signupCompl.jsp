@@ -13,7 +13,7 @@
 	</div>
 	<br>
 	<div style="text-align:center;display:flex;justify-content: center;">
-		<button type="button" class="button" onclick="location.href='main'">홈페이지로 이동</button>
+		<button type="button" class="button" onclick="location.href='/'">홈페이지로 이동</button>
 	</div>
 </body>
 </html>

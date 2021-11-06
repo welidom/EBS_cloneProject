@@ -22,7 +22,7 @@ public class MainController {
 	@Inject
 	private NoticeService noticeService;
 
-	@RequestMapping(value="/main")
+	@RequestMapping(value="/")
 	public String mainNotice(HttpServletRequest req) {
 		List<NoticeDTO> list = noticeService.listNotice("mainPage");
 		if(list.size() > 4) {
@@ -71,6 +71,11 @@ public class MainController {
 			return content;
 		}
 	}
-	
+	@RequestMapping(value = "/inMaking")
+	public String inMaking(HttpServletRequest req) {
+		
+		req.setAttribute("footerContent", Includes.getFooter());
+		return "inMaking";
+	}
 	
 }

@@ -6,7 +6,7 @@
 <span id="managerMsg" style="color: red;"></span><br>
 <input type="hidden" id="id" value="${dto.id }">
 <button id="scan">수정</button>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 $(document).ready(function(){
 	$("#scan").on("click", function(){

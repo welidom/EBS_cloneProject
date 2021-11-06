@@ -5,7 +5,7 @@
 학교 관리자 ID: <input name="schoolManager"><br>
 <span id="managerMsg" style="color: red;"></span><br>
 <button id="scan">추가</button>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 $(document).ready(function(){
 	$("#scan").on("click", function(){

@@ -1,6 +1,7 @@
 package com.kgitbank.ebs;
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.api.client.util.Value;
 import com.kgitbank.ebs.model.SchoolDTO;
 import com.kgitbank.ebs.model.UserDTO;
 import com.kgitbank.ebs.service.MailService;
@@ -51,7 +53,7 @@ public class UserController {
 			session.setAttribute("UserId", check.getId());
 			session.setAttribute("UserPermit", check.getPermit());
 			path = "pass";
-			url = "main";
+			url = "/";
 			msg = "";
 		}
 		
@@ -60,7 +62,25 @@ public class UserController {
 		mav.addObject("msg", msg);
 		return mav;
 	}
-	
+	@RequestMapping(value = "findId", method = RequestMethod.GET)
+	public String findIdForm() {
+		return "user/findIdForm";
+	}
+	@RequestMapping(value = "findId", method = RequestMethod.POST)
+	public ModelAndView findIdPro(String email) {
+		List<UserDTO> list = userService.emailUserList(email);
+		List<String> ids = new ArrayList<String>();
+		for(UserDTO dto:list) {
+			ids.add(dto.getId());
+		}
+		
+		mailService.sendId(email, ids);
+		
+		ModelAndView mav = new ModelAndView("message");
+		mav.addObject("msg","이메일이 발송되었습니다");
+		mav.addObject("url", "login");
+		return mav;
+	}
 	@RequestMapping(value = "/term", method=RequestMethod.GET)
 	public String term() {
 		
@@ -83,7 +103,7 @@ public class UserController {
 		session.removeAttribute("UserId");
 		
 		ModelAndView mav = new ModelAndView("pass");
-		mav.addObject("url", "main");
+		mav.addObject("url", "/");
 		return mav;
 	}
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
@@ -95,7 +115,7 @@ public class UserController {
 		}else if(dto.getPermit() == 2) {
 			url = "teacherProfile.do";
 		}else {
-			url = "main";
+			url = "/";
 		}
 		ModelAndView mav = new ModelAndView("pass");
 		mav.addObject("url", url);
@@ -188,12 +208,12 @@ public class UserController {
 		String msg,url;
 		if(dto != null) {
 			msg="인증되었습니다.";
-			url = "main";
+			url = "/";
 			session.setAttribute("UserId", dto.getId());
 			userService.setPermit(dto.getId(), 2);
 		}else {
 			msg="인증에 실페하셨습니다 .";
-			url = "main";
+			url = "/";
 		}
 		ModelAndView mav = new ModelAndView("message");
 		mav.addObject("msg", msg);

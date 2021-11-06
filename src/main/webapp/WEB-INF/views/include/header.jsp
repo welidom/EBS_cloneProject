@@ -12,7 +12,7 @@
 	<div class="header">
 		<table>
 		<tr>
-			<th width="700spx"><a href="main" class="defaultButton">EBS 온라인클론스</a></th>
+			<th width="700spx"><a href="/" class="defaultButton">EBS 온라인클론스</a></th>
 			<td width="300px"></td>
 			<td><a href="manual" class="defaultButton">이용자메뉴얼</a></td>
 			<td><a href="notice" class="defaultButton">공지사항</a></td>

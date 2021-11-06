@@ -57,7 +57,7 @@ public class FaqController {
 			url= "faqList";
 		}else {
 			msg="faq 삭제 실페s";
-			url = "main";
+			url = "/";
 		}
 		ModelAndView mav = new ModelAndView("message");
 		mav.addObject("msg", msg);
@@ -82,7 +82,7 @@ public class FaqController {
 			url = "faqList";
 		}else {
 			msg="faq 수정실페";
-			url = "main";
+			url = "/";
 		}
 		ModelAndView mav = new ModelAndView("message");
 		mav.addObject("msg", msg);
@@ -105,7 +105,7 @@ public class FaqController {
 			url = "faqList";
 		}else {
 			msg = "faq 추가실페";
-			url = "main";
+			url = "/";
 		}
 		ModelAndView mav = new ModelAndView("message");
 		mav.addObject("msg", msg);

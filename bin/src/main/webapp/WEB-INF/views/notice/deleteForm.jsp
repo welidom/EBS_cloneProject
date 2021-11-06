@@ -62,7 +62,7 @@
 	</form>
 </div>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 function submitNums() {
 	document.deleteNums.submit();
