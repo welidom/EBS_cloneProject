@@ -92,8 +92,8 @@ public class NoticeController {
 		
 		String root_path = req.getSession().getServletContext().getRealPath("/"); 
 		String savePath = root_path+"resources/Files/noticeFiles";
-		
-		String originalFileName= "";
+		System.out.println(savePath);
+		String originalFileName= null;
 			
 		try {
 			if(!uploadFile.isEmpty()) {
@@ -200,7 +200,7 @@ public class NoticeController {
 		String root_path = req.getSession().getServletContext().getRealPath("/"); 
 		String savePath = root_path+"resources/Files/noticeFiles";
 		
-		String originalFileName= "";
+		String originalFileName= null;
 			
 		try {
 			if(!uploadFile.isEmpty()) {

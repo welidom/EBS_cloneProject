@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../include/header.jsp"%>
+<%@ include file="../../include/header.jsp"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profile.css" type="text/css">
 <div style="padding: 0 14%;">
 <div style="text-align: left;"><span style="font-weight: bold; font-size: 18px; color: darkgreen;">기본정보</span> <span>회원가입 시 입력한 기본정보를 확인합니다.</span></div>
@@ -124,4 +124,4 @@ function openpopup(){
 	}, 1000); 
 }
 </script>
-<%@ include file="../include/footer.jsp"%>
+<%@ include file="../../include/footer.jsp"%>

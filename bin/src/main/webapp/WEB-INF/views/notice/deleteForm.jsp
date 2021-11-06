@@ -38,7 +38,7 @@
 		<td style="padding: 15px 0;color:#2580EB;">${dto.category}</td>
 		<td align="left" style="color:#2580EB;">${dto.subject}</td>
 		<c:choose>
-			<c:when test="${dto.attach ne null}"><td align="center"><a href="/filepath/noticeFiles/${dto.attach}" style="font-size: 20px; color:black;"><i class="fas fa-paperclip"></i></a></td></c:when>
+			<c:when test="${dto.attach ne null}"><td align="center"><span style="font-size: 20px; color:black;"><i class="fas fa-paperclip"></i></span></td></c:when>
 			<c:otherwise><td></td></c:otherwise>
 		</c:choose>
 		<td align="center">${dto.reg_date}</td>
@@ -51,7 +51,7 @@
 			<td style="padding: 15px 0;color:black;">${dto.category}</td>
 		<td align="left" >${dto.subject}</td>
 		<c:choose>
-			<c:when test="${dto.attach ne null}"><td align="center"><a href="/filepath/noticeFiles/${dto.attach}" style="font-size: 20px; color:black;"><i class="fas fa-paperclip"></i></a></td></c:when>
+			<c:when test="${dto.attach ne null}"><td align="center"><span style="font-size: 20px; color:black;"><i class="fas fa-paperclip"></i></span></td></c:when>
 			<c:otherwise><td></td></c:otherwise>
 		</c:choose>
 		<td align="center">${dto.reg_date}</td>

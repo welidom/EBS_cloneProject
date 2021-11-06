@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.kgitbank.ebs.model.SchoolDTO;
 import com.kgitbank.ebs.model.UserDTO;
 import com.kgitbank.ebs.service.MailService;
@@ -146,7 +144,23 @@ public class UserController {
 		req.setAttribute("dto", dto);
 		req.setAttribute("grade", grade);
 		req.setAttribute("footerContent", Includes.getFooter());
-		return "user/profile";
+		return "user/student/profile";
+	}
+	@RequestMapping(value = "/teacherProfile")
+	public String teacherProfile(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		UserDTO dto = userService.getUser((String) session.getAttribute("UserId")); 
+		String birth = "";
+		for(int i = 0; i<4; i++) {
+			birth += dto.getBirth().split("")[i];
+		}
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		int age = year - Integer.parseInt(birth);
+		req.setAttribute("school", schoolService.getSchool(dto.getSchoolId()).getName());
+		req.setAttribute("dto", dto);
+		req.setAttribute("age", age);
+		req.setAttribute("footerContent", Includes.getFooter());
+		return "user/teacher/profile";
 	}
 	@RequestMapping(value="/manage", method = RequestMethod.GET)
 	public String manage(HttpServletRequest req) {

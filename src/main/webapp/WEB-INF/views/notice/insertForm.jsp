@@ -23,7 +23,8 @@
 		<th>제목:</th><td colspan="3"><input id="subject" name="subject" style="width: 100%"></td>
 	</tr>
 	<tr>
-		<th>내용:</th>
+		<th>내용:
+${pageContext.request.contextPath }</th>
 		<td colspan="3"><textarea id="content" name="content" rows="20px" cols="100%"></textarea> </td>
 	</tr>
 	<tr>
