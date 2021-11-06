@@ -140,7 +140,7 @@ public class UserController {
 		}else {
 			grade = "---";
 		}
-		req.setAttribute("school", schoolService.getSchool(dto.getSchoolId()).getName());
+		req.setAttribute("school", schoolService.getSchool(dto.getSchoolId()));
 		req.setAttribute("dto", dto);
 		req.setAttribute("grade", grade);
 		req.setAttribute("footerContent", Includes.getFooter());
@@ -156,7 +156,8 @@ public class UserController {
 		}
 		int year = Calendar.getInstance().get(Calendar.YEAR);
 		int age = year - Integer.parseInt(birth);
-		req.setAttribute("school", schoolService.getSchool(dto.getSchoolId()).getName());
+		
+		req.setAttribute("school", schoolService.getSchool(dto.getSchoolId()));
 		req.setAttribute("dto", dto);
 		req.setAttribute("age", age);
 		req.setAttribute("footerContent", Includes.getFooter());

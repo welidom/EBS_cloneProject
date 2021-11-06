@@ -88,7 +88,7 @@
        		$.ajax({
 				url:"searchFaq",
 				type:"GET",
-				data: {"cno":$("input[name='hiddencno']").attr("value"), "keyword": $("#searchContent").val()},
+				data: {"cno":$("#hiddencno").attr("value"), "keyword": $("#searchContent").val()},
 				success:function(data){
 					var result = JSON.parse(data);
 					var cno = result['cno'];
