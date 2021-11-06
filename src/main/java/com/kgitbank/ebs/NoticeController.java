@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.api.client.repackaged.org.apache.commons.codec.binary.StringUtils;
 import com.kgitbank.ebs.model.NoticeDTO;
 import com.kgitbank.ebs.service.NoticeService;
 import com.kgitbank.ebs.utils.Includes;
@@ -40,14 +41,7 @@ public class NoticeController {
 	}
 	@RequestMapping(value = "/notice", method=RequestMethod.POST)
 	public String searchNotice(HttpServletRequest req) {
-		String search = "";
-		try {
-			search = new String (req.getParameter("search").getBytes("8859_1"), "utf-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		
-		
+		String search = req.getParameter("search");
 		String mode = req.getParameter("searchFor");
 		
 		List<NoticeDTO> mustList = noticeService.listNotice("must");
@@ -92,21 +86,22 @@ public class NoticeController {
 		
 		String root_path = req.getSession().getServletContext().getRealPath("/"); 
 		String savePath = root_path+"resources/Files/noticeFiles";
-		System.out.println(savePath);
 		String originalFileName= null;
-			
+		
 		try {
 			if(!uploadFile.isEmpty()) {
 				Includes.saveFile(uploadFile, savePath);
-				originalFileName = new String(uploadFile.getOriginalFilename().getBytes("8859_1"), "utf-8");
+				originalFileName = uploadFile.getOriginalFilename();
 			}
 			dto.setAttach(originalFileName);
-			dto.setContent(new String(req.getParameter("content").getBytes("8859_1"), "utf-8"));
-			dto.setCategory(new String(req.getParameter("category").getBytes("8859_1"), "utf-8"));
-			dto.setSubject(new String(req.getParameter("subject").getBytes("8859_1"), "utf-8"));				
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		dto.setContent(req.getParameter("content"));
+		dto.setCategory(req.getParameter("category"));
+		dto.setSubject(req.getParameter("subject"));
+		
 		String[] mr = req.getParameterValues("mustRead");
 		if(mr != null) {
 			dto.setMustRead(1);
@@ -115,7 +110,6 @@ public class NoticeController {
 		}
 		
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
-		
 		
 		int res = noticeService.insertNotice(dto);
 		String msg,url;

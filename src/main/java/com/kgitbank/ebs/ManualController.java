@@ -63,16 +63,15 @@ public class ManualController {
 		
 		try {
 			Includes.saveFile(uploadFile, savePath);
-			originalFileName = new String(uploadFile.getOriginalFilename().getBytes("8859_1"), "utf-8");
+			originalFileName = uploadFile.getOriginalFilename();
 			
 			dto.setContent(originalFileName);
-			dto.setCategory(new String(req.getParameter("category").getBytes("8859_1"), "utf-8"));
-			dto.setSubject(new String(req.getParameter("subject").getBytes("8859_1"), "utf-8"));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		dto.setCategory(req.getParameter("category"));
+		dto.setSubject(req.getParameter("subject"));
 		int res = manualService.insertManual(dto);
 		String msg,url;
 		if(res > 0) {

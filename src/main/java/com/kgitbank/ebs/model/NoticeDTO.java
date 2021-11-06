@@ -58,6 +58,12 @@ public class NoticeDTO {
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
 	}
+	@Override
+	public String toString() {
+		return "NoticeDTO [num=" + num + ", mustRead=" + mustRead + ", category=" + category + ", subject=" + subject
+				+ ", content=" + content + ", attach=" + attach + ", reg_date=" + reg_date + ", readcount=" + readcount
+				+ "]";
+	}
 	
 	
 }

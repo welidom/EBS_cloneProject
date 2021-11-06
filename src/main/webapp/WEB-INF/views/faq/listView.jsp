@@ -44,7 +44,7 @@
        	</c:if>
 <div class="totalcounts">총<b>0</b>개</div>
 	<div id="download" class="download">
-	<a href="downloadFile?originalFileName=온라인클래스 FAQ.hwp&path=faqFiles" class="key_color"><img src="${pageContext.request.contextPath }/resources/images/faq/downloadImage.png" class="downima"><b>온라인클래스 자주묻는질문(FAQ) 다운로드</b></a>
+	<a href="downloadFile?originalFileName=온라인클래스FAQ.hwp&path=faqFiles" class="key_color"><img src="${pageContext.request.contextPath }/resources/images/faq/downloadImage.png" class="downima"><b>온라인클래스 자주묻는질문(FAQ) 다운로드</b></a>
 	</div>
 	     	<div class="loadMore">더보기 <b class=keyboard_down>∨</b></div>
       </c:if>
