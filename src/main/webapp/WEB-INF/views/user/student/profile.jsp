@@ -69,24 +69,22 @@
 	<div class="info">
 	<span class="th">알림 수신</span>
 		<c:if test="${dto.notice eq 1}">
-			<input id="notice" type="checkbox" class="sms" value="1" checked="checked">
+			<input name="notice" type="checkbox" class="sms" value="1" checked="checked">
 		</c:if>
 		<c:if test="${dto.notice eq 0}">
-			<input id="notice" type="checkbox" class="sms" value="1">
+			<input name="notice" type="checkbox" class="sms" value="1">
 		</c:if>
-		<input type="hidden" name="notice" value='0' id="hidden_notice">
 		온라인클론스 알림 수신 설정
 	</div>
 	<div class="info">
 	<span class="th">SMS 동의</span>
 	<span>
 		<c:if test="${dto.sms eq 1}">
-			<input id="sms" type="checkbox" class="sms" checked="checked" value="1">
+			<input name="sms" type="checkbox" class="sms" checked="checked" value="1">
 		</c:if>
 		<c:if test="${dto.sms eq 0}">
-			<input id="sms" type="checkbox" class="sms" value="1">
+			<input name="sms" type="checkbox" class="sms" value="1">
 		</c:if>
-		<input type="hidden" name="sms" value='0' id="hidden_sms">
 		선생님 피드백, 독려 등 학습 SMS 수신 동의
 	</span>
 	</div>
@@ -100,12 +98,6 @@
 <script>
 function check(){
 	var form = document.getElementById("sendProfile");
-	if(document.getElementById("notice").checked){
-		document.getElementById("hidden_notice").disabled = true;
-	}
-	if(document.getElementById("sms").checked){
-		document.getElementById("hidden_sms").disabled = true;
-	}
 	if(document.getElementById("schoolId").value == ""){
 		alert("학교찾기를 진행해주세요");
 	}else if(document.getElementById("num").value==""){

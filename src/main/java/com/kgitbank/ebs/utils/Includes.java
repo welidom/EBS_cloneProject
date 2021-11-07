@@ -17,7 +17,7 @@ public class Includes {
 
 		Files.createDirectories(dir);
 	    
-		String fileName = new String(file.getOriginalFilename().getBytes("8859_1"), "utf-8");
+		String fileName = file.getOriginalFilename();
 
 		Path targetPath = dir.resolve(fileName).normalize();
 

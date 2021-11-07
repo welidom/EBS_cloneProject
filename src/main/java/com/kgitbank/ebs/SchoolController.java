@@ -63,7 +63,7 @@ public class SchoolController {
 		userService.updateUser(dto);
 		
 		ModelAndView mav = new ModelAndView("pass");
-		mav.addObject("url", "mainSchool");
+		mav.addObject("url", "/");
 		return mav;
 	}
 	@RequestMapping(value = "/insertSchool", method = RequestMethod.GET)

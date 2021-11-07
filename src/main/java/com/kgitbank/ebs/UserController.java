@@ -129,7 +129,7 @@ public class UserController {
 		String msg,url;
 		if(res > 0) {
 			msg = "프로필 수정 성공";
-			url = "mainSchool";
+			url = "/";
 		}else {
 			msg = "프로필 수정 실페";
 			url = "profile";

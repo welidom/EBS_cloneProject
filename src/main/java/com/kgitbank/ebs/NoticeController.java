@@ -209,12 +209,8 @@ public class NoticeController {
 		try {
 			if(!uploadFile.isEmpty()) {
 				Includes.saveFile(uploadFile, savePath);
-				originalFileName = new String(uploadFile.getOriginalFilename().getBytes("8859_1"), "utf-8");
-			}
-			dto.setAttach(originalFileName);
-			dto.setContent(new String(req.getParameter("content").getBytes("8859_1"), "utf-8"));
-			dto.setCategory(new String(req.getParameter("category").getBytes("8859_1"), "utf-8"));
-			dto.setSubject(new String(req.getParameter("subject").getBytes("8859_1"), "utf-8"));				
+				originalFileName = uploadFile.getOriginalFilename();
+			}			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -224,6 +220,10 @@ public class NoticeController {
 		}else {
 			dto.setMustRead(0);
 		}
+		dto.setAttach(originalFileName);
+		dto.setContent(req.getParameter("content"));
+		dto.setCategory(req.getParameter("category"));
+		dto.setSubject(req.getParameter("subject"));	
 		
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 		
