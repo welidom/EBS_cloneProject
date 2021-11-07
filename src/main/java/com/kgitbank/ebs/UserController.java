@@ -61,24 +61,13 @@ public class UserController {
 		mav.addObject("msg", msg);
 		return mav;
 	}
-	@RequestMapping(value = "findId", method = RequestMethod.GET)
+	@RequestMapping(value = "/findId", method = RequestMethod.GET)
 	public String findIdForm() {
 		return "user/findIdForm";
 	}
-	@RequestMapping(value = "findId", method = RequestMethod.POST)
-	public ModelAndView findIdPro(String email) {
-		List<UserDTO> list = userService.emailUserList(email);
-		List<String> ids = new ArrayList<String>();
-		for(UserDTO dto:list) {
-			ids.add(dto.getId());
-		}
-		
-		mailService.sendId(email, ids);
-		
-		ModelAndView mav = new ModelAndView("message");
-		mav.addObject("msg","이메일이 발송되었습니다");
-		mav.addObject("url", "login");
-		return mav;
+	@RequestMapping(value = "/findPw", method = RequestMethod.GET)
+	public String findPwForm() {
+		return "user/findPwForm";
 	}
 	@RequestMapping(value = "/term", method=RequestMethod.GET)
 	public String term() {
@@ -238,5 +227,28 @@ public class UserController {
 	@RequestMapping(value = "/deleteUser")
 	public void deleteUser(String id) {
 		userService.deleteUser(id);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/findId", method = RequestMethod.POST)
+	public void findIdPro(String email) {
+		List<UserDTO> list = userService.emailUserList(email);
+		List<String> ids = new ArrayList<String>();
+		for(UserDTO dto:list) {
+			ids.add(dto.getId());
+		}
+		
+		mailService.sendId(email, ids);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/findPw", method = RequestMethod.POST)
+	public boolean findPwPro(String email, String userId) {
+		UserDTO dto = userService.getUser(userId);
+		if(dto.getEmail().equals(email)) {
+			mailService.sendPw(email, dto.getPw());
+			return true;
+		}else {
+			return false;
+		}
+		
 	}
 }

@@ -73,4 +73,21 @@ public class MailService {
             e.printStackTrace();
         }
     }
+    public void sendPw(String email, String pw) {
+    	try {
+        	MailUtils sendMail = new MailUtils(mailSender);
+			sendMail.setSubject("온라인 클론스 비밀번호 찾기 ");
+	    	sendMail.setText(new StringBuffer().append("<h1>[비밀번호입니다]</h1>")
+					.append("<p>발송된 비밀번호</p><br>")
+					.append(pw)
+					.toString());
+	    	sendMail.setFrom("EBSOnlineClones@gmail.com", "EBS온라인클론스");
+            sendMail.setTo(email);
+            sendMail.send();
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
 }
