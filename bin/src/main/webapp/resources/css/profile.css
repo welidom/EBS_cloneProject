@@ -1,0 +1,35 @@
+.basicInfo .th{
+	background-color: #f5f7f6;
+	width: 15%;
+	text-align: center;
+}
+.basicInfo .td{
+	width:30%;
+}
+.basicInfo .info{
+	border-bottom: 1px solid;
+}
+.basicInfo span{
+	line-height:54px ;
+	display:inline-block;
+	font-size: 16px; 
+	font-weight: 500; 
+}
+.btn{
+    padding: 10px 25px;
+    color: white;
+    background-color: darkgreen;
+    margin-top: 5px;
+    border: hidden;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.disabled{
+	padding: 10px 25px;
+    color: gray;
+    background-color: lightgray;
+    margin-top: 5px;
+    border: hidden;
+    border-radius: 5px;
+    cursor: pointer;
+}

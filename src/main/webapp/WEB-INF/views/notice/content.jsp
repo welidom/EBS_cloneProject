@@ -31,7 +31,7 @@
 		</c:if>
 	</div>
 	<div style="margin: 50px 0; float: right;">
-		<c:if test="${UserPermit eq 3 }">
+		<c:if test="${user.permit eq 3 }">
 		<a href="updateNotice?num=${dto.num }" class="btn_update">수정</a>
 		</c:if>
 		<a href="notice" class="btn_list">목록</a>

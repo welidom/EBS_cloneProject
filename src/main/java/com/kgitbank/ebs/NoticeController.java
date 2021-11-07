@@ -1,11 +1,11 @@
 package com.kgitbank.ebs;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
@@ -15,9 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.api.client.repackaged.org.apache.commons.codec.binary.StringUtils;
 import com.kgitbank.ebs.model.NoticeDTO;
+import com.kgitbank.ebs.model.UserDTO;
 import com.kgitbank.ebs.service.NoticeService;
+import com.kgitbank.ebs.service.UserService;
 import com.kgitbank.ebs.utils.Includes;
 
 @Controller
@@ -25,14 +26,17 @@ public class NoticeController {
 
 	@Inject
 	private NoticeService noticeService;
-	
+	@Inject
+	private UserService userService;
 	
 	@RequestMapping(value = "/notice", method=RequestMethod.GET)
 	public String noticeMain(HttpServletRequest req) {
 		List<NoticeDTO> mustList = noticeService.listNotice("must");
 		List<NoticeDTO> notMustList = noticeService.listNotice("notMust");
+		HttpSession session = req.getSession();
+		UserDTO dto = userService.getUser((String) session.getAttribute("UserId"));
 		
-		
+		req.setAttribute("user", dto);
 		req.setAttribute("mustList", setDate(mustList));
 		req.setAttribute("notMustList", setDate(notMustList));
 		req.setAttribute("footerContent", Includes.getFooter());
@@ -46,7 +50,10 @@ public class NoticeController {
 		
 		List<NoticeDTO> mustList = noticeService.listNotice("must");
 		List<NoticeDTO> notMustList = noticeService.searchNotice(search, mode);
+		HttpSession session = req.getSession();
+		UserDTO dto = userService.getUser((String) session.getAttribute("UserId"));
 		
+		req.setAttribute("user", dto);
 		req.setAttribute("mustList", setDate(mustList));
 		req.setAttribute("notMustList", setDate(notMustList));
 		req.setAttribute("footerContent", Includes.getFooter());
@@ -66,7 +73,10 @@ public class NoticeController {
 		
 		dto.setReg_date(dto.getReg_date().substring(0, 10));
 		dto.setReg_date(dto.getReg_date().replaceAll("-", "."));
+		HttpSession session = req.getSession();
+		UserDTO userDTO = userService.getUser((String) session.getAttribute("UserId"));
 		
+		req.setAttribute("user", userDTO);
 		req.setAttribute("footerContent", Includes.getFooter());
 		req.setAttribute("dto", dto);
 		return "notice/content";

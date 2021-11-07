@@ -18,7 +18,7 @@
 		<div style="font-weight: bold;display: flex; justify-content:space-between;">
 			<div>
 				총<span style="color:#2580EB;">${fn:length(notMustList) + fn:length(mustList) }</span>개
-				<c:if test="${UserPermit eq 3}">
+				<c:if test="${user.permit eq 3}">
 				<a href="insertNotice" class="btn_noticePlus"></a>
 				<a href="deleteNotice" class="btn_noticeSub"></a>
 				</c:if>

@@ -1,0 +1,99 @@
+body{
+overflow-x:hidden;
+}
+.welcome{
+position:relative;
+left:20%;
+width:55%;
+word-break:keep-all;
+}
+.imgur{
+height:200px;
+width:280px;
+position:relative;
+left:20%;
+background-color:black;
+}
+.agreement{
+position:relative;
+left:20%;
+}
+.scroll{
+height:260px;
+width:60%;
+overflow:auto;
+outline:0.5px solid lightgrey;
+position:relative;
+left:20%;
+}
+.table_pc{
+border: 1px solid #444;
+border-collapse: collapse;
+}
+table{
+border-collapse: collapse;
+}
+th, td{
+border: 1px solid #444;
+padding:10px;
+}
+.regheader{
+background-color:white;
+padding:40px 40px 0px
+}
+.img_one{
+    color: #666;
+    font: 12px/1.168em '맑은 고딕','Malgun Gothic','돋움','Dotum','AppleGothic',sans-serif;
+    line-height: 1.42857143;
+    font-weight: normal;
+    box-sizing: border-box;
+    margin: 0;
+    word-break: keep-all;
+    word-wrap: break-word;
+    position: relative;
+    padding: 50px 0 0px 260px;
+}
+
+.inp{
+width:55%;
+height:30px;      
+}
+.btn{
+text-decoration:none;
+margin:10px;
+padding:5px 20px;
+color:#5959ff;
+font-size:15px;
+border:0.5px solid #5959ff;
+outline:0;
+cursor:pointer;
+background-color:white;
+}
+.btn_term{
+text-decoration:none;
+margin:10px;
+padding:20px 80px;
+background-color:#323295;
+color:white;
+font-weight:bold;
+font-size:20px;
+border:0;
+outline:0;
+cursor:pointer;
+}
+.btn:hover{
+background-color:#5959ff;
+color:white;
+}
+.button{
+text-decoration:none;
+margin:10px;
+padding:20px 80px;
+background-color:#323295;
+color:white;
+font-weight:bold;
+font-size:20px;
+border:0;
+outline:0;
+cursor:pointer;
+}

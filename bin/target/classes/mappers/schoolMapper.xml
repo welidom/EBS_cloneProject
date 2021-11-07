@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kgitbank.ebs.mapper.schoolMapper">
+<select id="searchSchool" parameterType="String" resultType="SchoolDTO">
+	select * from school where name like CONCAT('%', #{searchFor}, '%')
+</select>
+<select id="getSchool" resultType="SchoolDTO" parameterType="String">
+	select * from school where id = #{id}
+</select>
+<select id="schoolList" resultType="SchoolDTO">
+	select * from school
+</select>
+<select id="checkSchool" parameterType="String" resultType="SchoolDTO">
+	select * from school where name = #{schoolName}
+</select>
+<insert id="insertSchool" parameterType="hashMap">
+	insert into school values(#{id}, #{pw}, #{schoolName}, #{schoolManager})
+</insert>
+<delete id="deleteSchool" parameterType="String">
+	delete from school where id = #{id}
+</delete>
+<update id="updateSchool" parameterType="SchoolDTO">
+	update school set name = #{name}, manager = #{manager} where id = #{id}
+</update>
+</mapper>

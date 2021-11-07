@@ -18,7 +18,7 @@
 	<div>
 		<span style="width: 100%">
 			<b style="font-size: 25px">동영상 메뉴얼</b>
-			<c:if test="${UserPermit eq 3}">
+			<c:if test="${user.permit eq 3}">
 				<a href="deleteManual" style="float:right; color:black; background-color: lightgray; border: 1px hidden; padding:10px; border-radius: 40px; font-weight: bold;">메뉴얼 삭제 〉</a>
 				<a href="insertManual" style="float:right; color:white; background-color: #2580EB;border: 1px solid; padding:10px; border-radius: 40px; font-weight: bold;">메뉴얼 추가 〉</a>
 			</c:if>

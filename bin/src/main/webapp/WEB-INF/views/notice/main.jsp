@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri= "http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../include/header.jsp" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/notice.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/notice.css" type="text/css">
 <div style="background-color: #2580EB; padding: 0 14%; color:white; display: inline-block; width: 72%">
 	<span style="float: left; padding-top: 30px">
 	HOME 〉 공지사항<br>
@@ -18,10 +18,12 @@
 		<div style="font-weight: bold;display: flex; justify-content:space-between;">
 			<div>
 				총<span style="color:#2580EB;">${fn:length(notMustList) + fn:length(mustList) }</span>개
-				<a href="insertNotice.do" class="btn_noticePlus"></a>
-				<a href="deleteNotice.do" class="btn_noticeSub"></a>
+				<c:if test="${UserPermit eq 3}">
+				<a href="insertNotice" class="btn_noticePlus"></a>
+				<a href="deleteNotice" class="btn_noticeSub"></a>
+				</c:if>
 			</div>
-			<form action="notice.do" method="post">
+			<form action="notice" method="post">
 			<div style="float: right; display: block;">
 				<select id="searchFor" name="searchFor" class="select search">
 					<option value="subject">제목</option>
@@ -29,7 +31,7 @@
 				</select>
 				<input id="search" name="search" placeholder="검색어를 입력하세요." onfocus="this.value=''" class="searchBar search">
 				<input type="submit" value="검색 " class="search btn_submitKey">
-				<input type="button" onclick="location.href='notice.do'" value="검색 초기화" class="search btn_resetKey">
+				<input type="button" onclick="location.href='notice'" value="검색 초기화" class="search btn_resetKey">
 			</div>
 			</form>
 		</div>
@@ -47,9 +49,9 @@
 		<c:set var="color" value="black"/>
 			<td style="color:#2580EB;"><i class="fas fa-volume-up"></i> 필독</td>
 			<td style="padding: 15px 0;color:#2580EB;">${dto.category}</td>
-			<td align="left" ><a style="color:#2580EB;" href="noticeContent.do?num=${dto.num }&&no=${dto.mustRead}">${dto.subject}</a></td>
+			<td align="left" ><a style="color:#2580EB;" href="noticeContent?num=${dto.num }&&no=${dto.mustRead}">${dto.subject}</a></td>
 			<c:choose>
-				<c:when test="${dto.attach ne null}"><td align="center"><a href="${pageContext.request.contextPath}/resources/Files/noticeFiles/${dto.attach}" style="font-size: 20px; color:black;"><i class="fas fa-paperclip"></i></a></td></c:when>
+				<c:when test="${dto.attach ne null}"><td align="center"><a href="downloadFile?originalFileName=${dto.attach}&path=noticeFiles" style="font-size: 20px; color:black;"><i class="fas fa-paperclip"></i></a></td></c:when>
 				<c:otherwise><td></td></c:otherwise>
 			</c:choose>
 			<td align="center">${dto.reg_date}</td>
@@ -62,9 +64,9 @@
 			<td>${re }</td>
 			<c:set var="re" value="${re - 1}"/>
 			<td style="padding: 15px 0;color:black;">${dto.category}</td>
-			<td align="left" ><a style="color:black;" href="noticeContent.do?num=${dto.num }&&no=${dto.mustRead}">${dto.subject}</a></td>
+			<td align="left" ><a style="color:black;" href="noticeContent?num=${dto.num }&&no=${dto.mustRead}">${dto.subject}</a></td>
 			<c:choose>
-				<c:when test="${dto.attach ne null}"><td align="center"><a href="${pageContext.request.contextPath}/resources/Files/noticeFiles/${dto.attach}" style="font-size: 20px; color:black;"><i class="fas fa-paperclip"></i></a></td></c:when>
+				<c:when test="${dto.attach ne null}"><td align="center"><a href="downloadFile?originalFileName=${dto.attach}&path=noticeFiles" style="font-size: 20px; color:black;"><i class="fas fa-paperclip"></i></a></td></c:when>
 				<c:otherwise><td></td></c:otherwise>
 			</c:choose>
 			<td align="center">${dto.reg_date}</td>

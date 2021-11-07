@@ -6,4 +6,31 @@
 <select id="faqList" resultType="FaqDTO">
 	select * from faq order by readcount desc
 </select>
+<select id="cnoFaqList" resultType="FaqDTO" parameterType="int">
+	select * from faq where category = #{cno} order by readcount desc
+</select>
+<select id="readcountFaqList" resultType="FaqDTO">
+	select * from faq where readcount > 10 order by readcount desc
+</select>
+<update id="faqReadcount" parameterType="int">
+	update faq set readcount = readcount + 1 where num = #{num}
+</update>
+<select id="faqSearch" resultType="FaqDTO" parameterType="String">
+	select * from faq where readcount > 10 and question like CONCAT('%', #{keyword}, '%')
+</select>
+<select id="cnoFaqSearch" parameterType="HashMap" resultType="FaqDTO">
+	select * from faq where category = #{cno} and (question like CONCAT('%', #{keyword}, '%') or answer like CONCAT('%', #{keyword}, '%')) order by readcount desc
+</select>
+<delete id="deleteFaq" parameterType="int">
+	delete from faq where num = #{num}
+</delete>
+<select id="getFaq" parameterType="int" resultType="FaqDTO">
+	select * from faq where num = #{num}
+</select>
+<update id="updateFaq" parameterType="FaqDTO">
+	update faq set category = #{category}, question = #{question}, answer = #{answer} where num = #{num}
+</update>
+<insert id="insertFaq" parameterType="FaqDTO">
+	insert into faq(category, question, answer, readcount) values(#{category}, #{question}, #{answer}, 0)
+</insert>
 </mapper>

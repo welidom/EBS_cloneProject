@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/header.jsp" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/manual.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/manual.css" type="text/css">
 <div style="background-color: #2580EB; padding: 0 14%; color:white; display: inline-block; width: 72%">
 	<span style="float: left; padding-top: 30px">
 	HOME 〉 이용자메뉴얼 〉 메뉴얼 삭제<br>
@@ -15,12 +15,12 @@
 	<img style="float: right;" alt="manual.png" src="${pageContext.request.contextPath}/resources/images/manual.png">
 </div>
 <div style="padding: 40px 14% 20px 14%;">
-	<form action="deleteManual.do" name= "deleteNums" method="post">
+	<form action="deleteManual" name= "deleteNums" method="post">
 	<div>
 		<span style="width: 100%">
 			<b style="font-size: 25px">동영상 메뉴얼</b>
 			<a href="javascript:submitNums()" style="float:right; color:black; background-color: lightgray; border: 1px hidden; padding:10px; border-radius: 40px; font-weight: bold;">메뉴얼 삭제 〉</a>
-			<a href="manual.do" style="float:right; color:white; background-color: #2580EB; border: 1px solid; padding:10px; border-radius: 40px; font-weight: bold;">메뉴얼 삭제 취소  〉</a>
+			<a href="manual" style="float:right; color:white; background-color: #2580EB; border: 1px solid; padding:10px; border-radius: 40px; font-weight: bold;">메뉴얼 삭제 취소  〉</a>
 		</span>
 		<table style="border-top: 2px solid #2580EB; width: 100%" class="manual">
 		<tr style="background-color: ; border-top: 2px solid #2580EB;">

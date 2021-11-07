@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kgitbank.ebs.mapper.userMapper">
+<select id="getUser" parameterType="String" resultType="UserDTO">
+	select * from account where id = #{userId}
+</select>
+<insert id="newUser" parameterType="UserDTO">
+	insert into account (id, pw, name, gender, birth, email, phoneNum, notice, sms, permit) values(#{id}, #{pw}, #{name}, #{gender}, #{birth}, #{email}, #{phoneNum}, 1, 1, 1)
+</insert>
+<update id="updateUser" parameterType="UserDTO">
+	update account set classNum = #{classNum}, num = #{num},notice = #{notice}, sms = #{sms}  where id = #{id}
+</update>
+<select id="userList" resultType="UserDTO">
+	select * from account where permit != 3
+</select>
+<update id="setSchool" parameterType="hashMap">
+	update account set schoolid = #{schoolId} where id = #{userId}
+</update>
+<update id="setPermit" parameterType="hashMap">
+	update account set permit = #{permit} where id = #{id}
+</update>
+<update id="setAuth" parameterType="hashMap">
+	update account set auth = #{key} where id = #{id}
+</update>
+<select id="checkUser" parameterType="hashMap" resultType="UserDTO">
+	select * from account where email = #{email} and auth = #{key}
+</select>
+<delete id="deleteUser" parameterType="String">
+	delete from account where id = #{id}
+</delete>
+<select id="emailUserList" parameterType="String" resultType="UserDTO">
+	select * from account where email = #{email}
+</select>
+</mapper>

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/notice.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/notice.css" type="text/css">
 <div style="background-color: #2580EB; padding: 0 14%; color:white; display: inline-block; width: 72%">
 	<span style="float: left; padding-top: 30px">
 	HOME 〉 공지사항<br>
@@ -27,12 +27,14 @@
 	</div>
 	<div style="font-weight: bold;padding: 10px 0; border-top :1px solid lightgray; width: 100%;display:inline-block ;border-bottom: 1px solid lightgray;">
 		<c:if test="${dto.attach ne null}">
-			<a href="${pageContext.request.contextPath}/resources/Files/noticeFiles/${dto.attach}" style="font-size: 10px;"><i class="fas fa-paperclip"></i>${dto.attach }</a>
+			<a href="downloadFile?originalFileName=${dto.attach}&path=noticeFiles" style="font-size: 10px; #2580EB;"><i class="fas fa-paperclip"></i>${dto.attach }</a>
 		</c:if>
 	</div>
 	<div style="margin: 50px 0; float: right;">
-		<a href="updateNotice.do?num=${dto.num }" class="btn_update">수정</a>
-		<a href="notice.do" class="btn_list">목록</a>
+		<c:if test="${UserPermit eq 3 }">
+		<a href="updateNotice?num=${dto.num }" class="btn_update">수정</a>
+		</c:if>
+		<a href="notice" class="btn_list">목록</a>
 	</div>
 </div>
 <%@ include file="../include/footer.jsp" %>

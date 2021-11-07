@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kgitbank.ebs.model.ManualDTO;
+import com.kgitbank.ebs.model.UserDTO;
 import com.kgitbank.ebs.service.ManualService;
+import com.kgitbank.ebs.service.UserService;
 import com.kgitbank.ebs.utils.Includes;
 
 @Controller
@@ -24,12 +27,17 @@ public class ManualController {
 	
 	@Inject
 	private ManualService manualService;
-
+	@Inject
+	private UserService userService;
+	
 	@RequestMapping(value="/manual", method = RequestMethod.GET)
 	public String manual(HttpServletRequest req) {
 		List<ManualDTO> videoManual = manualService.getManual(0);
 		List<ManualDTO> documentManual = manualService.getManual(1);
+		HttpSession session = req.getSession();
 		
+		UserDTO dto = userService.getUser((String) session.getAttribute("UserId"));
+		req.setAttribute("user", dto);
 		req.setAttribute("videoManual", setDate(videoManual));
 		req.setAttribute("documentManual", setDate(documentManual));
 		req.setAttribute("footerContent", Includes.getFooter());
