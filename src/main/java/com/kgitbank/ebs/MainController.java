@@ -44,7 +44,7 @@ public class MainController {
 		dto.setContent(cut(dto.getContent(), 7));
 		NoticeDTO service = noticeService.getNotice(2, "ex");
 		service.setContent(cut(service.getContent(), 20));
-		List<FaqDTO> faqlist = faqService.faqList();
+		List<FaqDTO> faqlist = faqService.faqReadcountList();
 		if(faqlist.size() > 8) {
 			faqlist = faqlist.subList(0, 8);
 		}
